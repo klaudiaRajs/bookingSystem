@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="pbsDataSet" targetNamespace="http://tempuri.org/pbsDataSet.xsd" xmlns:mstns="http://tempuri.org/pbsDataSet.xsd" xmlns="http://tempuri.org/pbsDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="pbsConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="pbsConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.PatientBookingSystem.Properties.Settings.GlobalReference.Default.pbsConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="absenceTableAdapter" GeneratorDataComponentClassName="absenceTableAdapter" Name="absence" UserDataComponentName="absenceTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.absence" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `absenceId`, `startTime`, `endTime`, `reason`, `staffId`, `startDate`, `endDate` FROM `absence`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="bookingTableAdapter" GeneratorDataComponentClassName="bookingTableAdapter" Name="booking" UserDataComponentName="bookingTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.booking" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id`, `confirmation`, `attendance`, `lackOfCancellation`, `comment`, `userId`, `staffScheduleId`, `staffId` FROM `booking`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="pbs_userTableAdapter" GeneratorDataComponentClassName="pbs_userTableAdapter" Name="pbs_user" UserDataComponentName="pbs_userTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.pbs_user" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id`, `firstName`, `lastName`, `login`, `password`, `DOB`, `phoneNumber`, `email`, `NiN`, `address`, `confirmationMethod`, `userType` FROM `pbs_user`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="scheduleTableAdapter" GeneratorDataComponentClassName="scheduleTableAdapter" Name="schedule" UserDataComponentName="scheduleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.schedule" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `scheduleId`, `date`, `startTime`, `endTime` FROM `schedule`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="staffTableAdapter" GeneratorDataComponentClassName="staffTableAdapter" Name="staff" UserDataComponentName="staffTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.staff" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `staffId`, `firstName`, `lastName`, `phoneNumber`, `staffType` FROM `staff`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="staffscheduleTableAdapter" GeneratorDataComponentClassName="staffscheduleTableAdapter" Name="staffschedule" UserDataComponentName="staffscheduleTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="pbsConnectionString (Settings)" DbObjectName="pbs.staffschedule" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `staffId`, `scheduleId` FROM `staffschedule`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="pbsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="pbsDataSet" msprop:Generator_UserDSName="pbsDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="absence" msprop:Generator_TableClassName="absenceDataTable" msprop:Generator_TableVarName="tableabsence" msprop:Generator_TablePropName="absence" msprop:Generator_RowDeletingName="absenceRowDeleting" msprop:Generator_RowChangingName="absenceRowChanging" msprop:Generator_RowEvHandlerName="absenceRowChangeEventHandler" msprop:Generator_RowDeletedName="absenceRowDeleted" msprop:Generator_UserTableName="absence" msprop:Generator_RowChangedName="absenceRowChanged" msprop:Generator_RowEvArgName="absenceRowChangeEvent" msprop:Generator_RowClassName="absenceRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="booking" msprop:Generator_TableClassName="bookingDataTable" msprop:Generator_TableVarName="tablebooking" msprop:Generator_TablePropName="booking" msprop:Generator_RowDeletingName="bookingRowDeleting" msprop:Generator_RowChangingName="bookingRowChanging" msprop:Generator_RowEvHandlerName="bookingRowChangeEventHandler" msprop:Generator_RowDeletedName="bookingRowDeleted" msprop:Generator_UserTableName="booking" msprop:Generator_RowChangedName="bookingRowChanged" msprop:Generator_RowEvArgName="bookingRowChangeEvent" msprop:Generator_RowClassName="bookingRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="pbs_user" msprop:Generator_TableClassName="pbs_userDataTable" msprop:Generator_TableVarName="tablepbs_user" msprop:Generator_TablePropName="pbs_user" msprop:Generator_RowDeletingName="pbs_userRowDeleting" msprop:Generator_RowChangingName="pbs_userRowChanging" msprop:Generator_RowEvHandlerName="pbs_userRowChangeEventHandler" msprop:Generator_RowDeletedName="pbs_userRowDeleted" msprop:Generator_UserTableName="pbs_user" msprop:Generator_RowChangedName="pbs_userRowChanged" msprop:Generator_RowEvArgName="pbs_userRowChangeEvent" msprop:Generator_RowClassName="pbs_userRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="schedule" msprop:Generator_TableClassName="scheduleDataTable" msprop:Generator_TableVarName="tableschedule" msprop:Generator_TablePropName="schedule" msprop:Generator_RowDeletingName="scheduleRowDeleting" msprop:Generator_RowChangingName="scheduleRowChanging" msprop:Generator_RowEvHandlerName="scheduleRowChangeEventHandler" msprop:Generator_RowDeletedName="scheduleRowDeleted" msprop:Generator_UserTableName="schedule" msprop:Generator_RowChangedName="scheduleRowChanged" msprop:Generator_RowEvArgName="scheduleRowChangeEvent" msprop:Generator_RowClassName="scheduleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="staff" msprop:Generator_TableClassName="staffDataTable" msprop:Generator_TableVarName="tablestaff" msprop:Generator_TablePropName="staff" msprop:Generator_RowDeletingName="staffRowDeleting" msprop:Generator_RowChangingName="staffRowChanging" msprop:Generator_RowEvHandlerName="staffRowChangeEventHandler" msprop:Generator_RowDeletedName="staffRowDeleted" msprop:Generator_UserTableName="staff" msprop:Generator_RowChangedName="staffRowChanged" msprop:Generator_RowEvArgName="staffRowChangeEvent" msprop:Generator_RowClassName="staffRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="staffschedule" msprop:Generator_TableClassName="staffscheduleDataTable" msprop:Generator_TableVarName="tablestaffschedule" msprop:Generator_TablePropName="staffschedule" msprop:Generator_RowDeletingName="staffscheduleRowDeleting" msprop:Generator_RowChangingName="staffscheduleRowChanging" msprop:Generator_RowEvHandlerName="staffscheduleRowChangeEventHandler" msprop:Generator_RowDeletedName="staffscheduleRowDeleted" msprop:Generator_UserTableName="staffschedule" msprop:Generator_RowChangedName="staffscheduleRowChanged" msprop:Generator_RowEvArgName="staffscheduleRowChangeEvent" msprop:Generator_RowClassName="staffscheduleRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

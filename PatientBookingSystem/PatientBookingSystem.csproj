@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E09745BD-FCB9-4572-8EF6-A600F7F34A3A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PatientBookingSystem</RootNamespace>
+    <AssemblyName>PatientBookingSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="config.cs" />
+    <Compile Include="Controllers\AbsenceController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\ListDate.cs" />
+    <Compile Include="Helpers\ListItem.cs" />
+    <Compile Include="Helpers\Validator.cs" />
+    <Compile Include="Mappers\AbsenceMapper.cs" />
+    <Compile Include="Mappers\BookingMapper.cs" />
+    <Compile Include="Mappers\IDataMapper.cs" />
+    <Compile Include="Mappers\ScheduleMapper.cs" />
+    <Compile Include="Mappers\StaffMapper.cs" />
+    <Compile Include="Mappers\StaffScheduleMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\StaffScheduleModel.cs" />
+    <Compile Include="Presenters\Interfaces\AbsenceHandler.cs" />
+    <Compile Include="Presenters\Interfaces\AppointmentBoxI.cs" />
+    <Compile Include="Presenters\Interfaces\CheckedComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\BookingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\BookingWindow.Designer.cs">
+      <DependentUpon>BookingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\pastAppointmentsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\pastAppointmentsPanel.Designer.cs">
+      <DependentUpon>pastAppointmentsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\printConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\printConfirmation.Designer.cs">
+      <DependentUpon>printConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.Designer.cs">
+      <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\SingleScheduleDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\SingleScheduleDay.Designer.cs">
+      <DependentUpon>SingleScheduleDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\surgeryManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\surgeryManagement.Designer.cs">
+      <DependentUpon>surgeryManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addSchedule.Designer.cs">
+      <DependentUpon>addSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addUser.Designer.cs">
+      <DependentUpon>addUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addSurgeryExceptionDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addSurgeryExceptionDay.Designer.cs">
+      <DependentUpon>addSurgeryExceptionDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addStaffExceptionDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addStaffExceptionDay.Designer.cs">
+      <DependentUpon>addStaffExceptionDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addStaffMember.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\addStaffMember.Designer.cs">
+      <DependentUpon>addStaffMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentBox.Designer.cs">
+      <DependentUpon>appointmentBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentCancellation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentCancellation.Designer.cs">
+      <DependentUpon>appointmentCancellation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\dayOfaWeekBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\dayOfaWeekBox.Designer.cs">
+      <DependentUpon>dayOfaWeekBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ApplicationState.cs" />
+    <Compile Include="Helpers\SurgeryInfo.cs" />
+    <Compile Include="Helpers\TimeRange.cs" />
+    <Compile Include="Models\AbsenceModel.cs" />
+    <Compile Include="Models\BookingModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\StaffModel.cs" />
+    <Compile Include="Presenters\BasePresenter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\filtersPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\filtersPanel.Designer.cs">
+      <DependentUpon>filtersPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\homePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\homePanel.Designer.cs">
+      <DependentUpon>homePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\initialInstructionsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\initialInstructionsPanel.Designer.cs">
+      <DependentUpon>initialInstructionsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\leftPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\leftPanel.Designer.cs">
+      <DependentUpon>leftPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbConnector.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Controllers\Logger.cs" />
+    <Compile Include="pbsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pbsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\personalInformationPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\personalInformationPanel.Designer.cs">
+      <DependentUpon>personalInformationPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\schedulePerDayPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\schedulePerDayPanel.Designer.cs">
+      <DependentUpon>schedulePerDayPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\multipleScheduleEntriesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\multipleScheduleEntriesPanel.Designer.cs">
+      <DependentUpon>multipleScheduleEntriesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\noAppointmentsPerDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\noAppointmentsPerDay.Designer.cs">
+      <DependentUpon>noAppointmentsPerDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\singleEntrySchedulePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\singleEntrySchedulePanel.Designer.cs">
+      <DependentUpon>singleEntrySchedulePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\statisticsOverviewBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\statisticsOverviewBox.Designer.cs">
+      <DependentUpon>statisticsOverviewBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\surgeryInfoBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\surgeryInfoBox.Designer.cs">
+      <DependentUpon>surgeryInfoBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentTimeLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\appointmentTimeLabel.Designer.cs">
+      <DependentUpon>appointmentTimeLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\upcomingAppointmentsBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MinorElements\upcomingAppointmentsBox.Designer.cs">
+      <DependentUpon>upcomingAppointmentsBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\FeedbackWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\FeedbackWindow.Designer.cs">
+      <DependentUpon>FeedbackWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Presenters\MainViews\schedulePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\schedulePanel.Designer.cs">
+      <DependentUpon>schedulePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\settingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\settingsPanel.Designer.cs">
+      <DependentUpon>settingsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\MainViews\upcomingAppointments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\upcomingAppointments.Designer.cs">
+      <DependentUpon>upcomingAppointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\AbsenceRepo.cs" />
+    <Compile Include="Repositories\BaseRepo.cs" />
+    <Compile Include="Repositories\BookingRepo.cs" />
+    <Compile Include="Repositories\ScheduleRepo.cs" />
+    <Compile Include="Repositories\StaffRepo.cs" />
+    <Compile Include="Repositories\UserRepo.cs" />
+    <EmbeddedResource Include="Presenters\MainViews\BookingWindow.resx">
+      <DependentUpon>BookingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\pastAppointmentsPanel.resx">
+      <DependentUpon>pastAppointmentsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\printConfirmation.resx">
+      <DependentUpon>printConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\cancelAppointmentConfirmation.resx">
+      <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\SingleScheduleDay.resx">
+      <DependentUpon>SingleScheduleDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\surgeryManagement.resx">
+      <DependentUpon>surgeryManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\addSchedule.resx">
+      <DependentUpon>addSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\addUser.resx">
+      <DependentUpon>addUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\addSurgeryExceptionDay.resx">
+      <DependentUpon>addSurgeryExceptionDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\addStaffExceptionDay.resx">
+      <DependentUpon>addStaffExceptionDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\addStaffMember.resx">
+      <DependentUpon>addStaffMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\appointmentBox.resx">
+      <DependentUpon>appointmentBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\appointmentCancellation.resx">
+      <DependentUpon>appointmentCancellation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\dayOfaWeekBox.resx">
+      <DependentUpon>dayOfaWeekBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\filtersPanel.resx">
+      <DependentUpon>filtersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\homePanel.resx">
+      <DependentUpon>homePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\initialInstructionsPanel.resx">
+      <DependentUpon>initialInstructionsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\leftPanel.resx">
+      <DependentUpon>leftPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\personalInformationPanel.resx">
+      <DependentUpon>personalInformationPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\schedulePerDayPanel.resx">
+      <DependentUpon>schedulePerDayPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\multipleScheduleEntriesPanel.resx">
+      <DependentUpon>multipleScheduleEntriesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\noAppointmentsPerDay.resx">
+      <DependentUpon>noAppointmentsPerDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\singleEntrySchedulePanel.resx">
+      <DependentUpon>singleEntrySchedulePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\statisticsOverviewBox.resx">
+      <DependentUpon>statisticsOverviewBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\surgeryInfoBox.resx">
+      <DependentUpon>surgeryInfoBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\appointmentTimeLabel.resx">
+      <DependentUpon>appointmentTimeLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MinorElements\upcomingAppointmentsBox.resx">
+      <DependentUpon>upcomingAppointmentsBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\FeedbackWindow.resx">
+      <DependentUpon>FeedbackWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Presenters\MainViews\schedulePanel.resx">
+      <DependentUpon>schedulePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\settingsPanel.resx">
+      <DependentUpon>settingsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\upcomingAppointments.resx">
+      <DependentUpon>upcomingAppointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="pbsDataSet.xsc">
+      <DependentUpon>pbsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="pbsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>pbsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="pbsDataSet.xss">
+      <DependentUpon>pbsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxOPTSHOLDLib">
+      <Guid>{3050F4E0-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="OPTSHOLDLib">
+      <Guid>{3050F4E0-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
