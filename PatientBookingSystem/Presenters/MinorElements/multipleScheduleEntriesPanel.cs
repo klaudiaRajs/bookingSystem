@@ -13,6 +13,10 @@ using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
     public partial class multipleScheduleEntriesPanel : UserControl {
+
+        ScheduleController scheduleController = new ScheduleController();
+        FeedbackWindow feedback = new FeedbackWindow();
+
         public multipleScheduleEntriesPanel() {
             InitializeComponent();
             fillInMonthsForYearFromToday();
@@ -60,20 +64,40 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             int staffId = getStaffId();
             List<string> daysToBeScheduled = getDaysToBeScheduled();
             Dictionary<string, Dictionary<string, string>> timesPerDay = getTimesPerDay();
-            List<int> scheduledDays = getDatesForSelectedPeriod(selectedMonths, daysToBeScheduled, timesPerDay);
+            List<int> scheduledDays = getScheduleIdsPerPeriod(selectedMonths, daysToBeScheduled, timesPerDay);
+            bool resultOfSavingStaffSchedules = saveStaffSchedules(staffId, scheduledDays);
+            if( resultOfSavingStaffSchedules) {
+                clearAllTheFields(); 
+            }
         }
 
+        private void clearAllTheFields() {
+            allTheStaffMembers.SelectedIndex = 0; 
+            monthsToApplySchedule.Items.Clear();
+            fillInMonthsForYearFromToday(); 
+        }
 
-        private List<int> getDatesForSelectedPeriod(List<DateTime> monthsList, List<string> daysToBeScheduled, Dictionary<string, Dictionary<string, string>> timesPerDay) {
+        private bool saveStaffSchedules(int staffId, List<int> scheduledDays) {
+            List<bool> result = scheduleController.saveStaffSchedules(staffId, scheduledDays);
+            if (result.Count != scheduledDays.Count) {
+                feedback.setMessageForSavingError();
+                feedback.Show();
+                return false;
+            }
+            feedback.setMessageForSuccessfullOperation();
+            feedback.Show();
+            return true;
+        }
+
+        private List<int> getScheduleIdsPerPeriod(List<DateTime> monthsList, List<string> daysToBeScheduled, Dictionary<string, Dictionary<string, string>> timesPerDay) {
+            List<int> scheduleIdList = new List<int>();
             if (monthsList.Count != 0) {
-                ScheduleController controller = new ScheduleController();
-                List<int> scheduleIdList = new List<int>();
                 foreach (DateTime date in monthsList) {
                     DateTime resetedDate = date;
                     if (date.Date != DateTime.Today.Date) {
                         resetedDate = new DateTime(date.Year, date.Month, 1);
                     }
-                    while (resetedDate.Date <= DateHelper.convertToLastDayOfMonth(resetedDate)) {
+                    while (resetedDate.Date <= DateHelper.convertToLastDayOfMonth(date)) {
                         bool result = false;
                         foreach (string day in daysToBeScheduled) {
                             if (resetedDate.ToString("dddd", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")).ToLower() == day.ToLower()) {
@@ -81,15 +105,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                                 schedule.setDate(resetedDate.ToString("yyyy-MM-dd"));
                                 schedule.setStartTime(timesPerDay[day.ToString()].First().Key);
                                 schedule.setEndTime(timesPerDay[day.ToString()].First().Value);
-                                result = controller.saveSchedule(schedule);
-                                if( !result) {
-                                    FeedbackWindow feedback = new FeedbackWindow();
+                                result = scheduleController.saveSchedule(schedule);
+                                if (!result) {
                                     feedback.setMessageForSavingError();
                                     feedback.Show();
                                     return null;
                                 } else {
-                                    int scheduleId = controller.getScheduleId(schedule); 
-                                    scheduleIdList.Add(scheduleId); 
+                                    int scheduleId = scheduleController.getScheduleId(schedule);
+                                    scheduleIdList.Add(scheduleId);
                                 }
                             }
                         }
@@ -97,7 +120,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                     }
                 }
             }
-            return (new List<int> { });
+            return scheduleIdList;
         }
 
 

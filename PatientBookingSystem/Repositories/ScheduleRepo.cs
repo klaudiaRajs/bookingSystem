@@ -26,6 +26,12 @@ namespace PatientBookingSystem.Repositories {
             return this.db.Execute(query);
         }
 
+        internal bool saveStaffSchedule(int staffId, int scheduleId) {
+            string query = "INSERT INTO pbs_staffschedule (`staffId`, `scheduleId`) VALUES (" 
+                + staffId + ", " + scheduleId + ")";
+            return this.db.Execute(query);
+        }
+
         public int getScheduleId(ScheduleModel schedule) {
             string query = "SELECT * from " + table + " WHERE date= "
                 + this.getStringInMySqlInsertableFormat(schedule.getDate())

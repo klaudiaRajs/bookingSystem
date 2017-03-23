@@ -20,12 +20,21 @@ namespace PatientBookingSystem.Controllers {
 
         string date;
 
-        public ScheduleController(string date) {
+        public ScheduleController(string date = null) {
             this.date = date;
             refresh();
         }
 
-        public ScheduleController() {
+        public List<bool> saveStaffSchedules(int staffId, List<int> scheduleIdList) {
+            List<bool> results = new List<bool>(); 
+            if (staffId != 0 && scheduleIdList.Count != 0) {
+                foreach (int scheduleId in scheduleIdList) {
+                    if( scheduleRepo.saveStaffSchedule(staffId, scheduleId)) {
+                        results.Add(true);
+                    }
+                }
+            }
+            return results;
         }
 
         public bool saveSchedule(ScheduleModel schedule) {
