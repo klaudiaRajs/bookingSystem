@@ -38,7 +38,7 @@
             this.thirdTheClosestAppointmentLabel.Name = "thirdTheClosestAppointmentLabel";
             this.thirdTheClosestAppointmentLabel.Size = new System.Drawing.Size(184, 17);
             this.thirdTheClosestAppointmentLabel.TabIndex = 31;
-            this.thirdTheClosestAppointmentLabel.Text = "Thursday, 19th Dec 2016";
+            this.thirdTheClosestAppointmentLabel.Visible = false;
             // 
             // secondTheClosestAppointmentLabel
             // 
@@ -49,7 +49,7 @@
             this.secondTheClosestAppointmentLabel.Name = "secondTheClosestAppointmentLabel";
             this.secondTheClosestAppointmentLabel.Size = new System.Drawing.Size(184, 17);
             this.secondTheClosestAppointmentLabel.TabIndex = 30;
-            this.secondTheClosestAppointmentLabel.Text = "Thursday, 19th Dec 2016";
+            this.secondTheClosestAppointmentLabel.Visible = false;
             // 
             // theClosestAppointmentLabel
             // 
@@ -60,7 +60,7 @@
             this.theClosestAppointmentLabel.Name = "theClosestAppointmentLabel";
             this.theClosestAppointmentLabel.Size = new System.Drawing.Size(185, 17);
             this.theClosestAppointmentLabel.TabIndex = 29;
-            this.theClosestAppointmentLabel.Text = "Monday, 15th Nov 2015";
+            this.theClosestAppointmentLabel.Visible = false;
             // 
             // upcomingAppointmentsHeader
             // 

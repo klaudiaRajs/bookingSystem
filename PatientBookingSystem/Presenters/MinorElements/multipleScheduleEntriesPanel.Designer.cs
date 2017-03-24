@@ -671,6 +671,7 @@
             this.monthsToApplySchedule.Name = "monthsToApplySchedule";
             this.monthsToApplySchedule.Size = new System.Drawing.Size(159, 21);
             this.monthsToApplySchedule.TabIndex = 3;
+            this.monthsToApplySchedule.Text = "Please choose month:";
             this.monthsToApplySchedule.ValueSeparator = ", ";
             // 
             // multipleScheduleEntriesPanel

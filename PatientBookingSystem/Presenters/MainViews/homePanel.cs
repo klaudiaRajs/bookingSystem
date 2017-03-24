@@ -5,36 +5,39 @@ using System.Windows.Forms;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
-using PatientBookingSystem.Presenters; 
+using PatientBookingSystem.Presenters;
+using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem {
     partial class homePanel : UserControl {
         BookingRepo repo;
         List<IModel> bookingRepo;
 
-
-
         public homePanel() {
             InitializeComponent();
-
             repo = new BookingRepo();
             bookingRepo = repo.getBookingsPerUser();
-            theMostRecentAppointment.Text += getDateInPresenterFormat(repo.getLastAppointment());
-            theMostAttendandedDoctor.Text += repo.getTheMostAttendedDoctor().getFullStaffName();
-            if (repo.getTheMostAttendedNurse().Count != 0) {
-                theMostAttendendedNurse.Text += (repo.getTheMostAttendedNurse().First() as StaffModel).getFullStaffName();
+            if (ApplicationState.userType != "admin") {
+                theMostRecentAppointment.Text += getDateInPresenterFormat(repo.getLastAppointment());
+                theMostAttendandedDoctor.Text += repo.getTheMostAttendedDoctor().getFullStaffName();
+                if (repo.getTheMostAttendedNurse().Count != 0) {
+                    theMostAttendendedNurse.Text += (repo.getTheMostAttendedNurse().First() as StaffModel).getFullStaffName();
+                } else {
+                    theMostAttendendedNurse.Text += " no nurse appointments";
+                }
+            } else {
+                theMostAttendandedDoctor.Visible = false;
+                theMostAttendendedNurse.Visible = false;
+                theMostRecentAppointment.Visible = false;
+                essentailInformationLabel.Visible = false;
+                personalStatistics.Visible = false;
             }
             //debugger();
         }
 
-
-        private void homeContent_Paint(object sender, PaintEventArgs e) {
-
-        }
-        
         protected String getDateInPresenterFormat(String date) {
             string[] separator = new string[] { ".", " " };
-            if( String.IsNullOrEmpty(date)) {
+            if (String.IsNullOrEmpty(date)) {
                 return null;
             }
             string[] dateContent = date.Split(separator, StringSplitOptions.None);

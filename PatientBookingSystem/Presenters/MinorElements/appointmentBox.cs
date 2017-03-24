@@ -54,6 +54,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             commentLabel.Text = this.comment;
             appointmentDateLabel.Text = this.date + " " + this.time;
             if(ApplicationState.userType.Equals("admin")) {
+                patientLabel.Visible = true;
                 patientNameLabel.Visible = true;
                 patientNameLabel.Text = this.patient; 
             }

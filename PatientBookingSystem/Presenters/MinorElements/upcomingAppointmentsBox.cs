@@ -16,7 +16,7 @@ namespace PatientBookingSystem.Presenters {
         public upcomingAppointmentsBox() {
             InitializeComponent();
             repo = new BookingRepo();
-            fillInUpcomingAppointments(); 
+            fillInUpcomingAppointments();
         }
 
         protected String getDateInPresenterFormat(String date) {
@@ -29,21 +29,20 @@ namespace PatientBookingSystem.Presenters {
 
         private void fillInUpcomingAppointments() {
             List<IModel> bookings = repo.getAllUpcomingAppointments();
-            //if (bookings.ElementAt(0) != null) {
-            //    theClosestAppointmentLabel.Text = getDateInPresenterFormat(bookings.ElementAt(0).getScheduleModel().getDate().ToString());
-            //} else {
-            //    theClosestAppointmentLabel.Visible = false;
-            //}
-            //if (bookings.ElementAt(1) != null) {
-            //    secondTheClosestAppointmentLabel.Text = getDateInPresenterFormat(bookings.ElementAt(1).getScheduleModel().getDate().ToString());
-            //} else {
-            //    secondTheClosestAppointmentLabel.Visible = false;
-            //}
-            //if (bookings.ElementAt(2) != null) {
-            //    thirdTheClosestAppointmentLabel.Text = getDateInPresenterFormat(bookings.ElementAt(2).getScheduleModel().getDate().ToString());
-            //} else {
-            //    thirdTheClosestAppointmentLabel.Visible = false;
-            //}
+            if (bookings.Count >= 1 && bookings.ElementAt(0) != null) {
+                theClosestAppointmentLabel.Text = getDateInPresenterFormat(((BookingModel)bookings[0]).getScheduleModel().getDate().ToString());
+            } else {
+                theClosestAppointmentLabel.Text = "No upcoming appointments";
+            }
+            theClosestAppointmentLabel.Visible = true;
+            if (bookings.Count >= 2 && bookings.ElementAt(1) != null) {
+                secondTheClosestAppointmentLabel.Text = getDateInPresenterFormat(((BookingModel)bookings[1]).getScheduleModel().getDate().ToString());
+                secondTheClosestAppointmentLabel.Visible = true;
+            }
+            if (bookings.Count >= 3 && bookings.ElementAt(2) != null) {
+                thirdTheClosestAppointmentLabel.Text = getDateInPresenterFormat(((BookingModel)bookings[2]).getScheduleModel().getDate().ToString());
+                thirdTheClosestAppointmentLabel.Visible = true;
+            }
         }
     }
 }

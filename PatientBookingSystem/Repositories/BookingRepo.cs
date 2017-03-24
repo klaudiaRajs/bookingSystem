@@ -101,9 +101,6 @@ namespace PatientBookingSystem.Repositories {
             Dictionary<int, BookingModel> dict = new Dictionary<int, BookingModel>();
             string query = "SELECT * FROM " + view + " WHERE `patientId` = " + ApplicationState.userId;
             List<IModel> bookings = this.db.Query(query, new BookingMapper());
-            if (bookings.Count == 0) {
-                return null;
-            }
             return bookings;
         }
 
@@ -165,7 +162,7 @@ namespace PatientBookingSystem.Repositories {
         }
 
         public string getLastAppointment() {
-            string query = "SELECT * from " + view + " WHERE patientId = " + ApplicationState.userId + " AND attendance = 1 AND date < " + '"' + today + '"';
+            string query = "SELECT * from " + view + " WHERE patientId = " + ApplicationState.userId + " AND attendance = 1 AND date < " + '"' + today + "\" ORDER by date DESC";
             List<IModel> appointments = this.db.Query(query, new BookingMapper());
             if (appointments != null && appointments.Count != 0) {
                 string theMostRecentAppointment = (appointments.First() as BookingModel).getScheduleModel().getDate();
@@ -188,9 +185,6 @@ namespace PatientBookingSystem.Repositories {
                 + " AND date > " + '"' + today + '"'
                 + " ORDER BY date ASC";
             List<IModel> bookings = this.db.Query(query, new BookingMapper());
-            if (bookings.Count == 0) {
-                return null;
-            }
             return bookings;
         }
     }

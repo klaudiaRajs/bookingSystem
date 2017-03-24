@@ -22,6 +22,9 @@ namespace PatientBookingSystem {
             repo = new UserRepo(); 
             user = repo.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword); 
             fillInPersonalInformation(); 
+            if( ApplicationState.userType == "admin") {
+                personalStatistics.Visible = false;
+            }
         }
 
         private void fillInPersonalInformation() {

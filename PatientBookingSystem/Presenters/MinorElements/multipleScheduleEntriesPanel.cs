@@ -19,9 +19,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         public multipleScheduleEntriesPanel() {
             InitializeComponent();
+            modifyBreakTimes();
             fillInMonthsForYearFromToday();
-            monthsToApplySchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            allTheStaffMembers.DropDownStyle = ComboBoxStyle.DropDownList;
             fillInStaffMember();
+        }
+
+        private void modifyBreakTimes() {
+            // Make a sensible logic for setting default fields value 
         }
 
         private void fillInStaffMember() {
@@ -66,20 +71,20 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             Dictionary<string, Dictionary<string, string>> timesPerDay = getTimesPerDay();
             List<int> scheduledDays = getScheduleIdsPerPeriod(selectedMonths, daysToBeScheduled, timesPerDay);
             bool resultOfSavingStaffSchedules = saveStaffSchedules(staffId, scheduledDays);
-            if( resultOfSavingStaffSchedules) {
-                clearAllTheFields(); 
+            if (resultOfSavingStaffSchedules) {
+                clearAllTheFields();
             }
         }
 
         private void clearAllTheFields() {
-            allTheStaffMembers.SelectedIndex = 0; 
+            allTheStaffMembers.SelectedIndex = 0;
             monthsToApplySchedule.Items.Clear();
-            fillInMonthsForYearFromToday(); 
+            fillInMonthsForYearFromToday();
         }
 
         private bool saveStaffSchedules(int staffId, List<int> scheduledDays) {
-            List<bool> result = scheduleController.saveStaffSchedules(staffId, scheduledDays);
-            if (result.Count != scheduledDays.Count) {
+            List<bool> errors = scheduleController.saveStaffSchedules(staffId, scheduledDays);
+            if (errors.Count != 0) {
                 feedback.setMessageForSavingError();
                 feedback.Show();
                 return false;
@@ -103,16 +108,18 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                             if (resetedDate.ToString("dddd", System.Globalization.CultureInfo.CreateSpecificCulture("en-US")).ToLower() == day.ToLower()) {
                                 ScheduleModel schedule = new ScheduleModel();
                                 schedule.setDate(resetedDate.ToString("yyyy-MM-dd"));
-                                schedule.setStartTime(timesPerDay[day.ToString()].First().Key);
-                                schedule.setEndTime(timesPerDay[day.ToString()].First().Value);
-                                result = scheduleController.saveSchedule(schedule);
-                                if (!result) {
-                                    feedback.setMessageForSavingError();
-                                    feedback.Show();
-                                    return null;
-                                } else {
-                                    int scheduleId = scheduleController.getScheduleId(schedule);
-                                    scheduleIdList.Add(scheduleId);
+                                foreach (KeyValuePair<string, string> entry in timesPerDay[day.ToString()]) {
+                                    schedule.setStartTime(entry.Key);
+                                    schedule.setEndTime(entry.Value);
+                                    result = scheduleController.saveSchedule(schedule);
+                                    if (!result) {
+                                        feedback.setMessageForSavingError();
+                                        feedback.Show();
+                                        return null;
+                                    } else {
+                                        int scheduleId = scheduleController.getScheduleId(schedule);
+                                        scheduleIdList.Add(scheduleId);
+                                    }
                                 }
                             }
                         }
@@ -126,13 +133,62 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         private Dictionary<string, Dictionary<string, string>> getTimesPerDay() {
             Dictionary<string, Dictionary<string, string>> timesPerDay = new Dictionary<string, Dictionary<string, string>>();
-            timesPerDay.Add(monday.Text, (new Dictionary<string, string>() { { mondayWorkStartTime.Value.TimeOfDay.ToString(), mondayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(tuesday.Text, (new Dictionary<string, string>() { { tuesdayWorkStartTime.Value.TimeOfDay.ToString(), tuesdayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(wednesday.Text, (new Dictionary<string, string>() { { wednesdayWorkStartTime.Value.TimeOfDay.ToString(), wednesdayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(thursday.Text, (new Dictionary<string, string>() { { thursdayWorkStartTime.Value.TimeOfDay.ToString(), thursdayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(friday.Text, (new Dictionary<string, string>() { { fridayWorkStartTime.Value.TimeOfDay.ToString(), fridayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(saturday.Text, (new Dictionary<string, string>() { { saturdayWorkStartTime.Value.TimeOfDay.ToString(), saturdayWorkEndTime.Value.TimeOfDay.ToString() } }));
-            timesPerDay.Add(sunday.Text, (new Dictionary<string, string>() { { sundayWorkStartTime.Value.TimeOfDay.ToString(), sundayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            if (!mondayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(mondayWorkStartTime.Value.TimeOfDay.ToString(), mondayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(mondayBreakEndTime.Value.TimeOfDay.ToString(), mondayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(monday.Text, schedules);
+            } else {
+                timesPerDay.Add(monday.Text, (new Dictionary<string, string>() { { mondayWorkStartTime.Value.TimeOfDay.ToString(), mondayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!tuesdayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(tuesdayWorkStartTime.Value.TimeOfDay.ToString(), tuesdayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(tuesdayBreakEndTime.Value.TimeOfDay.ToString(), tuesdayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(monday.Text, schedules);
+            } else {
+                timesPerDay.Add(tuesday.Text, (new Dictionary<string, string>() { { tuesdayWorkStartTime.Value.TimeOfDay.ToString(), tuesdayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!wednesdayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(wednesdayWorkStartTime.Value.TimeOfDay.ToString(), wednesdayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(wednesdayBreakEndTime.Value.TimeOfDay.ToString(), wednesdayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(wednesday.Text, schedules);
+            } else {
+                timesPerDay.Add(wednesday.Text, (new Dictionary<string, string>() { { wednesdayWorkStartTime.Value.TimeOfDay.ToString(), wednesdayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!thursdayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(thursdayWorkStartTime.Value.TimeOfDay.ToString(), thursdayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(thursdayBreakEndTime.Value.TimeOfDay.ToString(), thursdayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(thursday.Text, schedules);
+            } else {
+                timesPerDay.Add(thursday.Text, (new Dictionary<string, string>() { { thursdayWorkStartTime.Value.TimeOfDay.ToString(), thursdayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!fridayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(fridayWorkStartTime.Value.TimeOfDay.ToString(), fridayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(fridayBreakEndTime.Value.TimeOfDay.ToString(), fridayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(friday.Text, schedules);
+            } else {
+                timesPerDay.Add(friday.Text, (new Dictionary<string, string>() { { fridayWorkStartTime.Value.TimeOfDay.ToString(), fridayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!saturdayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(saturdayWorkStartTime.Value.TimeOfDay.ToString(), saturdayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(saturdayBreakEndTime.Value.TimeOfDay.ToString(), saturdayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(saturday.Text, schedules);
+            } else {
+                timesPerDay.Add(saturday.Text, (new Dictionary<string, string>() { { saturdayWorkStartTime.Value.TimeOfDay.ToString(), saturdayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
+            if (!sundayBreak.Checked) {
+                Dictionary<string, string> schedules = new Dictionary<string, string>();
+                schedules.Add(sundayWorkStartTime.Value.TimeOfDay.ToString(), sundayBreakStartTime.Value.TimeOfDay.ToString());
+                schedules.Add(sundayBreakEndTime.Value.TimeOfDay.ToString(), sundayWorkEndTime.Value.TimeOfDay.ToString());
+                timesPerDay.Add(sunday.Text, schedules);
+            } else {
+                timesPerDay.Add(sunday.Text, (new Dictionary<string, string>() { { sundayWorkStartTime.Value.TimeOfDay.ToString(), sundayWorkEndTime.Value.TimeOfDay.ToString() } }));
+            }
             return timesPerDay;
         }
 

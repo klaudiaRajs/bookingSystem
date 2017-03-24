@@ -3,11 +3,12 @@ using System.Windows.Forms;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Presenters;
 using PatientBookingSystem.Presenters.MainViews;
+using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem {
     public partial class Main : Form {
-        const string helpMessageForLoggin = " Your login and password should be obtained from your surgery." 
-            + "Please contact the surgery if the one provided by them doesn't work"; 
+        const string helpMessageForLoggin = " Your login and password should be obtained from your surgery."
+            + "Please contact the surgery if the one provided by them doesn't work";
 
         public Main() {
             InitializeComponent();
@@ -34,7 +35,11 @@ namespace PatientBookingSystem {
                 HomePanel.Visible = true;
                 loadLeftPanel();
                 loadInitialInformationPanel();
-                loadHomePanel();
+                if (ApplicationState.userType != "admin") {
+                    loadHomePanel();
+                } else {
+                    loadSurgeryManagementPanel();
+                }
             } else {
                 FeedbackWindow message = new FeedbackWindow();
                 message.Show();
@@ -53,7 +58,7 @@ namespace PatientBookingSystem {
         }
 
         public void loadSurgeryManagementPanel() {
-            windowContentContainer.Controls.Clear(); 
+            windowContentContainer.Controls.Clear();
             surgeryManagement management = new surgeryManagement();
             management.Dock = DockStyle.Fill;
             windowContentContainer.Controls.Add(management);

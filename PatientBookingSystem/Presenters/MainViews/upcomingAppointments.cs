@@ -21,7 +21,6 @@ namespace PatientBookingSystem {
             InitializeComponent();
             this.parent = parent;
             getAppointmentBoxes();
-
         }
 
         public void getAppointmentBoxes() {

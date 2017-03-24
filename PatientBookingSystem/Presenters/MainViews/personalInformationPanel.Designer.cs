@@ -40,7 +40,7 @@
             this.theMostOftenAttendedStaffMemberLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
-            this.statisticsOverviewBox1 = new PatientBookingSystem.Presenters.statisticsOverviewBox();
+            this.personalStatistics = new PatientBookingSystem.Presenters.statisticsOverviewBox();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -192,7 +192,7 @@
             this.panel6.Controls.Add(this.theMostOftenAttendedStaffMemberLabel);
             this.panel6.Controls.Add(this.label3);
             this.panel6.Controls.Add(this.surgeryInfoBox1);
-            this.panel6.Controls.Add(this.statisticsOverviewBox1);
+            this.panel6.Controls.Add(this.personalStatistics);
             this.panel6.Controls.Add(this.label2);
             this.panel6.Controls.Add(this.emailLabel);
             this.panel6.Controls.Add(this.NiNLabel);
@@ -242,13 +242,13 @@
             this.surgeryInfoBox1.Size = new System.Drawing.Size(250, 150);
             this.surgeryInfoBox1.TabIndex = 47;
             // 
-            // statisticsOverviewBox1
+            // personalStatistics
             // 
-            this.statisticsOverviewBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.statisticsOverviewBox1.Location = new System.Drawing.Point(132, 302);
-            this.statisticsOverviewBox1.Name = "statisticsOverviewBox1";
-            this.statisticsOverviewBox1.Size = new System.Drawing.Size(252, 166);
-            this.statisticsOverviewBox1.TabIndex = 46;
+            this.personalStatistics.BackColor = System.Drawing.Color.LightSlateGray;
+            this.personalStatistics.Location = new System.Drawing.Point(132, 302);
+            this.personalStatistics.Name = "personalStatistics";
+            this.personalStatistics.Size = new System.Drawing.Size(252, 166);
+            this.personalStatistics.TabIndex = 46;
             // 
             // personalInformationPanel
             // 
@@ -279,7 +279,7 @@
         private System.Windows.Forms.Label NiNLabel;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.Label label2;
-        private Presenters.statisticsOverviewBox statisticsOverviewBox1;
+        private Presenters.statisticsOverviewBox personalStatistics;
         private System.Windows.Forms.Panel panel6;
         private Presenters.surgeryInfoBox surgeryInfoBox1;
         private System.Windows.Forms.Label theMostOftenAttendedStaffMemberLabel;

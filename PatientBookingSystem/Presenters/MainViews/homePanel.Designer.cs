@@ -24,33 +24,56 @@
         /// </summary>
         private void InitializeComponent() {
             this.homeContent = new System.Windows.Forms.Panel();
+            this.personalStatistics = new PatientBookingSystem.Presenters.statisticsOverviewBox();
+            this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
+            this.upcomingAppointmentsBox1 = new PatientBookingSystem.Presenters.upcomingAppointmentsBox();
             this.label7 = new System.Windows.Forms.Label();
             this.theMostRecentAppointment = new System.Windows.Forms.Label();
             this.theMostAttendendedNurse = new System.Windows.Forms.Label();
             this.theMostAttendandedDoctor = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.upcomingAppointmentsBox1 = new PatientBookingSystem.Presenters.upcomingAppointmentsBox();
-            this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
-            this.statisticsOverviewBox1 = new PatientBookingSystem.Presenters.statisticsOverviewBox();
+            this.essentailInformationLabel = new System.Windows.Forms.Label();
             this.homeContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // homeContent
             // 
-            this.homeContent.Controls.Add(this.statisticsOverviewBox1);
+            this.homeContent.Controls.Add(this.personalStatistics);
             this.homeContent.Controls.Add(this.surgeryInfoBox1);
             this.homeContent.Controls.Add(this.upcomingAppointmentsBox1);
             this.homeContent.Controls.Add(this.label7);
             this.homeContent.Controls.Add(this.theMostRecentAppointment);
             this.homeContent.Controls.Add(this.theMostAttendendedNurse);
             this.homeContent.Controls.Add(this.theMostAttendandedDoctor);
-            this.homeContent.Controls.Add(this.label24);
+            this.homeContent.Controls.Add(this.essentailInformationLabel);
             this.homeContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.homeContent.Location = new System.Drawing.Point(0, 0);
             this.homeContent.Name = "homeContent";
             this.homeContent.Size = new System.Drawing.Size(856, 551);
             this.homeContent.TabIndex = 3;
-            this.homeContent.Paint += new System.Windows.Forms.PaintEventHandler(this.homeContent_Paint);
+            // 
+            // personalStatistics
+            // 
+            this.personalStatistics.BackColor = System.Drawing.Color.LightSlateGray;
+            this.personalStatistics.Location = new System.Drawing.Point(78, 303);
+            this.personalStatistics.Name = "personalStatistics";
+            this.personalStatistics.Size = new System.Drawing.Size(250, 150);
+            this.personalStatistics.TabIndex = 41;
+            // 
+            // surgeryInfoBox1
+            // 
+            this.surgeryInfoBox1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.surgeryInfoBox1.Location = new System.Drawing.Point(449, 303);
+            this.surgeryInfoBox1.Name = "surgeryInfoBox1";
+            this.surgeryInfoBox1.Size = new System.Drawing.Size(250, 150);
+            this.surgeryInfoBox1.TabIndex = 40;
+            // 
+            // upcomingAppointmentsBox1
+            // 
+            this.upcomingAppointmentsBox1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.upcomingAppointmentsBox1.Location = new System.Drawing.Point(78, 42);
+            this.upcomingAppointmentsBox1.Name = "upcomingAppointmentsBox1";
+            this.upcomingAppointmentsBox1.Size = new System.Drawing.Size(230, 140);
+            this.upcomingAppointmentsBox1.TabIndex = 39;
             // 
             // label7
             // 
@@ -98,41 +121,17 @@
             this.theMostAttendandedDoctor.TabIndex = 36;
             this.theMostAttendandedDoctor.Text = "Your doctor\'s name: ";
             // 
-            // label24
+            // essentailInformationLabel
             // 
-            this.label24.AutoSize = true;
-            this.label24.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(446, 42);
-            this.label24.Margin = new System.Windows.Forms.Padding(3);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(139, 17);
-            this.label24.TabIndex = 35;
-            this.label24.Text = "Essential information";
-            // 
-            // upcomingAppointmentsBox1
-            // 
-            this.upcomingAppointmentsBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.upcomingAppointmentsBox1.Location = new System.Drawing.Point(78, 42);
-            this.upcomingAppointmentsBox1.Name = "upcomingAppointmentsBox1";
-            this.upcomingAppointmentsBox1.Size = new System.Drawing.Size(230, 140);
-            this.upcomingAppointmentsBox1.TabIndex = 39;
-            // 
-            // surgeryInfoBox1
-            // 
-            this.surgeryInfoBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.surgeryInfoBox1.Location = new System.Drawing.Point(449, 303);
-            this.surgeryInfoBox1.Name = "surgeryInfoBox1";
-            this.surgeryInfoBox1.Size = new System.Drawing.Size(250, 150);
-            this.surgeryInfoBox1.TabIndex = 40;
-            // 
-            // statisticsOverviewBox1
-            // 
-            this.statisticsOverviewBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.statisticsOverviewBox1.Location = new System.Drawing.Point(78, 303);
-            this.statisticsOverviewBox1.Name = "statisticsOverviewBox1";
-            this.statisticsOverviewBox1.Size = new System.Drawing.Size(250, 150);
-            this.statisticsOverviewBox1.TabIndex = 41;
+            this.essentailInformationLabel.AutoSize = true;
+            this.essentailInformationLabel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.essentailInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.essentailInformationLabel.Location = new System.Drawing.Point(446, 42);
+            this.essentailInformationLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.essentailInformationLabel.Name = "essentailInformationLabel";
+            this.essentailInformationLabel.Size = new System.Drawing.Size(139, 17);
+            this.essentailInformationLabel.TabIndex = 35;
+            this.essentailInformationLabel.Text = "Essential information";
             // 
             // homePanel
             // 
@@ -155,8 +154,8 @@
         private System.Windows.Forms.Label theMostRecentAppointment;
         private System.Windows.Forms.Label theMostAttendendedNurse;
         private System.Windows.Forms.Label theMostAttendandedDoctor;
-        private System.Windows.Forms.Label label24;
-        private Presenters.statisticsOverviewBox statisticsOverviewBox1;
+        private System.Windows.Forms.Label essentailInformationLabel;
+        private Presenters.statisticsOverviewBox personalStatistics;
         private Presenters.surgeryInfoBox surgeryInfoBox1;
         private Presenters.upcomingAppointmentsBox upcomingAppointmentsBox1;
     }

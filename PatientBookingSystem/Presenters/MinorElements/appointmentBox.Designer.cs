@@ -31,7 +31,7 @@
             this.cancelAppointmentButton = new System.Windows.Forms.Button();
             this.Reschedule = new System.Windows.Forms.Button();
             this.patientNameLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.patientLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -125,16 +125,17 @@
             this.patientNameLabel.Text = "Patient\'s name";
             this.patientNameLabel.Visible = false;
             // 
-            // label1
+            // patientLabel
             // 
-            this.label1.BackColor = System.Drawing.Color.Silver;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 110);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 17);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Patient\'s name";
+            this.patientLabel.BackColor = System.Drawing.Color.Silver;
+            this.patientLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.patientLabel.Location = new System.Drawing.Point(9, 110);
+            this.patientLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.patientLabel.Name = "patientLabel";
+            this.patientLabel.Size = new System.Drawing.Size(147, 17);
+            this.patientLabel.TabIndex = 40;
+            this.patientLabel.Text = "Patient\'s name";
+            this.patientLabel.Visible = false;
             // 
             // label2
             // 
@@ -174,7 +175,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.patientLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -204,7 +205,7 @@
         private System.Windows.Forms.Button cancelAppointmentButton;
         private System.Windows.Forms.Button Reschedule;
         private System.Windows.Forms.Label patientNameLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label patientLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

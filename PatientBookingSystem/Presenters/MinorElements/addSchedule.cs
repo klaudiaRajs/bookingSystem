@@ -19,5 +19,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             multipleScheduleEntriesPanel addMultipleEntries = new multipleScheduleEntriesPanel();
             addScheduleContent.Controls.Add(addMultipleEntries);
         }
+
+        private void singleEntryButton_Click(object sender, EventArgs e) {
+            addScheduleContent.Controls.Clear();
+            singleEntrySchedulePanel addSingleScheduleEntry = new singleEntrySchedulePanel();
+            addScheduleContent.Controls.Add(addSingleScheduleEntry);
+        }
     }
 }
