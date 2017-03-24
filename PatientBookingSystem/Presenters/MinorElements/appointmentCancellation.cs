@@ -141,5 +141,9 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 appointmentBoxesContainer.Controls.Add(box);
             }
         }
+
+        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
+            //Implementation not required
+        }
     }
 }

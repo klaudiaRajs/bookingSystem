@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Presenters.Interfaces {
     interface AppointmentBoxI {
-        void getAppointmentBoxes(); 
+        void getAppointmentBoxes();
+        void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments); 
     }
 }

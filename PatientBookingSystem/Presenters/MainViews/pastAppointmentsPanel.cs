@@ -27,5 +27,9 @@ namespace PatientBookingSystem.Presenters.MainViews {
                 pastAppointmentsContainer.Controls.Add(box);
             }
         }
+
+        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
+            //Implementation not required
+        }
     }
 }

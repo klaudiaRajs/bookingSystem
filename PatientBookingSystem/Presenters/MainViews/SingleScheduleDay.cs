@@ -78,10 +78,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
             if (this.parent != null) {
                 parent.getAppointmentBoxes();
             }
-
+            int numberOfMorningAppointments = 0;
+            int numberOfAfternoonAppointments = 0;
             TimeSpan appointmentStartTime = surgeryOpeningTime;
             while (appointmentStartTime < surgeryClosingTIme) {
                 TimeSpan appointmentEndTime = appointmentStartTime.Add(TimeSpan.FromMinutes(lengthOfRegularAppointment));
+
                 string formattedAppointmentStartTime = string.Format("{0:00}:{1:00}", appointmentStartTime.Hours, appointmentStartTime.Minutes);
                 string formattedAppointmentEndTime = string.Format("{0:00}:{1:00}", appointmentEndTime.Hours, appointmentEndTime.Minutes);
                 string appointmentRange = formattedAppointmentStartTime + " - " + formattedAppointmentEndTime;
@@ -91,11 +93,18 @@ namespace PatientBookingSystem.Presenters.MainViews {
                     string staffId = timetable.Columns[columnIndex].Name;
                     ScheduleController.slotStatus slotStatus = controller.getSlotStatus(appointmentStartTime, Int32.Parse(staffId));
                     string slotStatusName = slotStatus.ToString();
+                    if( slotStatusName.Equals("Available") && appointmentStartTime <= new TimeSpan(12,0,0) ){
+                        numberOfMorningAppointments++;
+                    }
+                    if( slotStatusName.Equals("Available") && appointmentStartTime > new TimeSpan(12,0,0)) {
+                        numberOfAfternoonAppointments++;
+                    }
                     timetable.Rows[timetable.RowCount - 1].Cells[staffId].Value = (slotStatus == ScheduleController.slotStatus.NotAvailable ? "" : slotStatusName);
                 }
                 appointmentStartTime = appointmentEndTime;
             }
             timetable.Visible = true;
+            parent.setNumberOfAppointmentsPerDay(numberOfMorningAppointments, numberOfAfternoonAppointments);
         }
 
         private void button1_Click(object sender, EventArgs e) {

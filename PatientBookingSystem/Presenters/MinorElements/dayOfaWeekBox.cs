@@ -12,9 +12,10 @@ using PatientBookingSystem.Presenters.MainViews;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Models;
+using PatientBookingSystem.Presenters.Interfaces;
 
 namespace PatientBookingSystem {
-    public partial class dayOfaWeekBox : UserControl {
+    public partial class dayOfaWeekBox : UserControl, AppointmentBoxI {
 
         public int morningAppointments { get; set; } 
         public int afternoonAppointments { get; set; }
@@ -51,9 +52,33 @@ namespace PatientBookingSystem {
             return this;
         }
 
+
+
         private void openSingleDayAppointmentsView_Click(object sender, EventArgs e) {
-            SingleScheduleDay singleDay = new SingleScheduleDay(null, this.date);
+            SingleScheduleDay singleDay = new SingleScheduleDay(this, this.date);
             singleDay.Show(); 
+        }
+
+        public void setNumberMorningAppointments(int numberOfMorningAppointments) {
+            this.numberOfMorningAppointmentsLabel.Text = numberOfMorningAppointments.ToString();
+        }
+
+        public void getAppointmentBoxes() {
+            //Implementation not required
+        }
+
+        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
+            this.setNumberMorningAppointments(morningAppointments);
+            this.setNumberOfAfternoonAppointments(afternoonAppointments);
+            this.setTotalNumberOfAvailableAppointments(morningAppointments, afternoonAppointments);
+        }
+
+        private void setTotalNumberOfAvailableAppointments(int morningAppointments, int afternoonAppointments) {
+            numberOfFreeAppointmentsLabel.Text = (morningAppointments + afternoonAppointments).ToString();
+        }
+
+        private void setNumberOfAfternoonAppointments(int afternoonAppointments) {
+            this.numberOfAfternoonAppointmentsLabel.Text = afternoonAppointments.ToString();
         }
     }
 }
