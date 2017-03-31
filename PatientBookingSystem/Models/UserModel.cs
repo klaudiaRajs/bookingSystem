@@ -18,9 +18,34 @@ namespace PatientBookingSystem.Models {
         private String email { get; set; }
         private String NiN { get; set; }
         private String address { get; set; }
-        private String confirmationMethod { get; set; }
         private String userType { get; set; }
+        private string notification { get; set; }
+        private string verification { get; set; }
+        private string confirmation { get; set; }
 
+        public string getConfirmationSettings() {
+            return this.confirmation;
+        }
+
+        public void setConfirmation(string confirmation) {
+            this.confirmation = confirmation;
+        }
+
+        public string getNotificationSettings() {
+            return this.notification;
+        }
+
+        public void setNotification(string notification) {
+            this.notification = notification;
+        }
+
+        public string getVerificationSettings() {
+            return this.verification;
+        }
+
+        public void setVerification(string verification) {
+            this.verification = verification;
+        }
 
         public string getFullName() {
             return this.firstName + " " + this.lastName;
@@ -71,9 +96,6 @@ namespace PatientBookingSystem.Models {
             return this.address; 
         }
 
-        public String getConfirmationMethod() {
-            return this.confirmationMethod; 
-        }
 
         public String getUserType() {
             return this.userType; 
@@ -122,9 +144,6 @@ namespace PatientBookingSystem.Models {
             this.address = address;
         }
 
-        public void setConfirmationMethod(String confirmationMethod) {
-            this.confirmationMethod = confirmationMethod;
-        }
 
         public void setUserType(String userType) {
             this.userType = userType;

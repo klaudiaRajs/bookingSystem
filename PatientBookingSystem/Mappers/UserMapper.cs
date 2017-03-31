@@ -23,7 +23,15 @@ namespace PatientBookingSystem.Mappers {
             if (!record.IsDBNull(9)) {
                 user.setAddress(record.GetString("address"));
             }
-            user.setConfirmationMethod(record.GetString("confirmationMethod"));
+            if (!record.IsDBNull(11)) {
+                user.setNotification(record.GetString("notification"));
+            }
+            if (!record.IsDBNull(12)) {
+                user.setVerification(record.GetString("verification"));
+            }
+            if (!record.IsDBNull(13)) {
+                user.setConfirmation(record.GetString("confirmation"));
+            }
             user.setUserType(record.GetString("userType"));
             return user;
         }

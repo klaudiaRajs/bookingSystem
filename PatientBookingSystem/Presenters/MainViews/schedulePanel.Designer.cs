@@ -25,6 +25,12 @@
         private void InitializeComponent() {
             this.scheduleBoxPanel = new System.Windows.Forms.Panel();
             this.scheduleHeaderPanel = new System.Windows.Forms.Panel();
+            this.allTheStaffMembers = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.afternoonAppointmentsCheckbox = new System.Windows.Forms.CheckBox();
+            this.morningAppointmentsCheckbox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.previousMonthButton = new System.Windows.Forms.Label();
             this.monthLabel = new System.Windows.Forms.Label();
@@ -32,7 +38,6 @@
             this.nextMonthButton = new System.Windows.Forms.Label();
             this.appointmentDaysPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
             this.scheduleBoxPanel.SuspendLayout();
             this.scheduleHeaderPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -51,6 +56,11 @@
             // 
             // scheduleHeaderPanel
             // 
+            this.scheduleHeaderPanel.Controls.Add(this.allTheStaffMembers);
+            this.scheduleHeaderPanel.Controls.Add(this.label2);
+            this.scheduleHeaderPanel.Controls.Add(this.afternoonAppointmentsCheckbox);
+            this.scheduleHeaderPanel.Controls.Add(this.morningAppointmentsCheckbox);
+            this.scheduleHeaderPanel.Controls.Add(this.label1);
             this.scheduleHeaderPanel.Controls.Add(this.label7);
             this.scheduleHeaderPanel.Controls.Add(this.flowLayoutPanel1);
             this.scheduleHeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -59,15 +69,77 @@
             this.scheduleHeaderPanel.Size = new System.Drawing.Size(856, 72);
             this.scheduleHeaderPanel.TabIndex = 56;
             // 
+            // allTheStaffMembers
+            // 
+            this.allTheStaffMembers.FormattingEnabled = true;
+            this.allTheStaffMembers.Location = new System.Drawing.Point(252, 35);
+            this.allTheStaffMembers.Name = "allTheStaffMembers";
+            this.allTheStaffMembers.Size = new System.Drawing.Size(121, 21);
+            this.allTheStaffMembers.TabIndex = 41;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(182, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 17);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Doctor:";
+            // 
+            // afternoonAppointmentsCheckbox
+            // 
+            this.afternoonAppointmentsCheckbox.AutoSize = true;
+            this.afternoonAppointmentsCheckbox.Location = new System.Drawing.Point(104, 50);
+            this.afternoonAppointmentsCheckbox.Name = "afternoonAppointmentsCheckbox";
+            this.afternoonAppointmentsCheckbox.Size = new System.Drawing.Size(72, 17);
+            this.afternoonAppointmentsCheckbox.TabIndex = 38;
+            this.afternoonAppointmentsCheckbox.Text = "Afternoon";
+            this.afternoonAppointmentsCheckbox.UseVisualStyleBackColor = true;
+            this.afternoonAppointmentsCheckbox.CheckedChanged += new System.EventHandler(this.afternoonAppointmentsCheckbox_CheckedChanged);
+            // 
+            // morningAppointmentsCheckbox
+            // 
+            this.morningAppointmentsCheckbox.AutoSize = true;
+            this.morningAppointmentsCheckbox.Location = new System.Drawing.Point(104, 31);
+            this.morningAppointmentsCheckbox.Name = "morningAppointmentsCheckbox";
+            this.morningAppointmentsCheckbox.Size = new System.Drawing.Size(64, 17);
+            this.morningAppointmentsCheckbox.TabIndex = 37;
+            this.morningAppointmentsCheckbox.Text = "Morning";
+            this.morningAppointmentsCheckbox.UseVisualStyleBackColor = true;
+            this.morningAppointmentsCheckbox.CheckedChanged += new System.EventHandler(this.morningAppointmentsCheckbox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(5, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 17);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Filter by time:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label7.Location = new System.Drawing.Point(5, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Home > Find appointment";
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.previousMonthButton);
             this.flowLayoutPanel1.Controls.Add(this.monthLabel);
             this.flowLayoutPanel1.Controls.Add(this.yearLabel);
             this.flowLayoutPanel1.Controls.Add(this.nextMonthButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(426, 11);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(434, 11);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(390, 53);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(382, 53);
             this.flowLayoutPanel1.TabIndex = 34;
             // 
             // previousMonthButton
@@ -127,16 +199,6 @@
             this.panel5.Size = new System.Drawing.Size(0, 0);
             this.panel5.TabIndex = 54;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(5, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "Home > Find appointment";
-            // 
             // schedulePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,5 +230,10 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label yearLabel;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox afternoonAppointmentsCheckbox;
+        private System.Windows.Forms.CheckBox morningAppointmentsCheckbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox allTheStaffMembers;
     }
 }

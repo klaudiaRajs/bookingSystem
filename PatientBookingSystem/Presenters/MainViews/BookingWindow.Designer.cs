@@ -32,8 +32,8 @@
             this.timeOfBooking = new System.Windows.Forms.Label();
             this.doctorsNameLabel = new System.Windows.Forms.Label();
             this.surgeryAddress1Line = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.emailCheckBox = new System.Windows.Forms.CheckBox();
+            this.printCheckBox = new System.Windows.Forms.CheckBox();
             this.initialInstructionsPanel1 = new PatientBookingSystem.initialInstructionsPanel();
             this.surgeryAddressSecondLine = new System.Windows.Forms.Label();
             this.surgeryPhoneNumberLabel = new System.Windows.Forms.Label();
@@ -143,25 +143,27 @@
             this.surgeryAddress1Line.Size = new System.Drawing.Size(107, 17);
             this.surgeryAddress1Line.TabIndex = 29;
             // 
-            // checkBox1
+            // emailCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(325, 319);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(51, 17);
-            this.checkBox1.TabIndex = 30;
-            this.checkBox1.Text = "Email";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.emailCheckBox.AutoSize = true;
+            this.emailCheckBox.Location = new System.Drawing.Point(325, 319);
+            this.emailCheckBox.Name = "emailCheckBox";
+            this.emailCheckBox.Size = new System.Drawing.Size(51, 17);
+            this.emailCheckBox.TabIndex = 30;
+            this.emailCheckBox.Text = "Email";
+            this.emailCheckBox.UseVisualStyleBackColor = true;
+            this.emailCheckBox.Visible = false;
             // 
-            // checkBox2
+            // printCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(382, 318);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(47, 17);
-            this.checkBox2.TabIndex = 31;
-            this.checkBox2.Text = "Print";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.printCheckBox.AutoSize = true;
+            this.printCheckBox.Location = new System.Drawing.Point(382, 318);
+            this.printCheckBox.Name = "printCheckBox";
+            this.printCheckBox.Size = new System.Drawing.Size(47, 17);
+            this.printCheckBox.TabIndex = 31;
+            this.printCheckBox.Text = "Print";
+            this.printCheckBox.UseVisualStyleBackColor = true;
+            this.printCheckBox.Visible = false;
             // 
             // initialInstructionsPanel1
             // 
@@ -245,8 +247,8 @@
             this.Controls.Add(this.saveBookingButton);
             this.Controls.Add(this.surgeryPhoneNumberLabel);
             this.Controls.Add(this.surgeryAddressSecondLine);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.printCheckBox);
+            this.Controls.Add(this.emailCheckBox);
             this.Controls.Add(this.surgeryAddress1Line);
             this.Controls.Add(this.doctorsNameLabel);
             this.Controls.Add(this.timeOfBooking);
@@ -276,8 +278,8 @@
         private System.Windows.Forms.Label timeOfBooking;
         private System.Windows.Forms.Label doctorsNameLabel;
         private System.Windows.Forms.Label surgeryAddress1Line;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox emailCheckBox;
+        private System.Windows.Forms.CheckBox printCheckBox;
         private System.Windows.Forms.Label surgeryAddressSecondLine;
         private System.Windows.Forms.Label surgeryPhoneNumberLabel;
         private System.Windows.Forms.Button saveBookingButton;

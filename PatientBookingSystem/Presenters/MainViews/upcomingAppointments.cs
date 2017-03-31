@@ -43,7 +43,7 @@ namespace PatientBookingSystem {
         }
 
         public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
-            throw new NotImplementedException();
+            //Implementation not required
         }
     }
 }

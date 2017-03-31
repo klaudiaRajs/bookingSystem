@@ -57,7 +57,6 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             }
             user.setAddress(address.Text);
             user.setEmailAddress(emailAddress.Text);
-            user.setConfirmationMethod(this.getValueFromDropDown(confirmationMethodsDropDown, surgery.defaultConfirmationMethod));
             user.setUserType(this.getValueFromDropDown(userTypes, surgery.defaultUserType));
             user.setDOBd(dobPicker.Value);
             save(Validator.validateUser(user), user);

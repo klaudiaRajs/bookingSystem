@@ -30,6 +30,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.parent = parent;
             this.staffScheduleId = staffScheduleId;
             getListOfAllPatientsIfAdmin();
+            //if( ApplicationState.bookingConfirmation[ApplicationState.bookingConfirmationMethod.print.ToString()]) {
+            //    printCheckBox.Visible = true;
+            //}
+            //if (ApplicationState.bookingConfirmation[ApplicationState.bookingConfirmationMethod.email.ToString()]) {
+            //    emailCheckBox.Visible = true;
+            //}
         }
 
         private void saveBookingButton_Click(object sender, EventArgs e) {

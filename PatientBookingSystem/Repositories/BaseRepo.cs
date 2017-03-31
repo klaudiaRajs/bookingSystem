@@ -16,7 +16,7 @@ namespace PatientBookingSystem.Repositories {
         }
 
         protected string getStringInMySqlInsertableFormat(string content) {
-            return '"' + content + '"';
+            return content.Equals("NULL") ? content : '"' + content + '"';
         }
 
 

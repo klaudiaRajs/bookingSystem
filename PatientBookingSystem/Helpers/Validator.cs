@@ -42,9 +42,6 @@ namespace PatientBookingSystem.Helpers {
             if (String.IsNullOrEmpty(user.getAddress()) || user.getAddress().IndexOf(' ') == -1) {
                 errors.Add("address");
             }
-            if (!user.getConfirmationMethod().Equals("email") && !user.getConfirmationMethod().Equals("call")){
-                errors.Add("confrimation method");
-            }
             if( !user.getUserType().Equals("patient") && !user.getUserType().Equals("admin")) {
                 errors.Add("user type");
             }

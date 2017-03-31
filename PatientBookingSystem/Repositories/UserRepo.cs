@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PatientBookingSystem.Models;
 using MySql.Data.MySqlClient;
 using PatientBookingSystem.Mappers;
+using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem.Repositories {
     class UserRepo : BaseRepo {
@@ -14,19 +15,28 @@ namespace PatientBookingSystem.Repositories {
         public List<IModel> getListOfAllUsers() {
             string query = "SELECT * FROM " + this.table;
             List<IModel> users = this.db.Query(query, new UserMapper());
-            if( users.Count == 0) {
-                return null; 
-            }
             return users; 
         }
 
         public List<IModel> getListOfAllPatients() {
             string query = "SELECT * FROM " + this.table + " WHERE userType = \"patient\"";
             List<IModel> patients = this.db.Query(query, new UserMapper());
-            if (patients.Count == 0) {
-                return null;
-            }
             return patients;
+        }
+
+        internal bool saveSettings(string notification, string verification, string confirmation) {
+            string query = "UPDATE " + this.table
+                + " SET `notification` = " + this.getStringInMySqlInsertableFormat(notification)
+                + ", `verification` = " + this.getStringInMySqlInsertableFormat(verification)
+                + ", `confirmation` = " + this.getStringInMySqlInsertableFormat(confirmation)
+                + " WHERE `id` = " + ApplicationState.userId;
+            return this.db.Execute(query);
+        }
+
+        internal string getNotificationSettings() {
+            string query = "SELECT notification FROM " + table + " WHERE id = " + ApplicationState.userId;
+            List<IModel> user = this.db.Query(query, new UserMapper());
+            return ((UserModel)user.First()).getNotificationSettings();
         }
 
         public bool save(UserModel user) {
@@ -41,7 +51,6 @@ namespace PatientBookingSystem.Repositories {
                 + this.getStringInMySqlInsertableFormat(user.getEmail()) + ", "
                 + (user.getNiN() == "NULL" ? user.getNiN() : this.getStringInMySqlInsertableFormat(user.getNiN())) + ", "
                 + (user.getAddress() == "NULL" ? user.getAddress() : this.getStringInMySqlInsertableFormat(user.getAddress())) + ", "
-                + this.getStringInMySqlInsertableFormat(user.getConfirmationMethod()) + ", "
                 + this.getStringInMySqlInsertableFormat(user.getUserType()) + ")";
             return this.db.Execute(query); 
         }

@@ -10,11 +10,7 @@ namespace PatientBookingSystem.Helpers {
     class ListItem {
         public int id { get; set; }
         public string text { get; set; } 
-        /*
-        public PatientListItem(string firstName, string lastName, int id) {
-            this.text = firstName + " " + lastName;
-            this.id = id; 
-        }*/
+        
 
         public List<ListItem> getDataSourceForAllStaffMembers() {
             StaffController controller = new StaffController();

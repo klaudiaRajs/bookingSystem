@@ -28,7 +28,7 @@ namespace PatientBookingSystem.Controllers {
                     ApplicationState.userId = user.getId();
                     ApplicationState.userLogin = user.getLogin(); 
                     ApplicationState.userPassword = user.getPassword();
-                    ApplicationState.userType = user.getUserType(); 
+                    ApplicationState.userType = user.getUserType();
                     return true;
                 }
             }

@@ -11,6 +11,7 @@ using PatientBookingSystem.Controllers;
 using System.Collections;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
+using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem {
     public partial class schedulePanel : UserControl {
@@ -19,10 +20,23 @@ namespace PatientBookingSystem {
         AbsenceRepo absenceRepo = new AbsenceRepo();
 
         DateTime date = DateTime.Today;
-        
+
+        List<dayOfaWeekBox> dayBoxes = new List<dayOfaWeekBox>();
+
+
+
         public schedulePanel() {
             InitializeComponent();
             generateDayBoxes();
+            fillInStaffMembers();
+        }
+
+        private void fillInStaffMembers() {
+            ListItem comboBoxElements = new ListItem();
+            allTheStaffMembers.DataSource = comboBoxElements.getDataSourceForAllStaffMembers();
+            allTheStaffMembers.DisplayMember = "text";
+            allTheStaffMembers.ValueMember = "id";
+
         }
 
         private void generateDayBoxes() {
@@ -35,6 +49,7 @@ namespace PatientBookingSystem {
                 if (absences == null) {
                     dayOfaWeekBox dayBox = new dayOfaWeekBox();
                     appointmentDaysPanel.Controls.Add(dayBox.getBox(dayNo, this.date.Month, this.date.Year));
+                    this.dayBoxes.Add(dayBox);
                 }
             }
             appointmentDaysPanel.Visible = true;
@@ -68,6 +83,22 @@ namespace PatientBookingSystem {
         private void previousMonthButton_Click(object sender, EventArgs e) {
             this.date = this.date.AddMonths(-1);
             reloadBoxDays();
+        }
+
+        private void morningAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
+            foreach (dayOfaWeekBox box in dayBoxes) {
+                if (box.morningAppointments == 0) {
+                    box.Visible = !morningAppointmentsCheckbox.Checked;
+                }
+            }
+        }
+
+        private void afternoonAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
+            foreach(dayOfaWeekBox box in dayBoxes) {
+                if (box.afternoonAppointments == 0) {
+                    box.Visible = !afternoonAppointmentsCheckbox.Checked;
+                }
+            }
         }
     }
 }

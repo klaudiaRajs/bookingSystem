@@ -17,5 +17,13 @@ namespace PatientBookingSystem.Controllers {
             return repo.save(user);
         }
 
+        internal bool saveSettings(List<string> notification, List<string> verification, List<string> confirmation) {
+
+            string notifications = (string.Join(",", notification.ToArray()).Length == 0 ? "NULL" : string.Join(",", notification.ToArray()));
+            string confirmations = (string.Join(",", confirmation.ToArray()).Length == 0 ? "NULL" : string.Join(",", confirmation.ToArray()));
+            string verifications = (string.Join(",", verification.ToArray()).Length == 0 ? "NULL" : string.Join(",", verification.ToArray()));
+
+            return repo.saveSettings(notifications, verifications, confirmations);
+        }
     }
 }
