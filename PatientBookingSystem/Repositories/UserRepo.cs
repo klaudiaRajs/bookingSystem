@@ -65,13 +65,10 @@ namespace PatientBookingSystem.Repositories {
             return patients;
         }
 
-        public UserModel getUserByLoginCredentials(String login, String password) {
+        public List<IModel> getListOfUsersByLoginCredentials(String login, String password) {
             String query = "SELECT * FROM " + this.table + " WHERE login='" + login + "' and password ='" + password + "'";
             List<IModel> list = this.db.Query(query, new UserMapper());
-            if (list.Count == 0) {
-                return null;
-            }
-            return list.ElementAt(0) as UserModel;
+            return list;
         }
 
     }

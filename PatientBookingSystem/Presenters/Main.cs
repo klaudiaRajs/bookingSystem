@@ -16,10 +16,6 @@ namespace PatientBookingSystem {
             LogInPanel.Visible = true;
         }
 
-        public void handleLogIn() {
-
-        }
-
         public void loadUpcomingAppointmentsPanel() {
             windowContentContainer.Controls.Clear();
             upcomingAppointmentsContainer upcomingAppointments = new upcomingAppointmentsContainer(this);
@@ -30,19 +26,26 @@ namespace PatientBookingSystem {
         private void logInButton_Click(object sender, EventArgs e) {
             // Loading the initial, home page. 
             Logger logger = new Logger();
-            if (logger.logUserIn(loginField.Text, passwordField.Text) == true) {
-                LogInPanel.Visible = false;
-                HomePanel.Visible = true;
-                loadLeftPanel();
-                loadInitialInformationPanel();
-                if (ApplicationState.userType != "admin") {
-                    loadHomePanel();
+            try {
+                if (logger.logUserIn(loginField.Text, passwordField.Text) == true) {
+                    LogInPanel.Visible = false;
+                    HomePanel.Visible = true;
+                    loadLeftPanel();
+                    loadInitialInformationPanel();
+                    if (ApplicationState.userType != "admin") {
+                        loadHomePanel();
+                    } else {
+                        loadSurgeryManagementPanel();
+                    }
                 } else {
-                    loadSurgeryManagementPanel();
+                    FeedbackWindow message = new FeedbackWindow();
+                    message.Show();
                 }
-            } else {
+            }
+            catch(Exception) {
                 FeedbackWindow message = new FeedbackWindow();
-                message.Show();
+                message.setMessageForExceptionReporting();
+                message.Show(); 
             }
         }
 

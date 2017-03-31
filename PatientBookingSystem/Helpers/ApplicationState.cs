@@ -21,7 +21,8 @@ namespace PatientBookingSystem.Helpers {
 
         public static void refreshUser() {
             UserRepo repo = new UserRepo();
-            UserModel user = repo.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword);
+            Logger logger = new Logger();
+            UserModel user = logger.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword);
             ApplicationState.notifications = user.getNotificationSettings() == null ? "" : user.getNotificationSettings();
             ApplicationState.verifications = user.getVerificationSettings() == null ? "" : user.getVerificationSettings();
             ApplicationState.confirmations = user.getConfirmationSettings() == null ? "" : user.getConfirmationSettings();

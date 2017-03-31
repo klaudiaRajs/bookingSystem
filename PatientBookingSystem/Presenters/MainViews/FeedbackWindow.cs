@@ -15,6 +15,10 @@ namespace PatientBookingSystem.Presenters {
             InitializeComponent();
         }
 
+        public void setMessageForExceptionReporting() {
+            feedbackMessage.Text = "Something went wrong with your credentials. Please contact administration."; 
+        }
+
         public void setMessageForBooking() {
             feedbackMessage.Text = "Something's wrong with your booking. You can't book this slot. Contact administration";
         }

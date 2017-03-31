@@ -6,12 +6,20 @@ using System.Collections.Generic;
 namespace PatientBookingSystem.Controllers {
     class UserController {
         UserModel model = new UserModel();
-        UserRepo repo = new UserRepo(); 
-        
+        UserRepo repo = new UserRepo();
+
         public List<IModel> getAllUsers() {
             List<IModel> users = repo.getListOfAllUsers();
             return users;
         }
+
+        public UserModel getUserByLoginCredentials(string login, string password) {
+            List<IModel> usersByCredentials = repo.getListOfUsersByLoginCredentials(login, password);
+            if (usersByCredentials.Count == 0 || usersByCredentials.Count > 2) {
+                throw new Exception("");
+            }
+            return usersByCredentials[0] as UserModel; 
+        } 
 
         public bool save(UserModel user) {
             return repo.save(user);

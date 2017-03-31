@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem {
     public partial class personalInformationPanel : UserControl {
@@ -19,8 +20,9 @@ namespace PatientBookingSystem {
          
         public personalInformationPanel() {
             InitializeComponent();
-            repo = new UserRepo(); 
-            user = repo.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword); 
+            repo = new UserRepo();
+            UserController userController = new UserController();  
+            user = userController.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword); 
             fillInPersonalInformation(); 
             if( ApplicationState.userType == "admin") {
                 personalStatistics.Visible = false;
