@@ -26,10 +26,10 @@ namespace PatientBookingSystem.Controllers {
         }
 
         public List<bool> saveStaffSchedules(int staffId, List<int> scheduleIdList) {
-            List<bool> errors = new List<bool>(); 
+            List<bool> errors = new List<bool>();
             if (staffId != 0 && scheduleIdList.Count != 0) {
                 foreach (int scheduleId in scheduleIdList) {
-                    if( !scheduleRepo.saveStaffSchedule(staffId, scheduleId)) {
+                    if (!scheduleRepo.saveStaffSchedule(staffId, scheduleId)) {
                         errors.Add(true);
                     }
                 }
@@ -84,17 +84,9 @@ namespace PatientBookingSystem.Controllers {
             return 0;
         }
 
-        public Dictionary<int, string> getAllAvailableDoctorsPerDate() {
-            Dictionary<int, string> doctors = new Dictionary<int, string>();
-
+        public List<IModel> getAllAvailableDoctorsPerDate() {
             List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
-            foreach (StaffScheduleModel schedule in scheduleMap) {
-                int staffId = schedule.getStaffMember().getStaffId();
-                if (!doctors.ContainsKey(staffId)) {
-                    doctors.Add(staffId, schedule.getStaffMember().getFullStaffName());
-                }
-            }
-            return doctors;
+            return scheduleMap;
         }
 
         public void refresh() {

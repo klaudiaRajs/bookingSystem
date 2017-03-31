@@ -63,10 +63,14 @@ namespace PatientBookingSystem.Presenters.MainViews {
             Console.WriteLine("------------ Diff: " + diff);
         }
 
+        public List<IModel> getAllTheDoctorsPerDate() {
+            return controller.getAllAvailableDoctorsPerDate(); 
+        }
+
         private void generateTimeTableHeader() {
-            Dictionary<int, string> availableDoctors = controller.getAllAvailableDoctorsPerDate();
-            foreach (KeyValuePair<int, string> entry in availableDoctors) {
-                timetable.Columns.Add(entry.Key.ToString(), entry.Value);
+            List<IModel> availableStaffMembers = controller.getAllAvailableDoctorsPerDate();
+            foreach (StaffScheduleModel staffMember in availableStaffMembers) {
+                timetable.Columns.Add(staffMember.getStaffMember().getStaffId().ToString(), staffMember.getStaffMember().getFullStaffName());
             }
         }
 

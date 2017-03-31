@@ -22,7 +22,8 @@ namespace PatientBookingSystem {
         SingleScheduleDay singleDay;
 
         public int morningAppointments;
-        public int afternoonAppointments; 
+        public int afternoonAppointments;
+        internal List<IModel> staffMembersPerDate; 
 
 
         public dayOfaWeekBox() {
@@ -35,6 +36,7 @@ namespace PatientBookingSystem {
             this.date = dateObject.ToString("yyyy-MM-dd");
             // this line need to be here, so the morning and evening appointments on schedule panel counts correctly 
             singleDay = new SingleScheduleDay(this, this.date);
+            this.staffMembersPerDate = singleDay.getAllTheDoctorsPerDate(); 
             dayNumber.Text = dayNo.ToString();
             return this;
         }

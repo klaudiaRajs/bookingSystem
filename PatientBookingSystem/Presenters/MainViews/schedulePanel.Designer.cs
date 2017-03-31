@@ -76,6 +76,7 @@
             this.allTheStaffMembers.Name = "allTheStaffMembers";
             this.allTheStaffMembers.Size = new System.Drawing.Size(121, 21);
             this.allTheStaffMembers.TabIndex = 41;
+            this.allTheStaffMembers.SelectedIndexChanged += new System.EventHandler(this.allTheStaffMembers_SelectedIndexChanged);
             // 
             // label2
             // 

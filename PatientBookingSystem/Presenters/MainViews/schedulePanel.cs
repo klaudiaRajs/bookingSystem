@@ -23,8 +23,6 @@ namespace PatientBookingSystem {
 
         List<dayOfaWeekBox> dayBoxes = new List<dayOfaWeekBox>();
 
-
-
         public schedulePanel() {
             InitializeComponent();
             generateDayBoxes();
@@ -88,15 +86,67 @@ namespace PatientBookingSystem {
         private void morningAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
             foreach (dayOfaWeekBox box in dayBoxes) {
                 if (box.morningAppointments == 0) {
-                    box.Visible = !morningAppointmentsCheckbox.Checked;
+                    if (isStaffMemberAvailable(box, (ListItem)allTheStaffMembers.SelectedItem)) {
+                        box.Visible = !morningAppointmentsCheckbox.Checked;
+                    }
                 }
             }
         }
 
+        private bool isStaffMemberAvailable(dayOfaWeekBox box, ListItem selectedStaffMember) {
+            if (selectedStaffMember.id != 0) {
+                foreach (StaffScheduleModel staffMember in box.staffMembersPerDate) {
+                    if (staffMember.getStaffMember().getStaffId() == selectedStaffMember.id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return true;
+        }
+
+        private bool areMorningAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
+            if (morningAppointmentsCheckbox.Checked) {
+                return (box.morningAppointments > 0);
+            }
+            return true;
+        }
+
+        private bool areAfternoonAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
+            if (afternoonAppointmentsCheckbox.Checked) {
+                return (box.morningAppointments > 0);
+            }
+            return true;
+        }
+
         private void afternoonAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
-            foreach(dayOfaWeekBox box in dayBoxes) {
+            foreach (dayOfaWeekBox box in dayBoxes) {
                 if (box.afternoonAppointments == 0) {
-                    box.Visible = !afternoonAppointmentsCheckbox.Checked;
+                    if (isStaffMemberAvailable(box, (ListItem)allTheStaffMembers.SelectedItem)) {
+                        box.Visible = !afternoonAppointmentsCheckbox.Checked;
+                    }
+                }
+            }
+        }
+
+        private void allTheStaffMembers_SelectedIndexChanged(object sender, EventArgs e) {
+            if (allTheStaffMembers.SelectedIndex != 0) {
+                foreach (dayOfaWeekBox box in dayBoxes) {
+                    bool found = false;
+                    foreach (StaffScheduleModel staffMember in box.staffMembersPerDate) {
+                        if (staffMember.getStaffMember().getStaffId() == ((ListItem)allTheStaffMembers.SelectedItem).id) {
+                            found = true;
+                        }
+                    }
+                    if (areMorningAppointmentsRequestedAndAvailable(box) && areAfternoonAppointmentsRequestedAndAvailable(box)) {
+                        box.Visible = found;
+                    }
+                }
+            } else {
+                foreach( dayOfaWeekBox box in dayBoxes) {
+                    if (areMorningAppointmentsRequestedAndAvailable(box) && areAfternoonAppointmentsRequestedAndAvailable(box)) {
+                        box.Visible = true;
+                    }
                 }
             }
         }
