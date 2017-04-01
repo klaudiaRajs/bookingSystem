@@ -11,7 +11,6 @@ namespace PatientBookingSystem.Helpers {
             if( nonInFormatDate.IndexOf(".") == 4 
                 || nonInFormatDate.IndexOf("-") == 4
                 || nonInFormatDate.IndexOf("/") == 4) {
-                // 
                 return nonInFormatDate;
             }
             else if (nonInFormatDate.IndexOf(".") == 2

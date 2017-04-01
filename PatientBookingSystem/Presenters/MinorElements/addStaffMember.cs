@@ -15,18 +15,18 @@ namespace PatientBookingSystem.Presenters.MinorElements {
     public partial class addStaffMember : UserControl {
 
         FeedbackWindow feedback;
-        SurgeryInfo surgeryInfo; 
+        ListItem itemsForComboBoxes; 
 
         public addStaffMember() {
             InitializeComponent();
-            this.surgeryInfo = new SurgeryInfo(); 
+            this.itemsForComboBoxes = new ListItem(); 
             fillInDropDownStaffTypeMenu();
             this.feedback = new FeedbackWindow();
             staffTypes.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void fillInDropDownStaffTypeMenu() {           
-            staffTypes.DataSource = surgeryInfo.getListOfStaffTypesForComboBox();
+            staffTypes.DataSource = itemsForComboBoxes.getListOfStaffTypesForComboBox();
             staffTypes.DisplayMember = "text";
             staffTypes.ValueMember = "id";
         }

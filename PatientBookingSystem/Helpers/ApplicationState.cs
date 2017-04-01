@@ -20,7 +20,6 @@ namespace PatientBookingSystem.Helpers {
         public static string confirmations;
 
         public static void refreshUser() {
-            UserRepo repo = new UserRepo();
             Logger logger = new Logger();
             UserModel user = logger.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword);
             ApplicationState.notifications = user.getNotificationSettings() == null ? "" : user.getNotificationSettings();

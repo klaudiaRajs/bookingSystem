@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace PatientBookingSystem.Models {
     class UserModel : IModel {
         private int id { get; set; }
-        private String firstName { get; set; }
-        private String lastName { get; set; }
-        private String login { get; set; }
-        private String password { get; set; }
+        private string firstName { get; set; }
+        private string lastName { get; set; }
+        private string login { get; set; }
+        private string password { get; set; }
         private string DOBs { get; set; }
         private DateTime DOBd { get; set; }
-        private String phoneNumber { get; set; }
-        private String email { get; set; }
-        private String NiN { get; set; }
-        private String address { get; set; }
-        private String userType { get; set; }
+        private string phoneNumber { get; set; }
+        private string email { get; set; }
+        private string NiN { get; set; }
+        private string address { get; set; }
+        private string userType { get; set; }
         private string notification { get; set; }
         private string verification { get; set; }
         private string confirmation { get; set; }

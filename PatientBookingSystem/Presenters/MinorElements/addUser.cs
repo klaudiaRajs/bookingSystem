@@ -15,12 +15,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
     public partial class addUser : UserControl {
         SurgeryInfo surgery;
         FeedbackWindow feedback;
+        ListItem itemsForComboBoxes; 
         const string DISABLED_FIELD = "None";
 
         public addUser() {
             InitializeComponent();
             this.surgery = new SurgeryInfo();
             this.feedback = new FeedbackWindow();
+            this.itemsForComboBoxes = new ListItem(); 
             dobPicker.MaxDate = DateTime.Today;
             dobPicker.Value = DateTime.Today;
             confirmationMethodsDropDown.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -30,13 +32,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         }
 
         private void fillInConfirmationMethods() {
-            confirmationMethodsDropDown.DataSource = this.surgery.getListOfConfirmationMethodsForComboBox();
+            confirmationMethodsDropDown.DataSource = this.itemsForComboBoxes.getListOfConfirmationMethodsForComboBox();
             confirmationMethodsDropDown.DisplayMember = "text";
             confirmationMethodsDropDown.ValueMember = "id";
         }
 
         private void fillInUserTypes() {
-            userTypes.DataSource = this.surgery.getListOfUserTypes();
+            userTypes.DataSource = this.itemsForComboBoxes.getListOfUserTypes();
             userTypes.DisplayMember = "text";
             userTypes.ValueMember = "id";
         }
