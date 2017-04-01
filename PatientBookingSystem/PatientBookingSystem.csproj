@@ -88,16 +88,15 @@
     <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Mappers\AbsenceMapper.cs" />
     <Compile Include="Mappers\BookingMapper.cs" />
-    <Compile Include="Mappers\IDataMapper.cs" />
+    <Compile Include="Interfaces\IDataMapper.cs" />
     <Compile Include="Mappers\ScheduleMapper.cs" />
     <Compile Include="Mappers\StaffMapper.cs" />
     <Compile Include="Mappers\StaffScheduleMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
-    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Models\StaffScheduleModel.cs" />
-    <Compile Include="Presenters\Interfaces\AbsenceHandler.cs" />
-    <Compile Include="Presenters\Interfaces\AppointmentBoxI.cs" />
-    <Compile Include="Presenters\Interfaces\CheckedComboBox.cs">
+    <Compile Include="Presenters\PresenterInterfaces\AppointmentBoxI.cs" />
+    <Compile Include="Presenters\Downloaded libraries\CheckedComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Presenters\MainViews\BookingWindow.cs">
