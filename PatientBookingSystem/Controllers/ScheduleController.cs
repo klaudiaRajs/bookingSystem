@@ -6,23 +6,31 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PatientBookingSystem.Controllers {
+    /** Class is responsible for all the actions requiring communication between presenters and repositories */ 
     class ScheduleController {
+        /** All the available slot statuses */
         public enum slotStatus { Available, Booked, NotAvailable };
 
-        BookingRepo bookingRepo = new BookingRepo();
-        ScheduleRepo scheduleRepo = new ScheduleRepo();
-        AbsenceRepo absenceRepo = new AbsenceRepo();
-        Dictionary<int, List<TimeRange>> absences;
-        Dictionary<int, List<TimeRange>> bookings;
-        List<IModel> scheduleMap;
+        private BookingRepo bookingRepo = new BookingRepo();
+        private ScheduleRepo scheduleRepo = new ScheduleRepo();
+        private AbsenceRepo absenceRepo = new AbsenceRepo();
+        private Dictionary<int, List<TimeRange>> absences;
+        private Dictionary<int, List<TimeRange>> bookings;
+        private List<IModel> scheduleMap;
 
-        string date;
+        private string date;
 
-        public ScheduleController(string date = null) {
+       public ScheduleController(string date = null) {
             this.date = date;
             refresh();
         }
 
+        /** Returns scheduleId based on other schedule information */ 
+        public int getScheduleIdBasedOnOtherScheduleInformation(ScheduleModel schedule) {
+            return scheduleRepo.getScheduleId(schedule);
+        }
+
+        /** Method calls on relevant methods to create staff schedule database entry */
         public List<bool> saveStaffSchedules(int staffId, List<int> scheduleIdList) {
             List<bool> errors = new List<bool>();
             if (staffId != 0 && scheduleIdList.Count != 0) {
@@ -35,6 +43,7 @@ namespace PatientBookingSystem.Controllers {
             return errors;
         }
 
+        /** Method calls on relevant repository methods to save schedule entry */ 
         public bool saveSchedule(ScheduleModel schedule) {
             if (schedule.getDate() != null && schedule.getStartTime() != null && schedule.getEndTime() != null) {
                 return scheduleRepo.save(schedule);
@@ -42,6 +51,7 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
+        /** Method returns slot status for given time and staff member */
         public slotStatus getSlotStatus(TimeSpan time, int staffId) {
             if (isAbsent(date, time, staffId)) {
                 return slotStatus.NotAvailable;
@@ -66,7 +76,8 @@ namespace PatientBookingSystem.Controllers {
             return slotStatus.NotAvailable;
         }
 
-        public int getStaffScheduleId(TimeSpan time, int staffId) {
+        /** Method returns scheduleId based on time and staff member */
+        internal int getStaffScheduleId(TimeSpan time, int staffId) {
             List<IModel> scheduleMap = getScheduleMap();
             foreach (StaffScheduleModel staffSchedule in scheduleMap) {
                 if (staffSchedule.getStaffMember().getStaffId() != staffId) {
@@ -82,33 +93,35 @@ namespace PatientBookingSystem.Controllers {
             return 0;
         }
 
-        public List<IModel> getAllAvailableDoctorsPerDate() {
+        /** Method returns a list of staffschedule models */ 
+        internal List<IModel> getAllAvailableDoctorsPerDate() {
             List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
             return scheduleMap;
         }
 
-        public void refresh() {
+        /** Methods refreshes data required for building a schedule */
+        internal void refresh() {
             absences = getListOfAllAbsencesPerDate(date);
             bookings = getListOfBookingsPerStaffMemberPerDate(date);
             scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
         }
 
+        /** Method checks if staff is absent on given datetime */ 
         private bool isAbsent(string date, TimeSpan time, int staffId) {
             return absences.ContainsKey(staffId) && isInAnyTimeRange(absences[staffId], time);
         }
 
-        public int getScheduleId(ScheduleModel schedule) {
-            return scheduleRepo.getScheduleId(schedule);
-        }
-
+        /** Method checked if a slot is already booked */ 
         private bool isBooked(string date, TimeSpan time, int staffId) {
             return bookings.ContainsKey(staffId) && isInAnyTimeRange(bookings[staffId], time);
         }
 
+        /** Method returns list of staffschedule models */
         public List<IModel> getScheduleMap() {
             return scheduleMap;
         }
 
+        /** Method returns absences per date */
         private Dictionary<int, List<TimeRange>> getListOfAllAbsencesPerDate(string date) {
             Dictionary<int, List<TimeRange>> absencesPerMember = new Dictionary<int, List<TimeRange>>();
 
@@ -125,6 +138,7 @@ namespace PatientBookingSystem.Controllers {
             return absencesPerMember;
         }
 
+        /** Method returns bookings per staff member per date */
         private Dictionary<int, List<TimeRange>> getListOfBookingsPerStaffMemberPerDate(string date) {
             Dictionary<int, List<TimeRange>> bookingsPerMember = new Dictionary<int, List<TimeRange>>();
 
@@ -151,6 +165,7 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
+        /** Method is a debugging tool */ 
         private void debugPrint(Dictionary<int, List<TimeRange>> appointmentList) {
             Console.WriteLine("----------------------------------");
             System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(appointmentList.GetType());

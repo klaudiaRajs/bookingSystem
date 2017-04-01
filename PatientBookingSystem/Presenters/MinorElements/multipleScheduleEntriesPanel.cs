@@ -117,7 +117,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                                         feedback.Show();
                                         return null;
                                     } else {
-                                        int scheduleId = scheduleController.getScheduleId(schedule);
+                                        int scheduleId = scheduleController.getScheduleIdBasedOnOtherScheduleInformation(schedule);
                                         scheduleIdList.Add(scheduleId);
                                     }
                                 }

@@ -72,7 +72,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 }
 
                 if (!controller.save(absence)) {
-                    this.feedbackWindow.setMessageForAbsences();
+                    this.feedbackWindow.setMessageForAbsencesProblems();
                 } else {
                     this.feedbackWindow.setMessageForSuccessfullOperation();
                 }

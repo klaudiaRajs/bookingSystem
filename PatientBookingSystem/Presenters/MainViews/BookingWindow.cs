@@ -43,7 +43,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
                 this.Close();
             } else {
                 FeedbackWindow window = new FeedbackWindow();
-                window.setMessageForBooking();
+                window.setMessageForBookingProblem();
                 window.Show();
             }
         }

@@ -40,7 +40,7 @@ namespace PatientBookingSystem {
         }
 
         private void logOutButton_Click(object sender, EventArgs e) {
-            parent.logOut();
+            parent.exitApplication();
         }
 
         private void upcomingAppointmentsHeader_Click(object sender, EventArgs e) {

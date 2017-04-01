@@ -7,16 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
+    /** Class provide tool for validating different types of data used within the system */
     static class Validator {
 
-        public static bool validateStaffMember(string firstName, string lastName, string phoneNumber, int staffType) {
+        /**
+         * Method validates staff member model 
+         */
+        public static bool validateStaffMember(StaffModel staffMember, int staffType = -1) {
             bool result = true;
-            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || staffType == 0) {
+            if (String.IsNullOrEmpty(staffMember.getFirstName()) || String.IsNullOrEmpty(staffMember.getLastName()) || staffType == 0) {
                 result = false;
             }
             return result;
         }
 
+        /** 
+         * Method validates user model
+         */
         public static List<string> validateUser(UserModel user) {
             List<string> errors = new List<string>();
             if (String.IsNullOrEmpty(user.getFirstName())) {
@@ -49,6 +56,24 @@ namespace PatientBookingSystem.Helpers {
             return errors; 
         }
 
+        /** 
+         * Method validates login and password for their requirements
+         */
+        public static bool validateLogger(string login, string password) {
+            bool result = true;
+            if( login.Length < 3) {
+                result = false;
+            }
+            if( password.Length < 3) {
+                result = false;
+            }
+            return result;
+            
+        }
+
+        /** 
+         * Method validates if absence model meet the requirements for saving
+         */
         public static List<string> validateAbsenceForSaving(AbsenceModel absence) {
             List<string> errors = new List<string>(); 
             if( DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {

@@ -49,18 +49,18 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 schedule.setStartTime(workStartTime.Value.TimeOfDay.ToString());
                 schedule.setEndTime(breakStartTime.Value.TimeOfDay.ToString());
                 if (controller.saveSchedule(schedule)) {
-                    scheduleIdList.Add(controller.getScheduleId(schedule));
+                    scheduleIdList.Add(controller.getScheduleIdBasedOnOtherScheduleInformation(schedule));
                 }
                 schedule.setStartTime(breakEndTime.Value.TimeOfDay.ToString());
                 schedule.setEndTime(workEndTime.Value.TimeOfDay.ToString());
                 if (controller.saveSchedule(schedule)) {
-                    scheduleIdList.Add(controller.getScheduleId(schedule));
+                    scheduleIdList.Add(controller.getScheduleIdBasedOnOtherScheduleInformation(schedule));
                 }
             } else {
                 schedule.setStartTime(workStartTime.Value.TimeOfDay.ToString());
                 schedule.setEndTime(workEndTime.Value.TimeOfDay.ToString());
                 controller.saveSchedule(schedule);
-                scheduleIdList.Add(controller.getScheduleId(schedule));
+                scheduleIdList.Add(controller.getScheduleIdBasedOnOtherScheduleInformation(schedule));
             }
 
             List<bool> errors = controller.saveStaffSchedules(staffId, scheduleIdList);

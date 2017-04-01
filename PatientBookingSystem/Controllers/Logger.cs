@@ -5,14 +5,34 @@ using PatientBookingSystem.Helpers;
 using System.Collections.Generic;
 
 namespace PatientBookingSystem.Controllers {
+    /** Class manages processes of logging user in */
     class Logger {
 
-        List<string> errors = new List<string>();
-        UserModel model = new UserModel();
-        UserRepo repo = new UserRepo();
-        const String ENTER_LOGIN_MESSAGE = " Please enter the login! ";
-        const String ENTER_PASSWORD_MESSAGE = " Please enter the password! ";
+        private List<string> errors = new List<string>();
+        private UserModel model = new UserModel();
+        private UserRepo repo = new UserRepo();
 
+        /** Messages  */
+        private const String ENTER_LOGIN_MESSAGE = " Credentials you provided does not meet the requirements ";
+        private const String ENTER_PASSWORD_MESSAGE = " Password you provided does not meet the requirements ";
+
+        /** 
+         * Return message for empty password
+         */
+         public string getEmptyPasswordMessage() {
+            return ENTER_PASSWORD_MESSAGE;
+        }
+
+        /** 
+         * Returns message for empty login 
+         */
+        public string getEmptyLoginMessage() {
+            return ENTER_LOGIN_MESSAGE;
+        }
+
+        /** 
+         * Method is resposible for logging user in and setting the user as logged in
+         */
         public Boolean logUserIn(String login, String password) {
             errors = this.validateLoginCredentials(login, password);
             if (errors.Count == 0) {

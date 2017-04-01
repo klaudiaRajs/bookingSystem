@@ -1,49 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
+    /** Class is responsible for presenting functionality of adding a new staff member */
     public partial class addStaffMember : UserControl {
 
-        FeedbackWindow feedback;
-        ListItem itemsForComboBoxes; 
+        private FeedbackWindow feedback;
+        private ListItem itemsForComboBoxes;
 
+        /** Method prepares staff drop down and initializes ListItem and FeedbackWindow classes */
         public addStaffMember() {
             InitializeComponent();
-            this.itemsForComboBoxes = new ListItem(); 
-            fillInDropDownStaffTypeMenu();
+            this.itemsForComboBoxes = new ListItem();
             this.feedback = new FeedbackWindow();
+            fillInDropDownStaffTypeMenu();
             staffTypes.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void fillInDropDownStaffTypeMenu() {           
+        /** Method fills in drop down containig staff types */
+        private void fillInDropDownStaffTypeMenu() {
             staffTypes.DataSource = itemsForComboBoxes.getListOfStaffTypesForComboBox();
             staffTypes.DisplayMember = "text";
             staffTypes.ValueMember = "id";
         }
 
+        /** Method calls on controller method for saving staff member */
         private void saveButton_Click(object sender, EventArgs e) {
             StaffController controller = new StaffController();
-            bool isValid = Validator.validateStaffMember(doctorsFirstName.Text, doctorsLastName.Text, doctorsPhoneNumber.Text, (int)staffTypes.SelectedValue);
-            if (isValid) {
-                StaffModel staffMember = new StaffModel();
-                staffMember.setFirstName(doctorsFirstName.Text);
-                staffMember.setLastName(doctorsLastName.Text);
-                staffMember.setPhoneNumber(doctorsPhoneNumber.Text);
-                if( String.IsNullOrEmpty(doctorsPhoneNumber.Text)) {
-                    staffMember.setPhoneNumber("NULL");
-                }
-                ListItem staffType = (ListItem)staffTypes.SelectedItem;
-                staffMember.setStaffType(staffType.text); 
+            StaffModel staffMember = this.getStaffModelFromForm();
+            if (Validator.validateStaffMember(staffMember, (int)staffTypes.SelectedValue)) {
                 bool result = controller.addStaffMember(staffMember);
                 if (!result) {
                     feedback.setMessageForSavingError();
@@ -52,6 +40,20 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 }
             }
             feedback.Show();
+        }
+
+        /**  Method prepares staff model from data get from form */
+        private StaffModel getStaffModelFromForm() {
+            StaffModel staffMember = new StaffModel();
+            staffMember.setFirstName(doctorsFirstName.Text);
+            staffMember.setLastName(doctorsLastName.Text);
+            staffMember.setPhoneNumber(doctorsPhoneNumber.Text);
+            if (String.IsNullOrEmpty(doctorsPhoneNumber.Text)) {
+                staffMember.setPhoneNumber("NULL");
+            }
+            ListItem staffType = (ListItem)staffTypes.SelectedItem;
+            staffMember.setStaffType(staffType.text);
+            return staffMember; 
         }
     }
 }
