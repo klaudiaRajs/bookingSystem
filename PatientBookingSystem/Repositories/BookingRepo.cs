@@ -1,11 +1,8 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PatientBookingSystem.Models;
 using MySql.Data.MySqlClient;
-using System.Collections;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Mappers;
 

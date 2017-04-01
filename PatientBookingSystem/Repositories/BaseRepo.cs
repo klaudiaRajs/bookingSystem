@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Repositories {
     class BaseRepo {
-        //todo popeawic i usuac!!
         protected DbConnector db;
 
         public BaseRepo() {
