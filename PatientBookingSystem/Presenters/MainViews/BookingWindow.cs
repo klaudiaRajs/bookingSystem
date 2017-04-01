@@ -3,12 +3,8 @@ using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
@@ -30,12 +26,6 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.parent = parent;
             this.staffScheduleId = staffScheduleId;
             getListOfAllPatientsIfAdmin();
-            //if( ApplicationState.bookingConfirmation[ApplicationState.bookingConfirmationMethod.print.ToString()]) {
-            //    printCheckBox.Visible = true;
-            //}
-            //if (ApplicationState.bookingConfirmation[ApplicationState.bookingConfirmationMethod.email.ToString()]) {
-            //    emailCheckBox.Visible = true;
-            //}
         }
 
         private void saveBookingButton_Click(object sender, EventArgs e) {

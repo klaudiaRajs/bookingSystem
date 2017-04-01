@@ -1,4 +1,5 @@
-﻿using PatientBookingSystem.Models;
+﻿using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,14 @@ namespace PatientBookingSystem.Helpers {
                 errors.Add("user type");
             }
             return errors; 
+        }
+
+        public static List<string> validateAbsenceForSaving(AbsenceModel absence) {
+            List<string> errors = new List<string>(); 
+            if( DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {
+                errors.Add("startDate");
+            }
+            return errors;
         }
     }
 }

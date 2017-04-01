@@ -431,6 +431,7 @@
     <EmbeddedResource Include="Presenters\MainViews\upcomingAppointments.resx">
       <DependentUpon>upcomingAppointments.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="pbsDataSet.xsc">
       <DependentUpon>pbsDataSet.xsd</DependentUpon>

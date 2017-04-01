@@ -12,7 +12,7 @@ namespace PatientBookingSystem.Mappers {
             user.setLogin(record.GetString("login"));
             user.setPassword(record.GetString("password"));
             user.setDOBs(record.GetString("DOB"));
-            user.setDOBd(DateHelper.getDateTimeObjectFromMySqlFormat(record.GetString("DOB"))); 
+            user.setDOBd(DateHelper.getDateTimeObjectFromString(record.GetString("DOB"))); 
             user.setEmailAddress(record.GetString("email"));
             if (!record.IsDBNull(6)) {
                 user.setPhoneNumber(record.GetString("phoneNumber"));
