@@ -4,11 +4,9 @@ using PatientBookingSystem.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Runtime.Caching;
 
 namespace PatientBookingSystem.Controllers {
     class ScheduleController {
-        /*@TODO move it from here*/
         public enum slotStatus { Available, Booked, NotAvailable };
 
         BookingRepo bookingRepo = new BookingRepo();
@@ -96,13 +94,6 @@ namespace PatientBookingSystem.Controllers {
         }
 
         private bool isAbsent(string date, TimeSpan time, int staffId) {
-            //ObjectCache cache = MemoryCache.Default;
-            //Dictionary<int, List<TimeRange>> absences = cache["absences_" + date] as Dictionary<int, List<TimeRange>>;
-            //if (absences == null) {
-            //    absences = getListOfAllAbsencesPerDate(date);
-            //    CacheItemPolicy policy = new CacheItemPolicy();
-            //    cache.Set("absences_" + date, absences, policy);
-            //}
             return absences.ContainsKey(staffId) && isInAnyTimeRange(absences[staffId], time);
         }
 
@@ -111,25 +102,10 @@ namespace PatientBookingSystem.Controllers {
         }
 
         private bool isBooked(string date, TimeSpan time, int staffId) {
-            //ObjectCache cache = MemoryCache.Default;
-            //Dictionary<int, List<TimeRange>> bookings = cache["bookings_" + date] as Dictionary<int, List<TimeRange>>;
-            //if (bookings == null) {
-            //    bookings = getListOfBookingsPerStaffMemberPerDate(date);
-            //    CacheItemPolicy policy = new CacheItemPolicy();
-            //    cache.Set("bookings_" + date, bookings, policy);
-            //}
             return bookings.ContainsKey(staffId) && isInAnyTimeRange(bookings[staffId], time);
         }
 
         public List<IModel> getScheduleMap() {
-            //ObjectCache cache = MemoryCache.Default;
-            //Dictionary<int, List<ScheduleModel>> scheduleMap = cache["scheduleMap_" + date] as Dictionary<int, List<ScheduleModel>>;
-            //if (scheduleMap == null) {
-            //    scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
-            //    CacheItemPolicy policy = new CacheItemPolicy();
-            //    cache.Set("scheduleMap_" + date, scheduleMap, policy);
-            //}
-            //scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
             return scheduleMap;
         }
 
@@ -137,7 +113,7 @@ namespace PatientBookingSystem.Controllers {
             Dictionary<int, List<TimeRange>> absencesPerMember = new Dictionary<int, List<TimeRange>>();
 
             List<IModel> registeredAbsences = absenceRepo.getAbsencesPerDate(date);
-            if (registeredAbsences != null) {
+            if (registeredAbsences.Count != 0) {
                 foreach (AbsenceModel absence in registeredAbsences) {
                     int staffId = absence.staffId;
                     if (!absencesPerMember.ContainsKey(staffId)) {
@@ -145,9 +121,7 @@ namespace PatientBookingSystem.Controllers {
                     }
                     absencesPerMember[staffId].Add(new TimeRange(absence.startTime, absence.endTime));
                 }
-            } else {
-                //@TODO add some handling here - what would happen if there are no absences ?? 
-            }
+            } 
             return absencesPerMember;
         }
 

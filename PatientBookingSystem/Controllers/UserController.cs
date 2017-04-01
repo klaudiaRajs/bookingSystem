@@ -16,7 +16,7 @@ namespace PatientBookingSystem.Controllers {
         public UserModel getUserByLoginCredentials(string login, string password) {
             List<IModel> usersByCredentials = repo.getListOfUsersByLoginCredentials(login, password);
             if (usersByCredentials.Count == 0 || usersByCredentials.Count > 2) {
-                throw new Exception("");
+                throw new Exception("Problem with users listing");
             }
             return usersByCredentials[0] as UserModel; 
         } 

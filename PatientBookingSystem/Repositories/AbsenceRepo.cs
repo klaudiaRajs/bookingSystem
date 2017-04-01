@@ -14,9 +14,6 @@ namespace PatientBookingSystem.Repositories {
         public List<IModel> getAbsencesPerDate(String date) {
             string query = "SELECT * from pbs_absence WHERE pbs_absence.startDate <= " + '"' + date + '"' + " AND pbs_absence.endDate >= " + '"' + date + '"';
             List<IModel> absences = this.db.Query(query, new AbsenceMapper());
-            if( absences.Count == 0) {
-                return null; 
-            }
             return absences;       
         }
 
