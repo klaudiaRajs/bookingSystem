@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace PatientBookingSystem.Controllers {
     /** Class is responsible for all the communication between presenters and staff repository */ 
     class StaffController {
+
         StaffRepo repo; 
 
         public StaffController() {

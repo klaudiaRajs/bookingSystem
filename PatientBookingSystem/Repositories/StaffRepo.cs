@@ -1,15 +1,16 @@
 ﻿using PatientBookingSystem.Mappers;
 using PatientBookingSystem.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PatientBookingSystem.Repositories {
+    /** Class is responsible for communicating rest of the system with pbs_staff table in the database */
     class StaffRepo : BaseRepo {
+        
+        string table = "pbs_staff";
 
-        String table = "pbs_staff";
-
-        public StaffModel getStaffMemberById(int id) {
+        /** Returns staff model based on staff id */
+        internal StaffModel getStaffMemberById(int id) {
             string query = "SELECT * from " + table + " WHERE staffId = " + id;
 
             List<IModel> staffMembers = this.db.Query(query, new StaffMapper());
@@ -19,6 +20,7 @@ namespace PatientBookingSystem.Repositories {
             return (staffMembers.First() as StaffModel); 
         }
 
+        /** Saves staff model to the database and returns result (true/false) */
         internal bool addStaffMember(StaffModel staffMember) {
             string query = "INSERT INTO " + table + "(`firstName`, `lastName`, `phoneNumber`, `staffType`) VALUES( "
                 + this.getStringInMySqlInsertableFormat(staffMember.getFirstName()) + ", "
@@ -28,7 +30,8 @@ namespace PatientBookingSystem.Repositories {
             return this.db.Execute(query);
         }
 
-        public List<IModel> getAllStaffMembers() {
+        /** Return list of all staff members */
+        internal List<IModel> getAllStaffMembers() {
             string query = "SELECT * from " + table; 
             List<IModel> staffMembers = this.db.Query(query, new StaffMapper()); 
             if( staffMembers.Count == 0) {

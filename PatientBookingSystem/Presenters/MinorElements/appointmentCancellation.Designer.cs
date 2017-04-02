@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.doctorCheck = new System.Windows.Forms.CheckBox();
-            this.doctorsDropDown = new System.Windows.Forms.ComboBox();
+            this.staffMemberDropDown = new System.Windows.Forms.ComboBox();
             this.patientsDropDown = new System.Windows.Forms.ComboBox();
             this.patientCheck = new System.Windows.Forms.CheckBox();
             this.dateCheck = new System.Windows.Forms.CheckBox();
@@ -41,17 +41,17 @@
             this.doctorCheck.Size = new System.Drawing.Size(15, 14);
             this.doctorCheck.TabIndex = 0;
             this.doctorCheck.UseVisualStyleBackColor = true;
-            this.doctorCheck.CheckedChanged += new System.EventHandler(this.doctorCheck_CheckedChanged);
+            this.doctorCheck.CheckedChanged += new System.EventHandler(this.staffMemberCheck_CheckedChanged);
             // 
-            // doctorsDropDown
+            // staffMemberDropDown
             // 
-            this.doctorsDropDown.Enabled = false;
-            this.doctorsDropDown.FormattingEnabled = true;
-            this.doctorsDropDown.Location = new System.Drawing.Point(135, 33);
-            this.doctorsDropDown.Name = "doctorsDropDown";
-            this.doctorsDropDown.Size = new System.Drawing.Size(121, 21);
-            this.doctorsDropDown.TabIndex = 1;
-            this.doctorsDropDown.SelectionChangeCommitted += new System.EventHandler(this.doctorsDropDown_SelectionChangeCommitted);
+            this.staffMemberDropDown.Enabled = false;
+            this.staffMemberDropDown.FormattingEnabled = true;
+            this.staffMemberDropDown.Location = new System.Drawing.Point(135, 33);
+            this.staffMemberDropDown.Name = "staffMemberDropDown";
+            this.staffMemberDropDown.Size = new System.Drawing.Size(121, 21);
+            this.staffMemberDropDown.TabIndex = 1;
+            this.staffMemberDropDown.SelectionChangeCommitted += new System.EventHandler(this.staffMembersDropDown_SelectionChangeCommitted);
             // 
             // patientsDropDown
             // 
@@ -119,7 +119,7 @@
             this.Controls.Add(this.dateCheck);
             this.Controls.Add(this.patientsDropDown);
             this.Controls.Add(this.patientCheck);
-            this.Controls.Add(this.doctorsDropDown);
+            this.Controls.Add(this.staffMemberDropDown);
             this.Controls.Add(this.doctorCheck);
             this.Name = "appointmentCancellation";
             this.Size = new System.Drawing.Size(850, 499);
@@ -131,7 +131,7 @@
         #endregion
 
         private System.Windows.Forms.CheckBox doctorCheck;
-        private System.Windows.Forms.ComboBox doctorsDropDown;
+        private System.Windows.Forms.ComboBox staffMemberDropDown;
         private System.Windows.Forms.ComboBox patientsDropDown;
         private System.Windows.Forms.CheckBox patientCheck;
         private System.Windows.Forms.CheckBox dateCheck;

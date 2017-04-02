@@ -2,7 +2,10 @@
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Mappers {
+    /** Class is responsible for mapping database fields to ScheduleModel */
     class ScheduleMapper : IDataMapper {
+
+        /** Method returns a mapped (database to model) ScheduleModel */
         public IModel map(MySqlDataReader reader) {
             ScheduleModel schedule = new ScheduleModel();
             schedule.setScheduleId(reader.GetInt32("scheduleId"));

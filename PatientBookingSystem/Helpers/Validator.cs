@@ -1,18 +1,27 @@
-﻿using PatientBookingSystem.Helpers;
-using PatientBookingSystem.Models;
+﻿using PatientBookingSystem.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
     /** Class provide tool for validating different types of data used within the system */
     static class Validator {
 
-        /**
-         * Method validates staff member model 
-         */
+        /** Messages  */
+        private const String ENTER_LOGIN_MESSAGE = " Credentials you provided does not meet the requirements ";
+        private const String ENTER_PASSWORD_MESSAGE = " Password you provided does not meet the requirements ";
+
+
+        /** Return message for empty password */
+        public static string getEmptyPasswordMessage() {
+            return Validator.ENTER_PASSWORD_MESSAGE;
+        }
+
+        /** Returns message for empty login */
+        public static string getEmptyLoginMessage() {
+            return ENTER_LOGIN_MESSAGE;
+        }
+
+        /** Method validates staff member model */
         public static bool validateStaffMember(StaffModel staffMember, int staffType = -1) {
             bool result = true;
             if (String.IsNullOrEmpty(staffMember.getFirstName()) || String.IsNullOrEmpty(staffMember.getLastName()) || staffType == 0) {
@@ -21,9 +30,7 @@ namespace PatientBookingSystem.Helpers {
             return result;
         }
 
-        /** 
-         * Method validates user model
-         */
+        /** Method validates user model */
         public static List<string> validateUser(UserModel user) {
             List<string> errors = new List<string>();
             if (String.IsNullOrEmpty(user.getFirstName())) {
@@ -56,9 +63,7 @@ namespace PatientBookingSystem.Helpers {
             return errors; 
         }
 
-        /** 
-         * Method validates login and password for their requirements
-         */
+        /** Method validates login and password for their requirements */
         public static bool validateLogger(string login, string password) {
             bool result = true;
             if( login.Length < 3) {
@@ -71,13 +76,26 @@ namespace PatientBookingSystem.Helpers {
             
         }
 
-        /** 
-         * Method validates if absence model meet the requirements for saving
-         */
+        /** Method validates if absence model meet the requirements for saving */
         public static List<string> validateAbsenceForSaving(AbsenceModel absence) {
             List<string> errors = new List<string>(); 
             if( DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {
                 errors.Add("startDate");
+            }
+            return errors;
+        }
+
+        /** Method validates if login credentials meet the requirements */
+        public static List<string> validateLoginCredentials(string login, string password) {
+            List<string> errors = new List<string>(); 
+            if (!(login.Length > 0 && login != ENTER_LOGIN_MESSAGE &&
+                password.Length > 0 && password != ENTER_PASSWORD_MESSAGE)) {
+                if (login.Length < 1) {
+                    errors.Add(ENTER_LOGIN_MESSAGE);
+                }
+                if (password.Length < 1) {
+                    errors.Add(ENTER_PASSWORD_MESSAGE);
+                }
             }
             return errors;
         }

@@ -1,43 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PatientBookingSystem.Controllers;
-using System.Collections;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem {
+    /** Class is responsible for manipulation schedulePanel view and communicating with relevant controllers */
     public partial class schedulePanel : UserControl {
-
-        ScheduleController controller = new ScheduleController(DateTime.Today.ToString());
-        AbsenceRepo absenceRepo = new AbsenceRepo();
-
+        
         DateTime date = DateTime.Today;
 
+        /** List of all day boxes per month */
         List<dayOfaWeekBox> dayBoxes = new List<dayOfaWeekBox>();
 
         public schedulePanel() {
             InitializeComponent();
             generateDayBoxes();
-            fillInStaffMembers();
+            fillInStaffMembersDropDown();
         }
 
-        private void fillInStaffMembers() {
+        /** Method provides data source for filling in staff member drop down */
+        private void fillInStaffMembersDropDown() {
             ListItem comboBoxElements = new ListItem();
             allTheStaffMembers.DataSource = comboBoxElements.getDataSourceForAllStaffMembers();
             allTheStaffMembers.DisplayMember = "text";
             allTheStaffMembers.ValueMember = "id";
-
         }
-
+        
+        /** Method generates boxes containing number of appointments and day */
         private void generateDayBoxes() {
+            AbsenceRepo absenceRepo = new AbsenceRepo();
             monthLabel.Text = date.ToString("MMMM").ToUpper();
             yearLabel.Text = date.ToString("yyyy").ToUpper();
             appointmentDaysPanel.Visible = false;
@@ -53,8 +47,9 @@ namespace PatientBookingSystem {
             appointmentDaysPanel.Visible = true;
         }
 
+        /** Method generates working days (according to surgery working days) per given month */
         private List<int> getWorkingDays(int year, int month) {
-            DayOfWeek[] nonWorkingDays = new DayOfWeek[2] { DayOfWeek.Saturday, DayOfWeek.Sunday };
+            DayOfWeek[] nonWorkingDays = SurgeryInfo.nonWorkingDays;
             List<int> workingDaysPerMonth = new List<int>();
             int numberOfDaysInMonth = DateTime.DaysInMonth(year, month);
             for (int i = 1; i < numberOfDaysInMonth; i++) {
@@ -66,23 +61,27 @@ namespace PatientBookingSystem {
             return workingDaysPerMonth;
         }
 
-        private void reloadBoxDays() {
+        /** Method reloads day boxes */
+        private void reloadDayBoxes() {
             appointmentDaysPanel.Controls.Clear();
             appointmentDaysPanel.Visible = false;
             generateDayBoxes();
             appointmentDaysPanel.Visible = true;
         }
 
+        /** Method changes date to following month */
         private void nextMonthButton_Click(object sender, EventArgs e) {
             this.date = this.date.AddMonths(1);
-            reloadBoxDays();
+            reloadDayBoxes();
         }
 
+        /** Method changes date to previous month */ 
         private void previousMonthButton_Click(object sender, EventArgs e) {
             this.date = this.date.AddMonths(-1);
-            reloadBoxDays();
+            reloadDayBoxes();
         }
 
+        /** Method filters results to days containing motning appointments */
         private void morningAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
             foreach (dayOfaWeekBox box in dayBoxes) {
                 if (box.morningAppointments == 0) {
@@ -93,6 +92,7 @@ namespace PatientBookingSystem {
             }
         }
 
+        /** Method filters results to days containing appointments for selected staff member */
         private bool isStaffMemberAvailable(dayOfaWeekBox box, ListItem selectedStaffMember) {
             if (selectedStaffMember.id != 0) {
                 foreach (StaffScheduleModel staffMember in box.staffMembersPerDate) {
@@ -105,6 +105,7 @@ namespace PatientBookingSystem {
             return true;
         }
 
+        /** Method checks if there are any morning appointmnets in given dayBox */
         private bool areMorningAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
             if (morningAppointmentsCheckbox.Checked) {
                 return (box.morningAppointments > 0);
@@ -112,6 +113,7 @@ namespace PatientBookingSystem {
             return true;
         }
 
+        /** Method checks if there are any afternoon appointments in given dayBox */
         private bool areAfternoonAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
             if (afternoonAppointmentsCheckbox.Checked) {
                 return (box.morningAppointments > 0);
@@ -119,6 +121,7 @@ namespace PatientBookingSystem {
             return true;
         }
 
+        /** Method hides/shows day boxes meeting requirement of containing afternoon appointments */ 
         private void afternoonAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
             foreach (dayOfaWeekBox box in dayBoxes) {
                 if (box.afternoonAppointments == 0) {
@@ -129,6 +132,7 @@ namespace PatientBookingSystem {
             }
         }
 
+        /** Method hides/shows day boxes meeting requirement of containing appointments with selected doctor */
         private void allTheStaffMembers_SelectedIndexChanged(object sender, EventArgs e) {
             if (allTheStaffMembers.SelectedIndex != 0) {
                 foreach (dayOfaWeekBox box in dayBoxes) {
@@ -143,7 +147,7 @@ namespace PatientBookingSystem {
                     }
                 }
             } else {
-                foreach( dayOfaWeekBox box in dayBoxes) {
+                foreach (dayOfaWeekBox box in dayBoxes) {
                     if (areMorningAppointmentsRequestedAndAvailable(box) && areAfternoonAppointmentsRequestedAndAvailable(box)) {
                         box.Visible = true;
                     }

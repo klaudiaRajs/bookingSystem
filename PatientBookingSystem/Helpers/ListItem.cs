@@ -2,15 +2,16 @@
 using PatientBookingSystem.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
+    /** Class is responsible for providing data sources and accessing fields for drop down lists(comboBoxes) */
     class ListItem {
+        /** Value to be returned from drop down list element */
         public int id { get; set; }
+        /** Value to be displayed in the drop down list element */
         public string text { get; set; }         
 
+        /** Method returns a list of staff members prepared to be a data source for a drop down list */
         public List<ListItem> getDataSourceForAllStaffMembers() {
             StaffController controller = new StaffController();
             List<IModel> allTheStaffMembers = controller.getAllStaffMembers();
@@ -22,7 +23,8 @@ namespace PatientBookingSystem.Helpers {
             return listOfStaffMembers;
         }
 
-         public List<ListItem> getListOfStaffTypesForComboBox() {
+        /** Method returns a list of staff types prepared to be a data source for a drop down list */
+        public List<ListItem> getListOfStaffTypesForComboBox() {
             List<ListItem> staffTypesData = new List<ListItem>();
             staffTypesData.Insert(0, new ListItem { text = "Select a staffType", id = 0 });
             string[] myEnumMember = Enum.GetNames(typeof(SurgeryInfo.staffTypes));
@@ -30,7 +32,7 @@ namespace PatientBookingSystem.Helpers {
             return staffTypesData; 
         }
 
-
+        /** Method fills in the list with enum values */
         private List<ListItem> fillInList(List<ListItem> list, string[] enumNames) {
             for (int i = 0; i < enumNames.Length; i++) {
                 list.Add(new ListItem { text = enumNames[i], id = i + 1 });
@@ -38,6 +40,7 @@ namespace PatientBookingSystem.Helpers {
             return list;
         }
 
+        /** Method returns a list of user types prepared to be a data source for a drop down list */
         public List<ListItem> getListOfUserTypes() {
             List<ListItem> userTypesData = new List<ListItem>();
             userTypesData.Insert(0, new ListItem { text = "Select a user type", id = 0 });
@@ -46,6 +49,7 @@ namespace PatientBookingSystem.Helpers {
             return userTypesData;
         }
 
+        /** Method returns a list of confirmation methods to be a data source for a drop down list */
         public List<ListItem> getListOfConfirmationMethodsForComboBox() {
             List<ListItem> confirmationMethods = new List<ListItem>();
             confirmationMethods.Insert(0, new ListItem { text = "Select confirmation method", id = 0 });

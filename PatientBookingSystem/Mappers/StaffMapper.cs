@@ -2,7 +2,10 @@
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Mappers {
+    /** Class is responsible for mapping database fields to StaffModel */
     class StaffMapper : IDataMapper {
+
+        /** Method returns a mapped (database to model) StaffModel*/
         public IModel map(MySqlDataReader reader) {
             StaffModel staffMember = new StaffModel();     
             staffMember.setStaffId(reader.GetInt16("staffId"));

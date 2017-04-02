@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem {
+    /** Class is responsible for manipulating elements of the presenter and communication between homePanel and booking controller */
     partial class homePanel : UserControl {
-        BookingRepo repo;
-        List<IModel> bookingRepo;
 
         public homePanel() {
             InitializeComponent();
-            repo = new BookingRepo();
-            bookingRepo = repo.getBookingsPerUser();
+            adjustPresenterBasedOnUserType(); 
+        }
+
+        /** Method adjusts the view based on user type */
+        private void adjustPresenterBasedOnUserType() {
+            BookingController controller = new BookingController(); 
             if (ApplicationState.userType != "admin") {
-                theMostRecentAppointment.Text += getDateInPresenterFormat(repo.getLastAppointment());
-                theMostAttendandedDoctor.Text += repo.getTheMostAttendedDoctor().getFullStaffName();
-                if (repo.getTheMostAttendedNurse().Count != 0) {
-                    theMostAttendendedNurse.Text += (repo.getTheMostAttendedNurse().First() as StaffModel).getFullStaffName();
+                theMostRecentAppointment.Text += getDateInPresenterFormat(controller.getLastAppointment());
+                theMostAttendandedDoctor.Text += controller.getTheMostOftenAttendedDoctor();
+                if (controller.getTheMostOftenAttendedNurse().Count != 0) {
+                    theMostAttendendedNurse.Text += (controller.getTheMostOftenAttendedNurse().First() as StaffModel).getFullStaffName();
                 } else {
                     theMostAttendendedNurse.Text += " no nurse appointments";
                 }
@@ -32,7 +34,8 @@ namespace PatientBookingSystem {
             }
         }
 
-        protected String getDateInPresenterFormat(String date) {
+        /** Method converts date based to format displayable in the view */
+        protected string getDateInPresenterFormat(string date) {
             string[] separator = new string[] { ".", " " };
             if (String.IsNullOrEmpty(date)) {
                 return null;

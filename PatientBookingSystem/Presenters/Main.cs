@@ -45,7 +45,7 @@ namespace PatientBookingSystem {
                         message.Show();
                     }
                 } else {
-                    message.setCustomizedMessage(logger.getEmptyLoginMessage());
+                    message.setCustomizedMessage(Validator.getEmptyLoginMessage());
                     message.Show();
                 }
             }

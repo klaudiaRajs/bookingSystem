@@ -6,25 +6,10 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Controllers {
-    /** 
-     * Class is a communicator between absence repository and presenters 
-     */
+    /** Class is a communicator between absence repository and presenters */
     class AbsenceController {
-
-        /** Absence repository */
-        private AbsenceRepo repo;
-
-        /**
-         * Initialization of absence repository  
-         */
-        public AbsenceController() {
-            this.repo = new AbsenceRepo();
-        }
-
-
-        /** 
-         * Public method for saving an absence
-         */
+        
+        /** Public method for saving an absence */
         public bool save(AbsenceModel absence) {
             bool result;
             if (absence.staffId != 0) {
@@ -38,9 +23,7 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
-        /** 
-         * Method validates if all the data is valid for saving
-         */
+        /** Method validates if all the data is valid for saving */
         public List<string> isDataValid(DateTimePicker startDatePicker, DateTimePicker endDatePicker, DateTimePicker startTimePicker, DateTimePicker endTimePicker, List<string> invalidFieldsList, ComboBox allTheDoctors = null) {
             List<string> invalidFields = invalidFieldsList;
             bool result = true;
@@ -73,10 +56,9 @@ namespace PatientBookingSystem.Controllers {
             return null;
         }
 
-        /** 
-         * Methods saves the absence if correct data provided
-         */
+        /** Methods saves the absence if correct data provided */
         private bool saveAbsence(AbsenceModel absence) {
+            AbsenceRepo repo = new AbsenceRepo(); 
             if (String.IsNullOrEmpty(absence.startTime)) {
                 absence.startTime = "NULL";
             }
@@ -93,7 +75,7 @@ namespace PatientBookingSystem.Controllers {
                 absence.endDate = "NULL";
             }
             if (Validator.validateAbsenceForSaving(absence).Count == 0) {
-                return this.repo.saveAbsence(absence);
+                return repo.saveAbsence(absence);
             }
             return false;
         }

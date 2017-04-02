@@ -3,7 +3,10 @@ using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Mappers {
+    /** Class is responsible for mapping database fields to UserModel */
     class UserMapper : IDataMapper {
+
+        /** Method returns a mapped (database to model) UserModel */
         public IModel map(MySqlDataReader record) {
             UserModel user = new UserModel();
             user.setId(record.GetInt32("id"));

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
+    /** Class is responsible for converting dates into different string formats */
     public static class DateHelper {
 
+        /** Method translates a date that is not formatted for MySQL into MySQL format */
         public static string getDateInMySqlFormat(string nonInFormatDate) {
             if (nonInFormatDate.IndexOf(".") == 4
                 || nonInFormatDate.IndexOf("-") == 4
@@ -24,9 +22,7 @@ namespace PatientBookingSystem.Helpers {
             return null;
         }
 
-        /**
-         *  Method generates DateTime object based on contents of date string. Method can detect 20.05.2017 format and 2017-05-02 format
-         */
+        /** Method generates DateTime object based on contents of date string. Method can detect 20.05.2017 format and 2017-05-02 format */
         public static DateTime getDateTimeObjectFromString(string date) {
             string day = "";
             string month = "";
@@ -46,6 +42,7 @@ namespace PatientBookingSystem.Helpers {
             return dateObject;
         }
 
+        /** Method returns the last day of a given month (DateTime object) */
         public static DateTime convertToLastDayOfMonth(DateTime date) {
             return new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
         }

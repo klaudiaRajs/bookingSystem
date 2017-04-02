@@ -28,6 +28,7 @@ namespace PatientBookingSystem.Models {
             return this.date; 
         }
 
+        /** Method sets model's date and if required deletes time part from date string */
         public void setDate(String date) {
             bool isDateTime = date.IndexOf(" ") >= 0;
             if (isDateTime) {
@@ -40,20 +41,12 @@ namespace PatientBookingSystem.Models {
             return this.startTime; 
         }
 
-        public DateTime getStartDateTime() {
-            return DateTime.ParseExact(this.date + " " + this.startTime, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-        }
-
         public void setStartTime(String startTime) {
             this.startTime = startTime;
         }
 
         public String getEndTime() {
             return this.endTime;
-        }
-
-        public DateTime getEndDateTime() {
-            return DateTime.ParseExact(this.date + " " + this.endTime, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public void setEndTime(String endTime) {
