@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
+
+    /** Class is responsible for managing multipleScheduleEntriesPanel view and communicating with relevant controllers */
     public partial class multipleScheduleEntriesPanel : UserControl {
 
         ScheduleController scheduleController = new ScheduleController();
         FeedbackWindow feedback = new FeedbackWindow();
 
+        /** Constructor initializes components, fills in and prepares drop downs */
         public multipleScheduleEntriesPanel() {
             InitializeComponent();
-            modifyBreakTimes();
-            fillInMonthsForYearFromToday();
-            allTheStaffMembers.DropDownStyle = ComboBoxStyle.DropDownList;
-            fillInStaffMember();
+            this.modifyBreakTimes();
+            this.prepareDropDowns();
         }
+
+        /** Method prepares drop down for view */
+        private void prepareDropDowns() {
+            this.fillInMonthsForYearFromToday();
+            this.allTheStaffMembers.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.fillInStaffMember();
+        }
+
 
         private void modifyBreakTimes() {
             // Make a sensible logic for setting default fields value 
         }
 
+        /** Method provides data source for staff member drop down (fills it in) */
         private void fillInStaffMember() {
             ListItem comboBoxElements = new ListItem();
             allTheStaffMembers.DataSource = comboBoxElements.getDataSourceForAllStaffMembers();
@@ -36,8 +40,9 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             allTheStaffMembers.ValueMember = "id";
         }
 
+        /** Method provides data source containing months for a year from today */
         private void fillInMonthsForYearFromToday() {
-            List<DateTime> months = getMonthsForYearFromToday();
+            List<DateTime> months = this.getMonthsForYearFromToday();
             monthsToApplySchedule.DisplayMember = "text";
             monthsToApplySchedule.ValueSeparator = ", ";
             foreach (DateTime entry in months) {
@@ -45,6 +50,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             }
         }
 
+        /** Method returns ids of months checked in the comboBox */
         private List<DateTime> getCheckedMonths() {
             List<DateTime> months = new List<DateTime>();
             foreach (ListDate item in monthsToApplySchedule.CheckedItems) {
@@ -53,6 +59,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return months;
         }
 
+        /** Method returns a list of DateTime objects for 12 months from today */
         private List<DateTime> getMonthsForYearFromToday() {
             DateTime date = DateTime.Today;
             List<DateTime> months = new List<DateTime>();
@@ -64,24 +71,26 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return months;
         }
 
+        /** Method initiaties processed for saving staffSchedule model */
         private void saveScheduleButton_Click(object sender, EventArgs e) {
             List<DateTime> selectedMonths = getCheckedMonths();
-            int staffId = getStaffId();
+            int staffId = getSelectedStaffId();
             List<string> daysToBeScheduled = getDaysToBeScheduled();
             Dictionary<string, Dictionary<string, string>> timesPerDay = getTimesPerDay();
             List<int> scheduledDays = getScheduleIdsPerPeriod(selectedMonths, daysToBeScheduled, timesPerDay);
-            bool resultOfSavingStaffSchedules = saveStaffSchedules(staffId, scheduledDays);
-            if (resultOfSavingStaffSchedules) {
+            if (this.saveStaffSchedules(staffId, scheduledDays)) {
                 clearAllTheFields();
             }
         }
 
+        /** Method clears all the fields in the form */
         private void clearAllTheFields() {
             allTheStaffMembers.SelectedIndex = 0;
             monthsToApplySchedule.Items.Clear();
             fillInMonthsForYearFromToday();
         }
 
+        /** Method analyzes validation and based on result shows appropriate message to the user  */ 
         private bool saveStaffSchedules(int staffId, List<int> scheduledDays) {
             List<bool> errors = scheduleController.saveStaffSchedules(staffId, scheduledDays);
             if (errors.Count != 0) {
@@ -94,6 +103,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return true;
         }
 
+        /** Method return list of schedule ids for passed period of time */
         private List<int> getScheduleIdsPerPeriod(List<DateTime> monthsList, List<string> daysToBeScheduled, Dictionary<string, Dictionary<string, string>> timesPerDay) {
             List<int> scheduleIdList = new List<int>();
             if (monthsList.Count != 0) {
@@ -131,6 +141,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         }
 
 
+        
         private Dictionary<string, Dictionary<string, string>> getTimesPerDay() {
             Dictionary<string, Dictionary<string, string>> timesPerDay = new Dictionary<string, Dictionary<string, string>>();
             if (!mondayBreak.Checked) {
@@ -192,6 +203,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return timesPerDay;
         }
 
+        /** Method returns days to be scheduled */
         private List<string> getDaysToBeScheduled() {
             List<string> selectedDays = new List<string>();
             if (monday.Checked) {
@@ -218,7 +230,8 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return selectedDays;
         }
 
-        private int getStaffId() {
+        /** Method returns staffId selected in staffMembers drop down */
+        private int getSelectedStaffId() {
             int staffId = ((ListItem)allTheStaffMembers.SelectedItem).id;
             if (staffId != 0) {
                 return staffId;
@@ -229,76 +242,88 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return 0;
         }
 
+        /** Method enables/disables Monday breaktimes */
         private void mondayBreak_CheckedChanged(object sender, EventArgs e) {
             mondayBreakStartTime.Enabled = !mondayBreak.Checked;
             mondayBreakEndTime.Enabled = !mondayBreak.Checked;
         }
 
+        /** Method enables/disables Tuesday breaktimes */
         private void tuesdayBreak_CheckedChanged(object sender, EventArgs e) {
             tuesdayBreakStartTime.Enabled = !tuesdayBreak.Checked;
             tuesdayBreakEndTime.Enabled = !tuesdayBreak.Checked;
         }
 
+        /** Method enables/disables WEdnesday breaktimes */
         private void wednesdayBreak_CheckedChanged(object sender, EventArgs e) {
             wednesdayBreakStartTime.Enabled = !wednesdayBreak.Checked;
             wednesdayBreakEndTime.Enabled = !wednesdayBreak.Checked;
         }
 
+        /** Method enables/disables Thursday breaktimes */
         private void thursdayBreak_CheckedChanged(object sender, EventArgs e) {
             thursdayBreakStartTime.Enabled = !thursdayBreak.Checked;
             thursdayBreakEndTime.Enabled = !thursdayBreak.Checked;
         }
 
+        /** Method enables/disables Friday breaktimes */
         private void fridayBreak_CheckedChanged(object sender, EventArgs e) {
             fridayBreakStartTime.Enabled = !fridayBreak.Checked;
             fridayBreakEndTime.Enabled = !fridayBreak.Checked;
         }
 
+        /** Method enables/disables Saturday breaktimes */
         private void saturdayBreak_CheckedChanged(object sender, EventArgs e) {
             saturdayBreakStartTime.Enabled = !saturdayBreak.Checked;
             saturdayBreakEndTime.Enabled = !saturdayBreak.Checked;
         }
 
+        /** Method enables/disables Sunday breaktimes */
         private void sundayBreak_CheckedChanged(object sender, EventArgs e) {
             sundayBreakStartTime.Enabled = !sundayBreak.Checked;
             sundayBreakEndTime.Enabled = !sundayBreak.Checked;
         }
 
+        /** Method enables/disables Monday as day to be scheduled */
         private void monday_CheckedChanged(object sender, EventArgs e) {
             mondayWorkStartTime.Enabled = monday.Checked;
             mondayWorkEndTime.Enabled = monday.Checked;
         }
 
+        /** Method enables/disables Tuesday as day to be scheduled */
         private void tuesday_CheckedChanged(object sender, EventArgs e) {
             tuesdayWorkStartTime.Enabled = tuesday.Checked;
             tuesdayWorkEndTime.Enabled = tuesday.Checked;
         }
 
+        /** Method enables/disables Wednesday as day to be scheduled */
         private void wednesday_CheckedChanged(object sender, EventArgs e) {
             wednesdayWorkStartTime.Enabled = wednesday.Checked;
             wednesdayWorkEndTime.Enabled = wednesday.Checked;
         }
 
+        /** Method enables/disables Thursday as day to be scheduled */
         private void thursday_CheckedChanged(object sender, EventArgs e) {
             thursdayWorkStartTime.Enabled = thursday.Checked;
             thursdayWorkEndTime.Enabled = thursday.Checked;
         }
 
+        /** Method enables/disables Friday as day to be scheduled */
         private void friday_CheckedChanged(object sender, EventArgs e) {
             fridayWorkStartTime.Enabled = friday.Checked;
             fridayWorkEndTime.Enabled = friday.Checked;
         }
 
+        /** Method enables/disables Saturday as day to be scheduled */
         private void saturday_CheckedChanged(object sender, EventArgs e) {
             saturdayWorkStartTime.Enabled = saturday.Checked;
             saturdayWorkEndTime.Enabled = saturday.Checked;
         }
 
+        /** Method enables/disables Sunday as day to be scheduled */
         private void sunday_CheckedChanged(object sender, EventArgs e) {
             sundayWorkStartTime.Enabled = sunday.Checked;
             sundayWorkEndTime.Enabled = sunday.Checked;
         }
-
-
     }
 }

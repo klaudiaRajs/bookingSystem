@@ -9,6 +9,7 @@ namespace PatientBookingSystem {
     /** Class is responsible for manipulating elements of the presenter and communication between homePanel and booking controller */
     partial class homePanel : UserControl {
 
+        /** Constructor prepares the view based on user type */
         public homePanel() {
             InitializeComponent();
             adjustPresenterBasedOnUserType(); 
@@ -16,22 +17,32 @@ namespace PatientBookingSystem {
 
         /** Method adjusts the view based on user type */
         private void adjustPresenterBasedOnUserType() {
-            BookingController controller = new BookingController(); 
             if (ApplicationState.userType != "admin") {
-                theMostRecentAppointment.Text += getDateInPresenterFormat(controller.getLastAppointment());
-                theMostAttendandedDoctor.Text += controller.getTheMostOftenAttendedDoctor();
-                if (controller.getTheMostOftenAttendedNurse().Count != 0) {
-                    theMostAttendendedNurse.Text += (controller.getTheMostOftenAttendedNurse().First() as StaffModel).getFullStaffName();
-                } else {
-                    theMostAttendendedNurse.Text += " no nurse appointments";
-                }
+                this.fillInViewInformation();
             } else {
-                theMostAttendandedDoctor.Visible = false;
-                theMostAttendendedNurse.Visible = false;
-                theMostRecentAppointment.Visible = false;
-                essentailInformationLabel.Visible = false;
-                personalStatistics.Visible = false;
+                this.disableStatisticsAndEssentialInformationElements(); 
             }
+        }
+
+        /** Method fills in information in the view */
+        private void fillInViewInformation() {
+            BookingController controller = new BookingController(); 
+            theMostRecentAppointment.Text += getDateInPresenterFormat(controller.getLastAppointment());
+            theMostAttendandedDoctor.Text += controller.getTheMostOftenAttendedDoctor();
+            if (controller.getTheMostOftenAttendedNurse().Count != 0) {
+                theMostAttendendedNurse.Text += (controller.getTheMostOftenAttendedNurse().First() as StaffModel).getFullStaffName();
+            } else {
+                theMostAttendendedNurse.Text += " no nurse appointments";
+            }
+        }
+
+        /** Method disables elements of the view irrelevant for admin */
+        private void disableStatisticsAndEssentialInformationElements() {
+            theMostAttendandedDoctor.Visible = false;
+            theMostAttendendedNurse.Visible = false;
+            theMostRecentAppointment.Visible = false;
+            essentailInformationLabel.Visible = false;
+            personalStatistics.Visible = false;
         }
 
         /** Method converts date based to format displayable in the view */

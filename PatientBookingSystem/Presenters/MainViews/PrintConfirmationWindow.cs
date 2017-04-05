@@ -5,16 +5,17 @@ using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
-    partial class printConfirmation : Form {
+    /** Class is responsible for managign print confirmation window and for printing a confirmation */
+    partial class PrintConfirmationWindow : Form {
+
         string date;
         string time;
         string staffName;
         string typeOfAppointment;
-        appointmentBox parent;
 
-        public printConfirmation(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
+        /** Constructor initializes fields and build the view up */
+        public PrintConfirmationWindow(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
             InitializeComponent();
-            this.parent = parent; 
             this.date = date;
             this.time = time;
             this.staffName = staffName;
@@ -22,6 +23,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             fillInData(); 
         }
 
+        /** Method fills in the form */
         private void fillInData() {
             dateLabel.Text = this.date;
             timeLabel.Text = this.time;
@@ -29,10 +31,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
             typeOfAppointmentLabel.Text = this.typeOfAppointment; 
         }
 
+        /** Method closes the window */
         private void homeButton_Click(object sender, EventArgs e) {
-            this.Close();
+            this.Hide();
         }
 
+        /** Method fires printing process */
         private void printButton_Click(object sender, EventArgs e) {
             prepareViewForPrinting();
             PrintDocument pd = new PrintDocument();
@@ -41,6 +45,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.Close();
         }
 
+        /** Method prepares view for printing */
         private void prepareViewForPrinting() {
             this.BackColor = System.Drawing.Color.White;
             dateLabel.BackColor = System.Drawing.Color.White;
@@ -53,6 +58,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             typeOfAppointmentLabelLabel.BackColor = System.Drawing.Color.White;
         }
 
+        /** Method prints the image of the confirmation window */
         private void PrintImage(object o, PrintPageEventArgs e) {
             int x = SystemInformation.WorkingArea.X;
             int y = SystemInformation.WorkingArea.Y;

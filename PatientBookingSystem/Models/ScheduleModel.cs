@@ -1,12 +1,14 @@
 ﻿using System;
 
 namespace PatientBookingSystem.Models {
-    class ScheduleModel : IModel {
-        int scheduleId;
-        String date;
-        String startTime;
-        String endTime;
-        StaffModel staffMember; 
+    /** Class is a database model of schedule table - contains all the getters and setters */
+    public class ScheduleModel : IModel {
+
+        private int scheduleId;
+        private string date;
+        private string startTime;
+        private string endTime;
+        private StaffModel staffMember; 
 
         public StaffModel getStaffMember() {
             return this.staffMember; 

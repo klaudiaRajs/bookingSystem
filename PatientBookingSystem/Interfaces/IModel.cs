@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PatientBookingSystem.Models {
+﻿namespace PatientBookingSystem.Models {
+    /** Interface is used as a method to apply mappers within the system */
     interface IModel {
 
     

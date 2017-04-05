@@ -1,7 +1,9 @@
 ﻿using System;
 
 namespace PatientBookingSystem.Models {
-    class AbsenceModel : IModel{
+    /** Class is a database model with all the setters and getters. Class implements IModel interface */
+    public class AbsenceModel : IModel{
+
         public int absenceId { get; set; }
         public string startTime { get; set; }
         public string endTime { get; set; }
@@ -28,6 +30,7 @@ namespace PatientBookingSystem.Models {
             return DateTime.ParseExact(this.endDate + " " + this.endTime, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        /** Method normalizes format of the date (removes time) */
         private string getNormalizedDate(string date) {
             bool isDateTime = date.IndexOf(" ") >= 0;
             if (isDateTime) {

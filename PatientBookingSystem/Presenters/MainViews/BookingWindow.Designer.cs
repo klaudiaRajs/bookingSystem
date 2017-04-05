@@ -234,6 +234,7 @@
             this.patientListBox.Size = new System.Drawing.Size(226, 21);
             this.patientListBox.TabIndex = 37;
             this.patientListBox.Text = "Patient\'s name, DOB";
+            this.patientListBox.Visible = false;
             // 
             // BookingWindow
             // 

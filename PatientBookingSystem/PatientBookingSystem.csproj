@@ -111,11 +111,11 @@
     <Compile Include="Presenters\MainViews\pastAppointmentsPanel.Designer.cs">
       <DependentUpon>pastAppointmentsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainViews\printConfirmation.cs">
+    <Compile Include="Presenters\MainViews\PrintConfirmationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presenters\MainViews\printConfirmation.Designer.cs">
-      <DependentUpon>printConfirmation.cs</DependentUpon>
+    <Compile Include="Presenters\MainViews\PrintConfirmationWindow.Designer.cs">
+      <DependentUpon>PrintConfirmationWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.cs">
       <SubType>Form</SubType>
@@ -123,11 +123,11 @@
     <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.Designer.cs">
       <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainViews\SingleScheduleDay.cs">
+    <Compile Include="Presenters\MainViews\SingleScheduleDayWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presenters\MainViews\SingleScheduleDay.Designer.cs">
-      <DependentUpon>SingleScheduleDay.cs</DependentUpon>
+    <Compile Include="Presenters\MainViews\SingleScheduleDayWindow.Designer.cs">
+      <DependentUpon>SingleScheduleDayWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MainViews\surgeryManagement.cs">
       <SubType>UserControl</SubType>
@@ -190,20 +190,11 @@
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\StaffModel.cs" />
-    <Compile Include="Presenters\BasePresenter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\filtersPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\filtersPanel.Designer.cs">
-      <DependentUpon>filtersPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Presenters\MainViews\Help.cs">
+    <Compile Include="Presenters\MainViews\HelpWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presenters\MainViews\Help.Designer.cs">
-      <DependentUpon>Help.cs</DependentUpon>
+    <Compile Include="Presenters\MainViews\HelpWindow.Designer.cs">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MainViews\homePanel.cs">
       <SubType>UserControl</SubType>
@@ -243,23 +234,11 @@
     <Compile Include="Presenters\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainViews\schedulePerDayPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Presenters\MainViews\schedulePerDayPanel.Designer.cs">
-      <DependentUpon>schedulePerDayPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presenters\MinorElements\multipleScheduleEntriesPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Presenters\MinorElements\multipleScheduleEntriesPanel.Designer.cs">
       <DependentUpon>multipleScheduleEntriesPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\noAppointmentsPerDay.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\noAppointmentsPerDay.Designer.cs">
-      <DependentUpon>noAppointmentsPerDay.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MinorElements\singleEntrySchedulePanel.cs">
       <SubType>UserControl</SubType>
@@ -278,12 +257,6 @@
     </Compile>
     <Compile Include="Presenters\MinorElements\surgeryInfoBox.Designer.cs">
       <DependentUpon>surgeryInfoBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\appointmentTimeLabel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Presenters\MinorElements\appointmentTimeLabel.Designer.cs">
-      <DependentUpon>appointmentTimeLabel.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MinorElements\upcomingAppointmentsBox.cs">
       <SubType>UserControl</SubType>
@@ -329,14 +302,14 @@
     <EmbeddedResource Include="Presenters\MainViews\pastAppointmentsPanel.resx">
       <DependentUpon>pastAppointmentsPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MainViews\printConfirmation.resx">
-      <DependentUpon>printConfirmation.cs</DependentUpon>
+    <EmbeddedResource Include="Presenters\MainViews\PrintConfirmationWindow.resx">
+      <DependentUpon>PrintConfirmationWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\cancelAppointmentConfirmation.resx">
       <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MainViews\SingleScheduleDay.resx">
-      <DependentUpon>SingleScheduleDay.cs</DependentUpon>
+    <EmbeddedResource Include="Presenters\MainViews\SingleScheduleDayWindow.resx">
+      <DependentUpon>SingleScheduleDayWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\surgeryManagement.resx">
       <DependentUpon>surgeryManagement.cs</DependentUpon>
@@ -365,11 +338,8 @@
     <EmbeddedResource Include="Presenters\MinorElements\dayOfaWeekBox.resx">
       <DependentUpon>dayOfaWeekBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MinorElements\filtersPanel.resx">
-      <DependentUpon>filtersPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MainViews\Help.resx">
-      <DependentUpon>Help.cs</DependentUpon>
+    <EmbeddedResource Include="Presenters\MainViews\HelpWindow.resx">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\homePanel.resx">
       <DependentUpon>homePanel.cs</DependentUpon>
@@ -386,14 +356,8 @@
     <EmbeddedResource Include="Presenters\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MainViews\schedulePerDayPanel.resx">
-      <DependentUpon>schedulePerDayPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MinorElements\multipleScheduleEntriesPanel.resx">
       <DependentUpon>multipleScheduleEntriesPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MinorElements\noAppointmentsPerDay.resx">
-      <DependentUpon>noAppointmentsPerDay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MinorElements\singleEntrySchedulePanel.resx">
       <DependentUpon>singleEntrySchedulePanel.cs</DependentUpon>
@@ -403,9 +367,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MinorElements\surgeryInfoBox.resx">
       <DependentUpon>surgeryInfoBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MinorElements\appointmentTimeLabel.resx">
-      <DependentUpon>appointmentTimeLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MinorElements\upcomingAppointmentsBox.resx">
       <DependentUpon>upcomingAppointmentsBox.cs</DependentUpon>

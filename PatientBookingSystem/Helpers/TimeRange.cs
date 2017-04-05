@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
+
+    /** Attribute allowing printing content to console in different part of the system */
     [Serializable]
-    class TimeRange {
+
+    /** Class is responsible for managing time ranges */
+    public class TimeRange {
         TimeSpan start;
         TimeSpan end;
 
@@ -28,10 +28,12 @@ namespace PatientBookingSystem.Helpers {
             this.end = TimeSpan.Parse(end);
         }
 
+        /** Method checks if TimeSpan is in time range */
         public bool isInTimeRange(TimeSpan time) {
             return time >= this.start && time < this.end;
         }
 
+        /** Method returns time range in a string format */
         public string getTimeRange() {
             return start.ToString().Substring(0,5) + " - " + end.ToString().Substring(0,5);
         }

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
 using PatientBookingSystem.Models;
-using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem {
+    /** Class is responsible for managing personal information panel and communicating with relevant controllers */
     public partial class personalInformationPanel : UserControl {
 
         UserModel user;
-        UserRepo repo; 
-         
+        
+        /** Constructor prepares view */ 
         public personalInformationPanel() {
             InitializeComponent();
-            repo = new UserRepo();
             UserController userController = new UserController();  
             user = userController.getUserByLoginCredentials(ApplicationState.userLogin, ApplicationState.userPassword); 
             fillInPersonalInformation(); 
@@ -22,6 +21,7 @@ namespace PatientBookingSystem {
             }
         }
 
+        /** Method fills in all the user information (view) */
         private void fillInPersonalInformation() {
             firstNameLabel.Text = user.getFirstName();
             lastNameLabel.Text = user.getLastName();
@@ -33,11 +33,13 @@ namespace PatientBookingSystem {
             theMostOftenAttendedStaffMemberLabel.Text = getTheMostOftenAttendedStaffMember();
         }
 
+        /** Method returns the most often attended staff member for the user */
         private string getTheMostOftenAttendedStaffMember() {
-            BookingRepo bookingRepo = new BookingRepo(); 
-            return bookingRepo.getTheMostOftenAttendedDoctor(); 
+            BookingController bookingController = new BookingController(); 
+            return bookingController.getFullNameOfTheMostOftenAttendedDoctor(); 
         }
 
+        /** Method returns date in prestable format */
         protected String getDateInPresenterFormat(String date) {
             string[] separator = new string[] { ".", " " };
             string[] dateContent = date.Split(separator, StringSplitOptions.None);
@@ -45,6 +47,5 @@ namespace PatientBookingSystem {
             String dateInFormat = newDate.ToString("dddd dd MMMM, yyyy");
             return dateInFormat;
         }
-
     }
 }

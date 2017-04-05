@@ -20,6 +20,60 @@ namespace PatientBookingSystem.Models {
             connection = new MySqlConnection(config.connectionString);
         }
 
+        public void printOutDatabases() {
+            if (!this.OpenConnection()) {
+                return;
+            }
+            MySqlCommand cmd = new MySqlCommand("SHOW DATABASES", connection);
+            MySqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read()) {
+                for (int i = 0; i < dataReader.FieldCount; i++) {
+                    string fieldName = dataReader.GetName(i);
+                    Console.Write(fieldName);
+                    Console.Write(":");
+                    Console.WriteLine(dataReader.GetString(fieldName));
+                }
+            }
+            Console.WriteLine("");
+            this.CloseConnection();
+        }
+
+        public void printOutTables() {
+            if (!this.OpenConnection()) {
+                return;
+            }
+            MySqlCommand cmd2 = new MySqlCommand("SHOW TABLES", connection);
+            MySqlDataReader dataReader2 = cmd2.ExecuteReader();
+            while (dataReader2.Read()) {
+                for (int i = 0; i < dataReader2.FieldCount; i++) {
+                    string fieldName = dataReader2.GetName(i);
+                    Console.Write(fieldName);
+                    Console.Write(":");
+                    Console.WriteLine(dataReader2.GetString(fieldName));
+                }
+            }
+            Console.WriteLine("");
+            this.CloseConnection();
+        }
+
+        public void printOutUsers() {
+            if (!this.OpenConnection()) {
+                return;
+            }
+            MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM pbs_user", connection);
+            MySqlDataReader dataReader2 = cmd2.ExecuteReader();
+            while (dataReader2.Read()) {
+                for (int i = 0; i < dataReader2.FieldCount; i++) {
+                    string fieldName = dataReader2.GetName(i);
+                    Console.Write(fieldName);
+                    Console.Write(":");
+                    Console.WriteLine(dataReader2.GetString(fieldName));
+                }
+            }
+            Console.WriteLine("");
+            this.CloseConnection();
+        }
+
         public bool OpenConnection() {
             try {
                 connection.Open();

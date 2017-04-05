@@ -13,6 +13,26 @@ namespace PatientBookingSystem.Controllers {
             repo = new BookingRepo(); 
         }
 
+        /** Method returns full name of the most often attended staff member for patient */
+        public string getFullNameOfTheMostOftenAttendedDoctor() {
+            return repo.getFullNameOfTheMostOftenAttendedDoctor();
+        }
+
+        /** Method returns list of all patient's past appointments */
+        public List<IModel> getPastAppointmentsPerUser() {
+            return repo.getAllPastAppointments(); 
+        }
+
+        /** Method returns booked appointments per day */
+        public List<IModel> getBookedAppointmentsPerDate(string date) {
+            return repo.getBookedAppointmentsPerDate(date); 
+        }
+
+        /** Method returns all the upcoming appointments */
+        public List<IModel> getAllUpcomingAppointments() {
+            return repo.getAllUpcomingAppointments(); 
+        }
+
         /** Method returns all upcoming appointments based on given search parameters */
         public List<IModel> getAllUpcomingAppointmentsForSearchParameters(int staffId, DateTime date, int patientId) {
             return repo.getAllUpcomingAppointmentsForSearch(staffId, date, patientId);
@@ -20,7 +40,7 @@ namespace PatientBookingSystem.Controllers {
 
         /** Method returns a list of all the staff members that had ever had an appointment with given patient */
         public List<IModel> getStaffMembersBasedOnPatient(int patientId) {
-            return repo.getDoctorsBasedOnPatient(patientId);
+            return repo.getStaffMembersBasedOnPatient(patientId);
         }
 
         /** Method returns the most often attended nurse */

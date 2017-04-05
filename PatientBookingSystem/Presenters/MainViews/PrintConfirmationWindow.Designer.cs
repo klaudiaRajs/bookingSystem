@@ -1,5 +1,5 @@
 ﻿namespace PatientBookingSystem.Presenters.MainViews {
-    partial class printConfirmation {
+    partial class PrintConfirmationWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>

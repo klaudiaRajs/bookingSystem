@@ -1,14 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.Interfaces {
-        public class CheckedComboBox : ComboBox {
+    /** 
+     * Class downloaded from: 
+     * https://www.codeproject.com/articles/31105/a-combobox-with-a-checkedlistbox-as-a-dropdown. 
+     * The code can be used over CPO licence that allows this usage of the code 
+     */
+    public class CheckedComboBox : ComboBox {
             /// <summary>
             /// Internal class to represent the dropdown list of the CheckedComboBox
             /// </summary>

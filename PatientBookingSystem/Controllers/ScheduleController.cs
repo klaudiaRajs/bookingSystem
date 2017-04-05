@@ -8,19 +8,23 @@ using System.Text;
 namespace PatientBookingSystem.Controllers {
     /** Class is responsible for all the actions requiring communication between presenters and repositories */ 
     class ScheduleController {
+
         /** All the available slot statuses */
         public enum slotStatus { Available, Booked, NotAvailable };
 
         private BookingRepo bookingRepo = new BookingRepo();
         private ScheduleRepo scheduleRepo = new ScheduleRepo();
         private AbsenceRepo absenceRepo = new AbsenceRepo();
+
         private Dictionary<int, List<TimeRange>> absences;
         private Dictionary<int, List<TimeRange>> bookings;
+
         private List<IModel> scheduleMap;
 
         private string date;
 
-       public ScheduleController(string date = null) {
+        /** Contructor calls on method refreshing data for generating a schedule */
+        public ScheduleController(string date = null) {
             this.date = date;
             refresh();
         }
@@ -32,8 +36,9 @@ namespace PatientBookingSystem.Controllers {
 
         /** Method calls on relevant methods to create staff schedule database entry */
         public List<bool> saveStaffSchedules(int staffId, List<int> scheduleIdList) {
+            bool validation = Validator.validateStaffSchedule(staffId, scheduleIdList);
             List<bool> errors = new List<bool>();
-            if (staffId != 0 && scheduleIdList.Count != 0) {
+            if (validation) {
                 foreach (int scheduleId in scheduleIdList) {
                     if (!scheduleRepo.saveStaffSchedule(staffId, scheduleId)) {
                         errors.Add(true);
@@ -94,7 +99,7 @@ namespace PatientBookingSystem.Controllers {
         }
 
         /** Method returns a list of staffschedule models */ 
-        internal List<IModel> getAllAvailableDoctorsPerDate() {
+        internal List<IModel> getAllAvailableStaffMembersPerDate() {
             List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
             return scheduleMap;
         }
@@ -156,6 +161,7 @@ namespace PatientBookingSystem.Controllers {
             return null;
         }
 
+        /** Method checks if a giveb time exists in any of time ranges */
         private bool isInAnyTimeRange(List<TimeRange> list, TimeSpan time) {
             foreach (TimeRange timeRange in list) {
                 if (timeRange.isInTimeRange(time)) {

@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Printing;
-using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Presenters.MinorElements;
 using PatientBookingSystem.Presenters.Interfaces;
 using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem {
+    /** Class is responsible for managing and modifying upcomingAppointments view and communicating with relevant controllers */
     public partial class upcomingAppointmentsContainer : UserControl, AppointmentBoxI {
+
         Main parent;
+
+        /** Constructor initializes components and calls on method that generates appointment boxes */
         public upcomingAppointmentsContainer(Main parent) {
             InitializeComponent();
             this.parent = parent;
             getAppointmentBoxes();
         }
 
+        /** Method generates appointment boxes */
         public void getAppointmentBoxes() {
             appointmentsContainer.Controls.Clear();
-            BookingRepo repo = new BookingRepo();
+            BookingController controller = new BookingController();
             List<IModel> bookedAppointments;
             string today = DateTime.Today.ToString("yyyy-MM-dd");
             if (!ApplicationState.userType.Equals("admin")) {
-                bookedAppointments = repo.getAllUpcomingAppointments();
+                bookedAppointments = controller.getAllUpcomingAppointments();
             } else {
-                bookedAppointments = repo.getBookedAppointmentsPerDate(today);
+                bookedAppointments = controller.getBookedAppointmentsPerDate(today);
             }
             if (bookedAppointments != null) {
                 foreach (BookingModel booking in bookedAppointments) {

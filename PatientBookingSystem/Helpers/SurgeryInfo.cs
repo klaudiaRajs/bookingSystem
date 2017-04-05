@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PatientBookingSystem.Helpers {
+    /** Class is responsible for providing surgery info - created due to limit put on a number of tables */
     class SurgeryInfo {
-        String surgeryName = "Tay Court Surgery";
-        String firstLineOfAddress = "50 Tay Street";
-        String secondLineOfAddress = "DD11 Dundee";
-        String phoneNumber = "01382 228228";
+
+        /** Surgery contact information */
+        string surgeryName = "Tay Court Surgery";
+        string firstLineOfAddress = "50 Tay Street";
+        string secondLineOfAddress = "DD11 Dundee";
+        string phoneNumber = "01382 228228";
 
         public enum staffTypes { doctor = 1, nurse = 2, administration = 3 };
         public enum userTypes { patient = 1, admin = 2 };

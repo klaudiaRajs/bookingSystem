@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PatientBookingSystem.Presenters.Interfaces;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
+    /** Class is responsible for managing addSurgeryExceptionDay view */
      partial class addSurgeryExceptionDay : UserControl {
+        
+        /** Constructor prepares start values for the view */
         public addSurgeryExceptionDay() {
             InitializeComponent();
             startDatePicker.MinDate = DateTime.Today;
             startDatePicker.Value = DateTime.Today;
         }
 
+        /** Method keeps the endDate value at no earlier than start date value */
         private void startDatePicker_ValueChanged(object sender, EventArgs e) {
             endDatePicker.Value = startDatePicker.Value; 
         }

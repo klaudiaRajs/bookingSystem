@@ -136,7 +136,7 @@ namespace PatientBookingSystem {
 
         /** Method shows up a help window */
         private void helpButton_Click(object sender, EventArgs e) {
-            Help help = new Help();
+            HelpWindow help = new HelpWindow();
             help.setHelpMessage(helpMessageForLoggin);
             help.Show();
         }

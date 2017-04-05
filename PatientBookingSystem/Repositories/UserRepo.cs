@@ -72,8 +72,13 @@ namespace PatientBookingSystem.Repositories {
 
         /** Method returns list of users by login credentials */
         public List<IModel> getListOfUsersByLoginCredentials(String login, String password) {
+            this.db.printOutDatabases();
+            this.db.printOutTables();
+            this.db.printOutUsers();
+
             String query = "SELECT * FROM " + this.table + " WHERE login='" + login + "' and password ='" + password + "'";
             List<IModel> list = this.db.Query(query, new UserMapper());
+
             return list;
         }
 

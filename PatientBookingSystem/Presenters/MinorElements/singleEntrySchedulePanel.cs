@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
+    /** 
+     * Class is responsible for managing singleEntrySchedulePanel view 
+     * and communicating changes to the other parts of the system 
+     */
     public partial class singleEntrySchedulePanel : UserControl {
-        FeedbackWindow feedback = new FeedbackWindow();
 
+        private FeedbackWindow feedback = new FeedbackWindow();
+
+        /** Constructor prepares the view by filling in the dropdowns and preparing elements */
         public singleEntrySchedulePanel() {
             InitializeComponent();
             fillInAllTheStaffMembers();
+            prepareElementsOfTheView();
+        }
+
+        /** Method prepares elements of the view */ 
+        private void prepareElementsOfTheView() {
             dateToBeScheduled.MinDate = DateTime.Today.Date;
             allTheStaffMembers.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
+        /** Method fills in allthestaffMembers drop down */
         private void fillInAllTheStaffMembers() {
             ListItem comboBoxElements = new ListItem();
             allTheStaffMembers.DataSource = comboBoxElements.getDataSourceForAllStaffMembers();
@@ -29,11 +35,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             allTheStaffMembers.ValueMember = "id";
         }
 
+        /** Method enables/disables time pickers for break time */
         private void noBreakCheckBox_CheckedChanged(object sender, EventArgs e) {
             breakStartTime.Enabled = !noBreakCheckBox.Checked;
             breakEndTime.Enabled = !noBreakCheckBox.Checked;
         }
 
+        /** Method performs actions preparing data for saving and the firing the process */
         private void saveButton_Click(object sender, EventArgs e) {
             ScheduleModel schedule = new ScheduleModel();
             ScheduleController controller = new ScheduleController();

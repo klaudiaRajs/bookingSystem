@@ -1,8 +1,10 @@
 ﻿namespace PatientBookingSystem.Models {
-    class StaffScheduleModel : IModel{
-        StaffModel staff;
-        ScheduleModel schedule;
-        int staffScheduleId;
+    /** Class is a database model of staffSchedule table - contains all the getters and setters */
+    public class StaffScheduleModel : IModel{
+
+        private StaffModel staff;
+        private ScheduleModel schedule;
+        private int staffScheduleId;
 
         public void setStaffScheduleId(int id) {
             this.staffScheduleId = id;

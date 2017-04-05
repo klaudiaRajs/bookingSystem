@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace PatientBookingSystem.Models {
-    class StaffModel : IModel{
+    /** Class is a database model of staff table - contains all the getters and setters */
+    public class StaffModel : IModel{
         int staffId;
         String firstName;
         String lastName;

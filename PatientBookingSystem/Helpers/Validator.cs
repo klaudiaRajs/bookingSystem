@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PatientBookingSystem.Helpers {
     /** Class provide tool for validating different types of data used within the system */
-    static class Validator {
+    public static class Validator {
 
         /** Messages  */
         private const String ENTER_LOGIN_MESSAGE = " Credentials you provided does not meet the requirements ";
@@ -19,6 +19,20 @@ namespace PatientBookingSystem.Helpers {
         /** Returns message for empty login */
         public static string getEmptyLoginMessage() {
             return ENTER_LOGIN_MESSAGE;
+        }
+
+        /** Method validates data for staffSchedule model  */
+        public static bool validateStaffSchedule(int staffId, List<int> scheduleIdList) {
+            bool result = true;
+            if (staffId == 0 || scheduleIdList.Count == 0) {
+                result = false;
+            }
+            foreach (int scheduleId in scheduleIdList) {
+                if (scheduleId == 0) {
+                    result = false;
+                }
+            }
+            return result;
         }
 
         /** Method validates staff member model */
@@ -45,41 +59,38 @@ namespace PatientBookingSystem.Helpers {
             if (String.IsNullOrEmpty(user.getPassword()) || user.getPassword().Length < 4) {
                 errors.Add("password");
             }
-            if( user.getDOBd().Date >= DateTime.Today.Date) {
+            if (user.getDOBd().Date >= DateTime.Today.Date) {
                 errors.Add("date of birth");
             }
             if (String.IsNullOrEmpty(user.getEmail()) || user.getEmail().IndexOf('@') == -1 || user.getEmail().IndexOf('.') == -1) {
                 errors.Add("email");
             }
-            if (String.IsNullOrEmpty(user.getNiN())) {
-                errors.Add("National Insurance Number");
-            }
             if (String.IsNullOrEmpty(user.getAddress()) || user.getAddress().IndexOf(' ') == -1) {
                 errors.Add("address");
             }
-            if( !user.getUserType().Equals("patient") && !user.getUserType().Equals("admin")) {
+            if (!user.getUserType().Equals("patient") && !user.getUserType().Equals("admin")) {
                 errors.Add("user type");
             }
-            return errors; 
+            return errors;
         }
 
         /** Method validates login and password for their requirements */
         public static bool validateLogger(string login, string password) {
             bool result = true;
-            if( login.Length < 3) {
+            if (login.Length < 3) {
                 result = false;
             }
-            if( password.Length < 3) {
+            if (password.Length < 3) {
                 result = false;
             }
             return result;
-            
+
         }
 
         /** Method validates if absence model meet the requirements for saving */
         public static List<string> validateAbsenceForSaving(AbsenceModel absence) {
-            List<string> errors = new List<string>(); 
-            if( DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {
+            List<string> errors = new List<string>();
+            if (DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {
                 errors.Add("startDate");
             }
             return errors;
@@ -87,7 +98,7 @@ namespace PatientBookingSystem.Helpers {
 
         /** Method validates if login credentials meet the requirements */
         public static List<string> validateLoginCredentials(string login, string password) {
-            List<string> errors = new List<string>(); 
+            List<string> errors = new List<string>();
             if (!(login.Length > 0 && login != ENTER_LOGIN_MESSAGE &&
                 password.Length > 0 && password != ENTER_PASSWORD_MESSAGE)) {
                 if (login.Length < 1) {

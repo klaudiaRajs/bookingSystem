@@ -1,5 +1,5 @@
 ﻿namespace PatientBookingSystem.Presenters.MainViews {
-    partial class SingleScheduleDay {
+    partial class SingleScheduleDayWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -33,9 +33,8 @@
             this.SlotId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actionPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.dateInfoLabel = new System.Windows.Forms.Label();
-            this.schedulePerDayPanel1 = new PatientBookingSystem.Presenters.schedulePerDayPanel();
             ((System.ComponentModel.ISupportInitialize)(this.timetable)).BeginInit();
             this.actionPanel.SuspendLayout();
             this.SuspendLayout();
@@ -112,7 +111,7 @@
             // actionPanel
             // 
             this.actionPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.actionPanel.Controls.Add(this.button1);
+            this.actionPanel.Controls.Add(this.exitButton);
             this.actionPanel.Controls.Add(this.dateInfoLabel);
             this.actionPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.actionPanel.Location = new System.Drawing.Point(0, 0);
@@ -120,15 +119,14 @@
             this.actionPanel.Size = new System.Drawing.Size(477, 40);
             this.actionPanel.TabIndex = 2;
             // 
-            // button1
+            // exitButton
             // 
-            this.button1.Location = new System.Drawing.Point(390, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.exitButton.Location = new System.Drawing.Point(390, 8);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(75, 23);
+            this.exitButton.TabIndex = 10;
+            this.exitButton.Text = "Close";
+            this.exitButton.UseVisualStyleBackColor = true;
             // 
             // dateInfoLabel
             // 
@@ -144,16 +142,16 @@
             // 
             // schedulePerDayPanel1
             // 
-            this.schedulePerDayPanel1.AutoScroll = true;
-            this.schedulePerDayPanel1.AutoSize = true;
-            this.schedulePerDayPanel1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.schedulePerDayPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.schedulePerDayPanel1.Location = new System.Drawing.Point(0, 0);
-            this.schedulePerDayPanel1.Name = "schedulePerDayPanel1";
-            this.schedulePerDayPanel1.Size = new System.Drawing.Size(477, 634);
-            this.schedulePerDayPanel1.TabIndex = 0;
+            //this.schedulePerDayPanel1.AutoScroll = true;
+            //this.schedulePerDayPanel1.AutoSize = true;
+            //this.schedulePerDayPanel1.BackColor = System.Drawing.Color.LightSlateGray;
+            //this.schedulePerDayPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.schedulePerDayPanel1.Location = new System.Drawing.Point(0, 0);
+            //this.schedulePerDayPanel1.Name = "schedulePerDayPanel1";
+            //this.schedulePerDayPanel1.Size = new System.Drawing.Size(477, 634);
+            //this.schedulePerDayPanel1.TabIndex = 0;
             // 
-            // SingleScheduleDay
+            // SingleScheduleDayWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -161,9 +159,10 @@
             this.ClientSize = new System.Drawing.Size(477, 634);
             this.Controls.Add(this.actionPanel);
             this.Controls.Add(this.timetable);
-            this.Controls.Add(this.schedulePerDayPanel1);
-            this.Name = "SingleScheduleDay";
+            //this.Controls.Add(this.schedulePerDayPanel1);
+            this.Name = "SingleScheduleDayWindow";
             this.Text = "SingleScheduleDay";
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             ((System.ComponentModel.ISupportInitialize)(this.timetable)).EndInit();
             this.actionPanel.ResumeLayout(false);
             this.actionPanel.PerformLayout();
@@ -175,9 +174,8 @@
         #endregion
         private System.Windows.Forms.DataGridView timetable;
         private System.Windows.Forms.Panel actionPanel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label dateInfoLabel;
-        private schedulePerDayPanel schedulePerDayPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn SlotId;
         private System.Windows.Forms.DataGridViewTextBoxColumn col1;
     }

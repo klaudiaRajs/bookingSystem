@@ -1,7 +1,9 @@
 ﻿using System;
 
 namespace PatientBookingSystem.Models {
-    class UserModel : IModel {
+    /** Class is a database model of user table - contains all the getters and setters */
+    public class UserModel : IModel {
+
         private int id { get; set; }
         private string firstName { get; set; }
         private string lastName { get; set; }
@@ -70,7 +72,7 @@ namespace PatientBookingSystem.Models {
             return this.DOBd; 
         }
 
-
+        /** Method returns date in mysql format */
         public string getDobInMySqlFormat() {
             return this.DOBd.ToString("yyyy-MM-dd");
         }

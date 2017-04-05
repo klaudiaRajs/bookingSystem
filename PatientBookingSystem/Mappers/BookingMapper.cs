@@ -2,8 +2,10 @@
 using PatientBookingSystem.Models;
 
 namespace PatientBookingSystem.Mappers {
+    /** Class is responsible for mapping database fields to BookingModel */
     class BookingMapper : IDataMapper {
 
+        /** Method returns a mapped (database to model) BookingModel*/
         public IModel map(MySqlDataReader reader) {
             BookingModel booking = new BookingModel();
             UserModel user = new UserModel();

@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem.Presenters {
+    /** Class is a representation of surgeryInfoBox view */
     public partial class surgeryInfoBox : UserControl {
 
-        SurgeryInfo surgery = new SurgeryInfo(); 
 
+        /** Constructor adjusts the information */
         public surgeryInfoBox() {
             InitializeComponent();
+            SurgeryInfo surgery = new SurgeryInfo();
 
-            surgeryName.Text += surgery.getSurgeryName(); 
+            surgeryName.Text += surgery.getSurgeryName();
             firstLineOfAddressLabel.Text += surgery.getFirstLineOfAddress();
             secondLineOfAddressLabel.Text += surgery.getSecondLineOfAddress();
             surgeryPhoneNumberLabel.Text += surgery.getPhoneNumber();
-            
+
         }
     }
 }

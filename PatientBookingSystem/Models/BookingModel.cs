@@ -1,19 +1,21 @@
 ﻿using System;
 
 namespace PatientBookingSystem.Models {
-    class BookingModel : IModel{
-        int bookingId { get; set; } 
-        int confirmation { get; set; }
-        int attendance { get; set; }
-        int lackOfCancellation { get; set; }
-        String comment { get; set; }
-        int userId { get; set; }
-        int staffScheduleId { get; set; }
-        String startTime;
-        String endTime;
-        StaffModel staffMember;
-        ScheduleModel scheduleModel;
-        UserModel userModel { get; set; }
+    /** Class is a database model of booking table - contains all the getters and setters */
+    public class BookingModel : IModel{
+
+        private int bookingId { get; set; } 
+        private int confirmation { get; set; }
+        private int attendance { get; set; }
+        private int lackOfCancellation { get; set; }
+        private string comment { get; set; }
+        private int userId { get; set; }
+        private int staffScheduleId { get; set; }
+        private String startTime;
+        private String endTime;
+        private StaffModel staffMember;
+        private ScheduleModel scheduleModel;
+        private UserModel userModel { get; set; }
 
         public int getBookingId() {
             return this.bookingId;

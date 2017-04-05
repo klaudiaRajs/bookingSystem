@@ -11,8 +11,7 @@ namespace PatientBookingSystem.Controllers {
 
         /** Method returns all the users */
         public List<IModel> getAllUsers() {
-            List<IModel> users = repo.getListOfAllUsers();
-            return users;
+            return repo.getListOfAllUsers();
         }
 
         /** Method returns user model for given login and password */

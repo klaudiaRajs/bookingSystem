@@ -2,41 +2,37 @@
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Presenters.Interfaces;
-using PatientBookingSystem.Presenters.MinorElements;
-using PatientBookingSystem.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
-    partial class SingleScheduleDay : Form {
-        int lengthOfRegularAppointment;
-        SurgeryInfo surgeryInfo;
-        ScheduleController controller;
-        TimeSpan surgeryOpeningTime;
-        TimeSpan surgeryClosingTIme;
-        string date;
-        AppointmentBoxI parent;
+    /** Class is responsible for managing a single schedule day window and communicating with relevant controllers */
+    partial class SingleScheduleDayWindow : Form {
 
-        public SingleScheduleDay(AppointmentBoxI parent, string date) {
+        private SurgeryInfo surgeryInfo;
+        private ScheduleController controller;
+
+        private string date;
+
+        private AppointmentBoxI parent;
+
+        /** Contructor is responsible for creating the object, initializing fields and calling on methods generating schedule */
+        public SingleScheduleDayWindow(AppointmentBoxI parent, string date) {
             InitializeComponent();
+            controller = new ScheduleController(date);
+            surgeryInfo = new SurgeryInfo();
+
             this.parent = parent;
             this.date = date;
-            surgeryInfo = new SurgeryInfo();
-            surgeryOpeningTime = surgeryInfo.openingTime;
-            surgeryClosingTIme = surgeryInfo.closingTime;
-            lengthOfRegularAppointment = surgeryInfo.regularAppointmentLength;
+
             dateInfoLabel.Text = date;
-            long start = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            controller = new ScheduleController(date);
             generateTimeTableHeader();
             generateTimeTableSlots();
-            long end = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            long diff = end - start;
-            Console.WriteLine("------------ Diff: " + diff);
             timetable.CellClick += new DataGridViewCellEventHandler(dataGridView2_CellClick);
         }
 
+        /** Method is responsibke for handling onclick event on schedule table */ 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (timetable.CurrentCell.ColumnIndex < 2) {
                 return;
@@ -54,7 +50,8 @@ namespace PatientBookingSystem.Presenters.MainViews {
             }
         }
 
-        public void reloadSchedule() {
+        /** Method is responsible for reloading schedule table and provides debugging tool */ 
+        internal void reloadSchedule() {
             long start = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             controller.refresh();
             generateTimeTableSlots();
@@ -63,21 +60,27 @@ namespace PatientBookingSystem.Presenters.MainViews {
             Console.WriteLine("------------ Diff: " + diff);
         }
 
-        public List<IModel> getAllTheDoctorsPerDate() {
-            return controller.getAllAvailableDoctorsPerDate(); 
+        /** Method returns all the staff members per date */
+        internal List<IModel> getAllTheStaffMembersPerDate() {
+            return controller.getAllAvailableStaffMembersPerDate(); 
         }
 
+        /** Method generates timetable's header */
         private void generateTimeTableHeader() {
-            List<IModel> availableStaffMembers = controller.getAllAvailableDoctorsPerDate();
+            List<IModel> availableStaffMembers = controller.getAllAvailableStaffMembersPerDate();
             foreach (StaffScheduleModel staffMember in availableStaffMembers) {
                 timetable.Columns.Add(staffMember.getStaffMember().getStaffId().ToString(), staffMember.getStaffMember().getFullStaffName());
             }
         }
 
+        /** Method generates timetable's slots */
         private void generateTimeTableSlots() {
-            timetable.Visible = false;
-            timetable.Rows.Clear();
-            timetable.Refresh();
+            int lengthOfRegularAppointment = surgeryInfo.regularAppointmentLength;
+
+            TimeSpan surgeryOpeningTime = surgeryInfo.openingTime;
+            TimeSpan surgeryClosingTIme = surgeryInfo.closingTime;
+
+            this.refreshTimetable(); 
             //reloads parent (Upcoming/Past Appointments) content after booking appointment     
             if (this.parent != null) {
                 parent.getAppointmentBoxes();
@@ -111,8 +114,16 @@ namespace PatientBookingSystem.Presenters.MainViews {
             parent.setNumberOfAppointmentsPerDay(numberOfMorningAppointments, numberOfAfternoonAppointments);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            this.Close();
+        /** Method refreshes timetable */
+        private void refreshTimetable() {
+            timetable.Visible = false;
+            timetable.Rows.Clear();
+            timetable.Refresh();
+        }
+
+        /** Method closes the single schedule day window */
+        private void exitButton_Click(object sender, EventArgs e) {
+            this.Hide();
         }
     }
 }

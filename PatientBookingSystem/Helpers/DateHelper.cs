@@ -31,11 +31,19 @@ namespace PatientBookingSystem.Helpers {
             if (date.IndexOf(".") != -1) {
                 day = date.Substring(0, 2);
                 month = date.Substring(3, 2);
-                year = date.Substring(6, 5);
+                year = date.Substring(6, 4);
             } else if (date.IndexOf("-") != -1) {
                 year = date.Substring(0, 4);
                 month = date.Substring(5, 2);
                 day = date.Substring(8, 2);
+            } else if (date.IndexOf('\\') != -1) {
+                day = date.Substring(0, 2);
+                month = date.Substring(3, 2);
+                year = date.Substring(6, 4);
+            } else if (date.IndexOf("/") != -1) {
+                day = date.Substring(0, 2);
+                month = date.Substring(3, 2);
+                year = date.Substring(6, 4);
             }
 
             DateTime dateObject = new DateTime(Int32.Parse(year), Int32.Parse(month), Int32.Parse(day));

@@ -1,14 +1,12 @@
-﻿using PatientBookingSystem.Controllers;
-using PatientBookingSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace PatientBookingSystem.Helpers {
+
+    /** Class is responsible for providing elements for a drop down list */
     class ListDate {
+
         public DateTime id { get; set; }
         public string text { get; set; }
+
     }
 }

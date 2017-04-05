@@ -1,49 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Controllers;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
+    /** Class is responsible for managing addUser view and communicating with relevant controllers */
     public partial class addUser : UserControl {
-        SurgeryInfo surgery;
-        FeedbackWindow feedback;
-        ListItem itemsForComboBoxes; 
+
+        ListItem itemsForComboBoxes;
         const string DISABLED_FIELD = "None";
 
+        /** Constructor initializes components and prepares drop downs */
         public addUser() {
             InitializeComponent();
-            this.surgery = new SurgeryInfo();
-            this.feedback = new FeedbackWindow();
-            this.itemsForComboBoxes = new ListItem(); 
+            this.itemsForComboBoxes = new ListItem();
             dobPicker.MaxDate = DateTime.Today;
             dobPicker.Value = DateTime.Today;
             confirmationMethodsDropDown.DropDownStyle = ComboBoxStyle.DropDownList;
             userTypes.DropDownStyle = ComboBoxStyle.DropDownList;
-            fillInUserTypes();
-            fillInConfirmationMethods();
+            this.fillInUserTypes();
+            this.fillInConfirmationMethods();
         }
 
+        /** Methods assigns data for confirmation method drop down (fills in values) */
         private void fillInConfirmationMethods() {
             confirmationMethodsDropDown.DataSource = this.itemsForComboBoxes.getListOfConfirmationMethodsForComboBox();
             confirmationMethodsDropDown.DisplayMember = "text";
             confirmationMethodsDropDown.ValueMember = "id";
         }
 
+        /** Method assigns data for user types (fills in values) */
         private void fillInUserTypes() {
             userTypes.DataSource = this.itemsForComboBoxes.getListOfUserTypes();
             userTypes.DisplayMember = "text";
             userTypes.ValueMember = "id";
         }
 
+        /** Method proceeds data from form to be validated and saved */
         private void saveButton_Click(object sender, EventArgs e) {
+            UserModel user = this.getUserModelFromDataForm(); 
+            this.save(Validator.validateUser(user), user);
+        }
+
+        /** Method wrapps data from the form into user model */
+        private UserModel getUserModelFromDataForm() {
+            SurgeryInfo surgery = new SurgeryInfo();
             UserModel user = new UserModel();
             user.setFirstName(firstName.Text);
             user.setLastName(lastName.Text);
@@ -61,21 +64,24 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             user.setEmailAddress(emailAddress.Text);
             user.setUserType(this.getValueFromDropDown(userTypes, surgery.defaultUserType));
             user.setDOBd(dobPicker.Value);
-            save(Validator.validateUser(user), user);
+            return user;
         }
 
+        /** Method calls on saving controller method based on validation */
         private void save(List<string> errors, UserModel user) {
             UserController controller = new UserController();
+            FeedbackWindow feedback = new FeedbackWindow();
             if (errors.Count != 0) {
-                this.feedback.setMessageForInvalidFieldsValues(errors);
+                feedback.setMessageForInvalidFieldsValues(errors);
             } else if (!controller.save(user)) {
-                this.feedback.setMessageForSavingError();
+                feedback.setMessageForSavingError();
             } else {
-                this.feedback.setMessageForSuccessfullOperation();
+                feedback.setMessageForSuccessfullOperation();
             }
-            this.feedback.Show();
+            feedback.Show();
         }
 
+        /** Method returns value from passed drop down */
         private string getValueFromDropDown(ComboBox dropDown, string defaultValue) {
             if (dropDown.Enabled) {
                 if ((int)dropDown.SelectedValue == 0) {
@@ -87,6 +93,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             }
         }
 
+        /** Method enables/disables national insurance number field and sets its default value */
         private void noNiN_CheckedChanged(object sender, EventArgs e) {
             if (noNiN.Checked) {
                 NiN.Text = DISABLED_FIELD;
@@ -96,6 +103,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             NiN.Enabled = !noNiN.Checked;
         }
 
+        /** Method enables/disables phone number field and sets its default values */
         private void noPhoneNumber_CheckedChanged(object sender, EventArgs e) {
             if (noPhoneNumber.Checked) {
                 phoneNumber.Text = DISABLED_FIELD;
@@ -105,10 +113,12 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             phoneNumber.Enabled = !noPhoneNumber.Checked;
         }
 
+        /** Method enables/disables confirmation method drop down */ 
         private void defaultConfirmation_CheckedChanged(object sender, EventArgs e) {
             confirmationMethodsDropDown.Enabled = !defaultConfirmation.Checked;
         }
 
+        /** Method enables/disables user type method drop down */
         private void defaultUserType_CheckedChanged(object sender, EventArgs e) {
             userTypes.Enabled = !defaultUserType.Checked;
         }
