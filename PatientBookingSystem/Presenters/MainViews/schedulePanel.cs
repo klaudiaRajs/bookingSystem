@@ -5,11 +5,12 @@ using System.Windows.Forms;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Presenters;
 
 namespace PatientBookingSystem {
     /** Class is responsible for manipulation schedulePanel view and communicating with relevant controllers */
     public partial class schedulePanel : UserControl {
-        
+
         DateTime date = DateTime.Today;
 
         /** List of all day boxes per month */
@@ -28,7 +29,7 @@ namespace PatientBookingSystem {
             allTheStaffMembers.DisplayMember = "text";
             allTheStaffMembers.ValueMember = "id";
         }
-        
+
         /** Method generates boxes containing number of appointments and day */
         private void generateDayBoxes() {
             AbsenceRepo absenceRepo = new AbsenceRepo();
@@ -40,17 +41,30 @@ namespace PatientBookingSystem {
                 List<IModel> absences = absenceRepo.getSurgeryAbsencesPerDate(dateToBeAdded);
                 if (absences == null) {
                     dayOfaWeekBox dayBox = new dayOfaWeekBox();
-                    dayOfaWeekBox boxToBeDisplayed = dayBox.getBox(dayNo, this.date.Month, this.date.Year); 
-                    if( boxToBeDisplayed.morningAppointments + boxToBeDisplayed.afternoonAppointments == 0) {
-                        boxToBeDisplayed.BackColor = System.Drawing.Color.Silver; 
-                        boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
-                        boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
-                    }
+                    dayOfaWeekBox boxToBeDisplayed = dayBox.getBox(dayNo, this.date.Month, this.date.Year);
+                    boxToBeDisplayed = this.adjustEventHandlersBasedOnBookingAvailability(boxToBeDisplayed, dayNo);
                     appointmentDaysPanel.Controls.Add(boxToBeDisplayed);
                     this.dayBoxes.Add(dayBox);
                 }
             }
             appointmentDaysPanel.Visible = true;
+        }
+
+        /** Method adjusts event handlers based on booking availability */
+        private dayOfaWeekBox adjustEventHandlersBasedOnBookingAvailability(dayOfaWeekBox boxToBeDisplayed_, int dayNo) {
+            dayOfaWeekBox boxToBeDisplayed = boxToBeDisplayed_;
+            if (boxToBeDisplayed.morningAppointments + boxToBeDisplayed.afternoonAppointments == 0) {
+                boxToBeDisplayed.BackColor = System.Drawing.Color.Silver;
+                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
+                boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
+            }
+            if (new DateTime(this.date.Year, this.date.Month, dayNo).Date < DateTime.Today.Date) {
+                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
+                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
+                boxToBeDisplayed.BackColor = System.Drawing.Color.Silver;
+                boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openBookingNotAvailableFeedbackMessage_Click);
+            }
+            return boxToBeDisplayed;
         }
 
         /** Method generates working days (according to surgery working days) per given month */
@@ -81,10 +95,16 @@ namespace PatientBookingSystem {
             reloadDayBoxes();
         }
 
-        /** Method changes date to previous month */ 
+        /** Method changes date to previous month */
         private void previousMonthButton_Click(object sender, EventArgs e) {
-            this.date = this.date.AddMonths(-1);
-            reloadDayBoxes();
+            if (this.date.AddMonths(-1).Month >= DateTime.Today.Month) {
+                this.date = this.date.AddMonths(-1);
+                reloadDayBoxes();
+            } else {
+                FeedbackWindow message = new FeedbackWindow();
+                message.setMessageForBookingNotAvailableForDateDueToDateInThePast();
+                message.Show(); 
+            }
         }
 
         /** Method filters results to days containing motning appointments */
@@ -101,8 +121,8 @@ namespace PatientBookingSystem {
         /** Method filters results to days containing appointments for selected staff member */
         private bool isStaffMemberAvailable(dayOfaWeekBox box, ListItem selectedStaffMember) {
             if (selectedStaffMember.id != 0) {
-                foreach(  KeyValuePair<int, string> entry in box.staffMembersPerDate) {
-                    if( entry.Key == selectedStaffMember.id ) {
+                foreach (KeyValuePair<int, string> entry in box.staffMembersPerDate) {
+                    if (entry.Key == selectedStaffMember.id) {
                         return true;
                     }
                 }
@@ -127,7 +147,7 @@ namespace PatientBookingSystem {
             return true;
         }
 
-        /** Method hides/shows day boxes meeting requirement of containing afternoon appointments */ 
+        /** Method hides/shows day boxes meeting requirement of containing afternoon appointments */
         private void afternoonAppointmentsCheckbox_CheckedChanged(object sender, EventArgs e) {
             foreach (dayOfaWeekBox box in dayBoxes) {
                 if (box.afternoonAppointments == 0) {
@@ -143,8 +163,8 @@ namespace PatientBookingSystem {
             if (allTheStaffMembers.SelectedIndex != 0) {
                 foreach (dayOfaWeekBox box in dayBoxes) {
                     bool found = false;
-                    foreach( KeyValuePair<int, string> entry in box.staffMembersPerDate) {
-                        if( entry.Key == ((ListItem)allTheStaffMembers.SelectedItem).id) {
+                    foreach (KeyValuePair<int, string> entry in box.staffMembersPerDate) {
+                        if (entry.Key == ((ListItem)allTheStaffMembers.SelectedItem).id) {
                             found = true;
                         }
                     }

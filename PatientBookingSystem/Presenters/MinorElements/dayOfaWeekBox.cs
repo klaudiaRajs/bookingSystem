@@ -74,5 +74,15 @@ namespace PatientBookingSystem {
             message.setMessageForNoAppointmentsPerDay();
             message.Show(); 
         }
+
+        /** 
+         * Method open a pop-up window informing the user that booking for this date 
+         * is impossible due to the date being in the past 
+         */
+        internal void openBookingNotAvailableFeedbackMessage_Click(object sender, EventArgs e) {
+            FeedbackWindow message = new FeedbackWindow();
+            message.setMessageForBookingNotAvailableForDateDueToDateInThePast();
+            message.Show();
+        }
     }
 }

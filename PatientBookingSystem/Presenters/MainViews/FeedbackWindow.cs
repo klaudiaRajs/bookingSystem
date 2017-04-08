@@ -8,6 +8,11 @@ namespace PatientBookingSystem.Presenters {
             InitializeComponent();
         }
 
+        /** Method sets message for booking not available for the date due to the date being in the past */
+        public void setMessageForBookingNotAvailableForDateDueToDateInThePast() {
+            this.feedbackMessage.Text = "Bookings are available only dates no earlier than today";
+        }
+
         /** Method sets message for no appointments per day */
         public void setMessageForNoAppointmentsPerDay() {
             this.feedbackMessage.Text = "There are no appointments for this day";
