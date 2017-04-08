@@ -22,10 +22,16 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         public appointmentCancellation() {
             InitializeComponent();
-            provideInformationForDropDownLists();
+            this.provideInformationForDropDownLists();
+            this.prepareAppointmentDatePicker();
+            this.updateStaffMembersList();
+            this.updatePatientList();
+        }
+
+        /** Method is responsible for preparing appointment date picker */
+        private void prepareAppointmentDatePicker() {
             appointmentDatePicker.Value = DateTime.Today;
-            updateStaffMembersList();
-            updatePatientList();
+            appointmentDatePicker.MinDate = DateTime.Today;
         }
 
         /** Method provides data sources and display/value members for presenter's drop down lists */
@@ -45,8 +51,8 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             staffMemberDropDown.Enabled = doctorCheck.Checked;
             selectedDoctor = 0;
 
-            updateStaffMembersList();
-            updatePatientList();
+            this.updateStaffMembersList();
+            this.updatePatientList();
         }
 
         /** Method enables patients drop down list and refreshes staffMembers and patients drop downs*/
@@ -54,8 +60,8 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             patientsDropDown.Enabled = patientCheck.Checked;
             selectedPatient = 0;
 
-            updateStaffMembersList();
-            updatePatientList();
+            this.updateStaffMembersList();
+            this.updatePatientList();
         }
 
         /** Method returns list of all the staff members */
@@ -103,7 +109,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             patientsDropDown.SelectedIndex = found == -1 ? 0 : found;
         }
 
-        /** Method updates staff members drop down list */ 
+        /** Method updates staff members drop down list */
         private void updateStaffMembersList() {
             staffMemberList.Clear();
             staffMemberList.Add(new ListItem { text = "Select a doctor", id = 0 });
@@ -126,13 +132,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         /** Method updates selected doctor field and updates drop down list of patients */
         private void staffMembersDropDown_SelectionChangeCommitted(object sender, EventArgs e) {
             this.selectedDoctor = staffMemberDropDown.SelectedItem == null ? 0 : (staffMemberDropDown.SelectedItem as ListItem).id;
-            updatePatientList();
+            this.updatePatientList();
         }
 
         /** Method updates selected patient field and updates drop down list of staff members */
         private void patientsDropDown_SelectionChangeCommitted(object sender, EventArgs e) {
             this.selectedPatient = staffMemberDropDown.SelectedItem == null ? 0 : (patientsDropDown.SelectedItem as ListItem).id;
-            updateStaffMembersList();
+            this.updateStaffMembersList();
         }
 
         /** Method fires generation of appointment booking boxes */
@@ -142,20 +148,26 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method generates appointment boxes meeting requirements from search parameters */
         public void getAppointmentBoxes() {
-            appointmentBoxesContainer.Controls.Clear();
             List<IModel> bookedAppointments = this.getAllTheBookingsForSearch();
-            foreach (BookingModel booking in bookedAppointments) {
-                string time = booking.getStartTime().Substring(0, 5) + " - " + booking.getEndTime().Substring(0, 5);
-                appointmentBox box = new appointmentBox(this, booking, time);
-                box.disableRescheduleButton();
-                appointmentBoxesContainer.Controls.Add(box);
+            appointmentBoxesContainer.Controls.Clear();
+            if (bookedAppointments.Count != 0) {
+                foreach (BookingModel booking in bookedAppointments) {
+                    string time = booking.getStartTime().Substring(0, 5) + " - " + booking.getEndTime().Substring(0, 5);
+                    appointmentBox box = new appointmentBox(this, booking, time);
+                    box.disableRescheduleButton();
+                    appointmentBoxesContainer.Controls.Add(box);
+                    noAppointmentInformation.Visible = false;
+                }
+            } else {
+                appointmentBoxesContainer.Controls.Add(noAppointmentInformation);
+                noAppointmentInformation.Visible = true;
             }
         }
 
         /** Method returns list of bookings meeting requirements from search parameters */
         private List<IModel> getAllTheBookingsForSearch() {
             int staffId = ((ListItem)staffMemberDropDown.SelectedItem).id;
-            DateTime date = appointmentDatePicker.Value.Date;
+            DateTime date = appointmentDatePicker.Enabled ? appointmentDatePicker.Value.Date : new DateTime(1890, 12, 12);
             int patientId = ((ListItem)patientsDropDown.SelectedItem).id;
             return bookingController.getAllUpcomingAppointmentsForSearchParameters(staffId, date, patientId);
         }
@@ -163,6 +175,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         /** Method included into interface - not required in this implementation */
         public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
             //Implementation not required
+        }
+
+        /** Method disables/enables dateTime picker for search parametrs */
+        private void dateCheck_CheckedChanged(object sender, EventArgs e) {
+            appointmentDatePicker.Enabled = !dateCheck.Checked;
         }
     }
 }

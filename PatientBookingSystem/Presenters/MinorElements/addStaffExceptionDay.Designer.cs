@@ -118,6 +118,7 @@
             this.endDatePicker.Name = "endDatePicker";
             this.endDatePicker.Size = new System.Drawing.Size(84, 20);
             this.endDatePicker.TabIndex = 24;
+            this.endDatePicker.ValueChanged += new System.EventHandler(this.endDatePicker_ValueChanged);
             // 
             // label3
             // 
@@ -163,6 +164,7 @@
             this.endTimePicker.Size = new System.Drawing.Size(85, 20);
             this.endTimePicker.TabIndex = 28;
             this.endTimePicker.Value = new System.DateTime(2017, 3, 15, 0, 0, 0, 0);
+            this.endTimePicker.ValueChanged += new System.EventHandler(this.endTimePicker_ValueChanged);
             // 
             // label5
             // 

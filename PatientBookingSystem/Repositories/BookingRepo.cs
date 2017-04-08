@@ -69,12 +69,17 @@ namespace PatientBookingSystem.Repositories {
         }
 
         /** Method returns list of all upcoming appointments meeting the parameters passed */
-        public List<IModel> getAllUpcomingAppointmentsForSearch(int staffId, DateTime date, int patientId) {
-            string query = "SELECT * from " + view + " WHERE date = \"" + date.ToString("yyyy-MM-dd") + '"';
-            if( patientId != 0) {
+        public List<IModel> getAllUpcomingAppointmentsForSearch(int staffId, int patientId, DateTime date ) {
+            string query = "SELECT * from " + view + " WHERE ";
+            if( date != new DateTime(1890, 12, 12)) {
+                query += "date = \"" + date.ToString("yyyy-MM-dd") + '"';
+            } else {
+                query += "date >= \"" + (DateTime.Today.Date).ToString("yyyy-MM-dd") + '"';
+            }
+            if( patientId != 0 ) {
                 query += " AND patientId = " + patientId; 
             }
-            if (staffId != 0) {
+            if (staffId != 0 && patientId != 0 ) {
                 query += " AND staffId = " + staffId;
             }
             List<IModel> bookings = this.db.Query(query, new BookingMapper());

@@ -61,7 +61,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
 
         /** Method closes the window */
         private void rejectCancellationButton_Click(object sender, EventArgs e) {
-            this.Close();
+            this.Hide();
         }
     }
 }

@@ -57,8 +57,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             StaffModel staffMember = new StaffModel();
             staffMember.setFirstName("John");
             staffMember.setLastName("Smith");
-            bool expected = true;
-            bool result = Validator.validateStaffMember(staffMember);
+            int expected = 0;
+            int result = Validator.validateStaffMember(staffMember).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -68,8 +68,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             StaffModel staffMember = new StaffModel();
             staffMember.setFirstName("John");
             staffMember.setLastName("");
-            bool expected = false;
-            bool result = Validator.validateStaffMember(staffMember);
+            int expected = 1;
+            int result = Validator.validateStaffMember(staffMember).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -79,8 +79,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             StaffModel staffMember = new StaffModel();
             staffMember.setFirstName("");
             staffMember.setLastName("Smith");
-            bool expected = false;
-            bool result = Validator.validateStaffMember(staffMember);
+            int expected = 1;
+            int result = Validator.validateStaffMember(staffMember).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -90,8 +90,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             StaffModel staffMember = new StaffModel();
             staffMember.setFirstName("");
             staffMember.setLastName("");
-            bool expected = false;
-            bool result = Validator.validateStaffMember(staffMember);
+            int expected = 2;
+            int result = Validator.validateStaffMember(staffMember).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -102,8 +102,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             staffMember.setFirstName("");
             staffMember.setLastName("");
             int staffType = 2;
-            bool expected = false;
-            bool result = Validator.validateStaffMember(staffMember, staffType);
+            int expected = 2;
+            int result = Validator.validateStaffMember(staffMember, staffType).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -114,8 +114,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             staffMember.setFirstName("John");
             staffMember.setLastName("Smith");
             int staffType = 0;
-            bool expected = false;
-            bool result = Validator.validateStaffMember(staffMember, staffType);
+            int expected = 1;
+            int result = Validator.validateStaffMember(staffMember, staffType).Count;
             Assert.AreEqual(expected, result);
         }
 
@@ -126,8 +126,8 @@ namespace PatientBookingSystem.Helpers.Tests {
             staffMember.setFirstName("John");
             staffMember.setLastName("Smith");
             int staffType = 1;
-            bool expected = true;
-            bool result = Validator.validateStaffMember(staffMember, staffType);
+            int expected = 0;
+            int result = Validator.validateStaffMember(staffMember, staffType).Count;
             Assert.AreEqual(expected, result);
         }
 

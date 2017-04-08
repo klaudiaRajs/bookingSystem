@@ -61,15 +61,19 @@ namespace PatientBookingSystem.Presenters.MainViews {
         }
 
         /** Method returns all the staff members per date */
-        internal List<IModel> getAllTheStaffMembersPerDate() {
+        internal Dictionary<int,string> getAllTheStaffMembersPerDate() {
             return controller.getAllAvailableStaffMembersPerDate(); 
         }
 
         /** Method generates timetable's header */
         private void generateTimeTableHeader() {
-            List<IModel> availableStaffMembers = controller.getAllAvailableStaffMembersPerDate();
-            foreach (StaffScheduleModel staffMember in availableStaffMembers) {
-                timetable.Columns.Add(staffMember.getStaffMember().getStaffId().ToString(), staffMember.getStaffMember().getFullStaffName());
+            //List<IModel> availableStaffMembers = controller.getAllAvailableStaffMembersPerDate();
+            //foreach (StaffScheduleModel staffMember in availableStaffMembers) {
+            //    timetable.Columns.Add(staffMember.getStaffMember().getStaffId().ToString(), staffMember.getStaffMember().getFullStaffName());
+            //}
+            Dictionary<int, string> availableDoctors = controller.getAllAvailableStaffMembersPerDate();
+            foreach (KeyValuePair<int, string> entry in availableDoctors) {
+                timetable.Columns.Add(entry.Key.ToString(), entry.Value);
             }
         }
 

@@ -59,7 +59,7 @@
             this.Controls.Add(this.contentText);
             this.Name = "HelpWindow";
             this.Text = "Help";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.exitButton_Click);
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             this.ResumeLayout(false);
 
         }

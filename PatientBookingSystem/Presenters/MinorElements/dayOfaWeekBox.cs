@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using PatientBookingSystem.Presenters.MainViews;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Presenters.Interfaces;
+using PatientBookingSystem.Presenters;
 
 namespace PatientBookingSystem {
     /** Class is responsible for managing dayOfAWeekBox in schedule panel */
@@ -14,8 +15,9 @@ namespace PatientBookingSystem {
         public int morningAppointments;
         public int afternoonAppointments;
 
-        internal List<IModel> staffMembersPerDate; 
+        internal Dictionary<int, string> staffMembersPerDate;
 
+        string date; 
 
         public dayOfaWeekBox() {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace PatientBookingSystem {
         /** Method is responsible for creating a day box */
         public dayOfaWeekBox getBox(int dayNo, int month, int year) {
             DateTime dateObject = new DateTime(year, month, dayNo);
-            string date = dateObject.ToString("yyyy-MM-dd");
+            this.date = dateObject.ToString("yyyy-MM-dd");
             // this line need to be here, so the morning and evening appointments on schedule panel counts correctly 
             this.singleDay = new SingleScheduleDayWindow(this, date);
             this.staffMembersPerDate = this.singleDay.getAllTheStaffMembersPerDate(); 
@@ -33,7 +35,8 @@ namespace PatientBookingSystem {
         }
 
         /** Method opens single day window */
-        private void openSingleDayAppointmentsView_Click(object sender, EventArgs e) {
+        internal void openSingleDayAppointmentsView_Click(object sender, EventArgs e) {
+            this.singleDay = new SingleScheduleDayWindow(this, date); 
             this.singleDay.Show(); 
         }
 
@@ -63,6 +66,13 @@ namespace PatientBookingSystem {
         /** Method sets a number of afternoon appointments */
         private void setNumberOfAfternoonAppointments(int afternoonAppointments) {
             this.numberOfAfternoonAppointmentsLabel.Text = afternoonAppointments.ToString();
+        }
+
+        /** Method open a pop-up window informing the user that there are no appointments for this date */
+        internal void openNoAppointmentsFeedbackMessage_Click(object sender, EventArgs e) {
+            FeedbackWindow message = new FeedbackWindow();
+            message.setMessageForNoAppointmentsPerDay();
+            message.Show(); 
         }
     }
 }

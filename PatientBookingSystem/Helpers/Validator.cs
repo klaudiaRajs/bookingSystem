@@ -36,12 +36,18 @@ namespace PatientBookingSystem.Helpers {
         }
 
         /** Method validates staff member model */
-        public static bool validateStaffMember(StaffModel staffMember, int staffType = -1) {
-            bool result = true;
-            if (String.IsNullOrEmpty(staffMember.getFirstName()) || String.IsNullOrEmpty(staffMember.getLastName()) || staffType == 0) {
-                result = false;
+        public static List<string> validateStaffMember(StaffModel staffMember, int staffType = -1) {
+            List<string> errors = new List<string>();
+            if (String.IsNullOrEmpty(staffMember.getFirstName())) {
+                errors.Add("first name");
             }
-            return result;
+            if (String.IsNullOrEmpty(staffMember.getLastName())) {
+                errors.Add("last name");
+            }
+            if (staffType == 0) {
+                errors.Add("staff type");
+            }
+            return errors;
         }
 
         /** Method validates user model */

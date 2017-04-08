@@ -31,6 +31,8 @@
             this.appointmentDatePicker = new System.Windows.Forms.DateTimePicker();
             this.searchButton = new System.Windows.Forms.Button();
             this.appointmentBoxesContainer = new System.Windows.Forms.FlowLayoutPanel();
+            this.noAppointmentInformation = new System.Windows.Forms.Label();
+            this.appointmentBoxesContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // doctorCheck
@@ -81,6 +83,7 @@
             this.dateCheck.Size = new System.Drawing.Size(15, 14);
             this.dateCheck.TabIndex = 4;
             this.dateCheck.UseVisualStyleBackColor = true;
+            this.dateCheck.CheckedChanged += new System.EventHandler(this.dateCheck_CheckedChanged);
             // 
             // appointmentDatePicker
             // 
@@ -103,10 +106,25 @@
             // appointmentBoxesContainer
             // 
             this.appointmentBoxesContainer.AutoScroll = true;
+            this.appointmentBoxesContainer.Controls.Add(this.noAppointmentInformation);
             this.appointmentBoxesContainer.Location = new System.Drawing.Point(3, 69);
             this.appointmentBoxesContainer.Name = "appointmentBoxesContainer";
             this.appointmentBoxesContainer.Size = new System.Drawing.Size(844, 427);
             this.appointmentBoxesContainer.TabIndex = 7;
+            // 
+            // noAppointmentInformation
+            // 
+            this.noAppointmentInformation.AutoSize = true;
+            this.noAppointmentInformation.BackColor = System.Drawing.Color.Silver;
+            this.noAppointmentInformation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.noAppointmentInformation.Location = new System.Drawing.Point(30, 30);
+            this.noAppointmentInformation.Margin = new System.Windows.Forms.Padding(30, 30, 3, 0);
+            this.noAppointmentInformation.Name = "noAppointmentInformation";
+            this.noAppointmentInformation.Size = new System.Drawing.Size(424, 18);
+            this.noAppointmentInformation.TabIndex = 8;
+            this.noAppointmentInformation.Text = "There are no appointments meeting requirements of this search";
+            this.noAppointmentInformation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.noAppointmentInformation.Visible = false;
             // 
             // appointmentCancellation
             // 
@@ -123,6 +141,8 @@
             this.Controls.Add(this.doctorCheck);
             this.Name = "appointmentCancellation";
             this.Size = new System.Drawing.Size(850, 499);
+            this.appointmentBoxesContainer.ResumeLayout(false);
+            this.appointmentBoxesContainer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +158,6 @@
         private System.Windows.Forms.DateTimePicker appointmentDatePicker;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.FlowLayoutPanel appointmentBoxesContainer;
+        private System.Windows.Forms.Label noAppointmentInformation;
     }
 }

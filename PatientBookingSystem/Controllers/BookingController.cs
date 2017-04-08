@@ -35,7 +35,7 @@ namespace PatientBookingSystem.Controllers {
 
         /** Method returns all upcoming appointments based on given search parameters */
         public List<IModel> getAllUpcomingAppointmentsForSearchParameters(int staffId, DateTime date, int patientId) {
-            return repo.getAllUpcomingAppointmentsForSearch(staffId, date, patientId);
+            return repo.getAllUpcomingAppointmentsForSearch(staffId, patientId, date);
         }
 
         /** Method returns a list of all the staff members that had ever had an appointment with given patient */

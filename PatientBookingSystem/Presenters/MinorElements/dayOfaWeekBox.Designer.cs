@@ -103,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.Controls.Add(this.numberOfFreeAppointmentsLabel);
             this.Controls.Add(this.numberOfAfternoonAppointmentsLabel);
             this.Controls.Add(this.label32);

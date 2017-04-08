@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using PatientBookingSystem.Helpers;
 using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Models;
+using System.Collections.Generic;
 
 namespace PatientBookingSystem.Presenters.MinorElements {
     /** Class is responsible for presenting functionality of adding a new staff member */
@@ -31,13 +32,16 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         private void saveButton_Click(object sender, EventArgs e) {
             StaffController controller = new StaffController();
             StaffModel staffMember = this.getStaffModelFromForm();
-            if (Validator.validateStaffMember(staffMember, (int)staffTypes.SelectedValue)) {
+            List<string> errors = Validator.validateStaffMember(staffMember, (int)staffTypes.SelectedValue);
+            if ( errors.Count == 0 ) {
                 bool result = controller.addStaffMember(staffMember);
                 if (!result) {
                     feedback.setMessageForSavingError();
                 } else {
                     feedback.setMessageForSuccessfullOperation();
                 }
+            } else {
+                feedback.setMessageForInvalidFieldsValues(errors);
             }
             feedback.Show();
         }

@@ -8,6 +8,11 @@ namespace PatientBookingSystem.Presenters {
             InitializeComponent();
         }
 
+        /** Method sets message for no appointments per day */
+        public void setMessageForNoAppointmentsPerDay() {
+            this.feedbackMessage.Text = "There are no appointments for this day";
+        }
+
         /** Method sets customized message passed through parameter */
         public void setCustomizedMessage(string message) {
             feedbackMessage.Text = message;
@@ -20,7 +25,7 @@ namespace PatientBookingSystem.Presenters {
 
         /** Method sets message for exception reporting */
         public void setMessageForExceptionReporting() {
-            feedbackMessage.Text = "Something went wrong with your credentials. Please contact administration."; 
+            feedbackMessage.Text = "Something went wrong. Please contact administration."; 
         }
 
         /** Method sets message for booking problem*/

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace PatientBookingSystem.Controllers {
-    /** Class is responsible for all the actions requiring communication between presenters and repositories */ 
+    /** Class is responsible for all the actions requiring communication between presenters and repositories */
     class ScheduleController {
 
         /** All the available slot statuses */
@@ -29,7 +29,7 @@ namespace PatientBookingSystem.Controllers {
             refresh();
         }
 
-        /** Returns scheduleId based on other schedule information */ 
+        /** Returns scheduleId based on other schedule information */
         public int getScheduleIdBasedOnOtherScheduleInformation(ScheduleModel schedule) {
             return scheduleRepo.getScheduleId(schedule);
         }
@@ -48,7 +48,7 @@ namespace PatientBookingSystem.Controllers {
             return errors;
         }
 
-        /** Method calls on relevant repository methods to save schedule entry */ 
+        /** Method calls on relevant repository methods to save schedule entry */
         public bool saveSchedule(ScheduleModel schedule) {
             if (schedule.getDate() != null && schedule.getStartTime() != null && schedule.getEndTime() != null) {
                 return scheduleRepo.save(schedule);
@@ -98,10 +98,20 @@ namespace PatientBookingSystem.Controllers {
             return 0;
         }
 
-        /** Method returns a list of staffschedule models */ 
-        internal List<IModel> getAllAvailableStaffMembersPerDate() {
+        /** Method returns a list of staffschedule models */
+        internal Dictionary<int, string> getAllAvailableStaffMembersPerDate() {
+            //List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
+            //return scheduleMap;
+            Dictionary<int, string> staffMembers = new Dictionary<int, string>();
+
             List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
-            return scheduleMap;
+            foreach (StaffScheduleModel schedule in scheduleMap) {
+                int staffId = schedule.getStaffMember().getStaffId();
+                if (!staffMembers.ContainsKey(staffId)) {
+                    staffMembers.Add(staffId, schedule.getStaffMember().getFullStaffName());
+                }
+            }
+            return staffMembers;
         }
 
         /** Methods refreshes data required for building a schedule */
@@ -111,12 +121,12 @@ namespace PatientBookingSystem.Controllers {
             scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
         }
 
-        /** Method checks if staff is absent on given datetime */ 
+        /** Method checks if staff is absent on given datetime */
         private bool isAbsent(string date, TimeSpan time, int staffId) {
             return absences.ContainsKey(staffId) && isInAnyTimeRange(absences[staffId], time);
         }
 
-        /** Method checked if a slot is already booked */ 
+        /** Method checked if a slot is already booked */
         private bool isBooked(string date, TimeSpan time, int staffId) {
             return bookings.ContainsKey(staffId) && isInAnyTimeRange(bookings[staffId], time);
         }
@@ -139,7 +149,7 @@ namespace PatientBookingSystem.Controllers {
                     }
                     absencesPerMember[staffId].Add(new TimeRange(absence.startTime, absence.endTime));
                 }
-            } 
+            }
             return absencesPerMember;
         }
 
@@ -171,7 +181,7 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
-        /** Method is a debugging tool */ 
+        /** Method is a debugging tool */
         private void debugPrint(Dictionary<int, List<TimeRange>> appointmentList) {
             Console.WriteLine("----------------------------------");
             System.Runtime.Serialization.Json.DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(appointmentList.GetType());

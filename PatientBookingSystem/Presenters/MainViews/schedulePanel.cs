@@ -40,7 +40,13 @@ namespace PatientBookingSystem {
                 List<IModel> absences = absenceRepo.getSurgeryAbsencesPerDate(dateToBeAdded);
                 if (absences == null) {
                     dayOfaWeekBox dayBox = new dayOfaWeekBox();
-                    appointmentDaysPanel.Controls.Add(dayBox.getBox(dayNo, this.date.Month, this.date.Year));
+                    dayOfaWeekBox boxToBeDisplayed = dayBox.getBox(dayNo, this.date.Month, this.date.Year); 
+                    if( boxToBeDisplayed.morningAppointments + boxToBeDisplayed.afternoonAppointments == 0) {
+                        boxToBeDisplayed.BackColor = System.Drawing.Color.Silver; 
+                        boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
+                        boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
+                    }
+                    appointmentDaysPanel.Controls.Add(boxToBeDisplayed);
                     this.dayBoxes.Add(dayBox);
                 }
             }
@@ -95,8 +101,8 @@ namespace PatientBookingSystem {
         /** Method filters results to days containing appointments for selected staff member */
         private bool isStaffMemberAvailable(dayOfaWeekBox box, ListItem selectedStaffMember) {
             if (selectedStaffMember.id != 0) {
-                foreach (StaffScheduleModel staffMember in box.staffMembersPerDate) {
-                    if (staffMember.getStaffMember().getStaffId() == selectedStaffMember.id) {
+                foreach(  KeyValuePair<int, string> entry in box.staffMembersPerDate) {
+                    if( entry.Key == selectedStaffMember.id ) {
                         return true;
                     }
                 }
@@ -137,8 +143,8 @@ namespace PatientBookingSystem {
             if (allTheStaffMembers.SelectedIndex != 0) {
                 foreach (dayOfaWeekBox box in dayBoxes) {
                     bool found = false;
-                    foreach (StaffScheduleModel staffMember in box.staffMembersPerDate) {
-                        if (staffMember.getStaffMember().getStaffId() == ((ListItem)allTheStaffMembers.SelectedItem).id) {
+                    foreach( KeyValuePair<int, string> entry in box.staffMembersPerDate) {
+                        if( entry.Key == ((ListItem)allTheStaffMembers.SelectedItem).id) {
                             found = true;
                         }
                     }
