@@ -25,6 +25,7 @@ namespace PatientBookingSystem {
         /** Method provides data source for filling in staff member drop down */
         private void fillInStaffMembersDropDown() {
             ListItem comboBoxElements = new ListItem();
+            allTheStaffMembers.DropDownStyle = ComboBoxStyle.DropDownList;
             allTheStaffMembers.DataSource = comboBoxElements.getDataSourceForAllStaffMembers();
             allTheStaffMembers.DisplayMember = "text";
             allTheStaffMembers.ValueMember = "id";

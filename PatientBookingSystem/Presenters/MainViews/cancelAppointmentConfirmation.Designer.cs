@@ -187,8 +187,10 @@
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.appointmentDate);
             this.Controls.Add(this.firstPartOfText);
+            this.KeyPreview = true;
             this.Name = "cancelAppointmentConfirmation";
             this.Text = "cancelAppointmentConfirmation";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cancelAppointmentConfirmation_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace PatientBookingSystem.Models {
+﻿namespace PatientBookingSystem.Models {
     /** Class is a database model of staff table - contains all the getters and setters */
     public class StaffModel : IModel{
-        int staffId;
-        String firstName;
-        String lastName;
-        String phoneNumber;
-        String staffType; 
+        private int staffId;
+        private string firstName;
+        private string lastName;
+        private string phoneNumber;
+        private string staffType; 
 
-        public String getFullStaffName() {
+        public string getFullStaffName() {
             return this.firstName + " " + this.lastName;
         }
 
@@ -21,35 +19,35 @@ namespace PatientBookingSystem.Models {
             this.staffId = staffId; 
         }
 
-        public String getFirstName() {
+        public string getFirstName() {
             return this.firstName; 
         }
 
-        public void setFirstName(String firstName) {
+        public void setFirstName(string firstName) {
             this.firstName = firstName; 
         }
 
-        public String getLastName() {
+        public string getLastName() {
             return this.lastName; 
         }
 
-        public void setLastName(String lastName) {
+        public void setLastName(string lastName) {
             this.lastName = lastName; 
         }
 
-        public String getPhoneNumber() {
+        public string getPhoneNumber() {
             return this.phoneNumber;
         }
 
-        public void setPhoneNumber(String phoneNumber) {
+        public void setPhoneNumber(string phoneNumber) {
             this.phoneNumber = phoneNumber; 
         }
 
-        public String getStaffType() {
+        public string getStaffType() {
             return this.staffType; 
         }
 
-        public void setStaffType(String staffType) {
+        public void setStaffType(string staffType) {
             this.staffType = staffType; 
         }
     }

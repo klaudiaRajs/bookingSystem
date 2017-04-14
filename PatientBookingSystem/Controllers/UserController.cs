@@ -7,7 +7,7 @@ namespace PatientBookingSystem.Controllers {
     /** Class is responsible for communication between presenters and user repository */
     class UserController {
 
-        UserRepo repo = new UserRepo();
+        private UserRepo repo = new UserRepo();
 
         /** Method returns all the users */
         public List<IModel> getAllUsers() {

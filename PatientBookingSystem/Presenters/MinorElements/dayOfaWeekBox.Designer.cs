@@ -41,6 +41,7 @@
             this.dayNumber.Size = new System.Drawing.Size(28, 26);
             this.dayNumber.TabIndex = 1;
             this.dayNumber.Text = "D";
+            this.dayNumber.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
             // 
             // label34
             // 
@@ -51,6 +52,7 @@
             this.label34.Size = new System.Drawing.Size(41, 17);
             this.label34.TabIndex = 3;
             this.label34.Text = "Free:";
+            this.label34.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
             // 
             // numberOfAfternoonAppointmentsLabel
             // 
@@ -70,6 +72,7 @@
             this.label32.Size = new System.Drawing.Size(74, 17);
             this.label32.TabIndex = 8;
             this.label32.Text = "Afternoon:";
+            this.label32.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
             // 
             // numberOfMorningAppointmentsLabel
             // 
@@ -89,6 +92,7 @@
             this.label35.Size = new System.Drawing.Size(63, 17);
             this.label35.TabIndex = 6;
             this.label35.Text = "Morning:";
+            this.label35.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
             // 
             // numberOfFreeAppointmentsLabel
             // 

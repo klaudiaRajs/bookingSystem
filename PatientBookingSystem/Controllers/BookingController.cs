@@ -2,15 +2,81 @@
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Repositories;
 using System;
+using PatientBookingSystem.Helpers;
 
 namespace PatientBookingSystem.Controllers {
     /** Class is responsible for communication between presenters and booking repository */
-    class BookingController {
+    public class BookingController {
 
-        BookingRepo repo; 
+        private BookingRepo repo;
+        private const string ATTENDANCE_ON_TIME = "Attended on time";
+        private const string ATTENDANCE_LATE = "Attended late";
+        private const string ATTENDANCE_CANCELLED = "Cancelled on time";
+        private const string ATTENDANCE_IGNORED = "Ignored";
+        private const string ATTENDANCE_INCORRECT_DATA = "Incorrect data";
+        private const string ATTENDANCE_NOT_CONFIRMED = "Not confirmed yet";
+
+        public Dictionary<string, Dictionary<string, int>> attendanceOptions = new Dictionary<string, Dictionary<string, int>>(); 
 
         public BookingController() {
-            repo = new BookingRepo(); 
+            this.repo = new BookingRepo();
+            this.attendanceOptions = this.getAttendanceOptions(); 
+        }
+
+        /** Method returns Dictionary of values representing attendance options */
+        public Dictionary<string, Dictionary<string, int>> getAttendanceOptions() {
+            Dictionary<string, Dictionary<string, int>> attendanceOptions = new Dictionary<string, Dictionary<string, int>>();
+            attendanceOptions.Add(ATTENDANCE_ON_TIME, this.getAppointmentStatusValues(1, 1, 0));
+            attendanceOptions.Add(ATTENDANCE_LATE, this.getAppointmentStatusValues(2, 1, 0));
+            attendanceOptions.Add(ATTENDANCE_CANCELLED, this.getAppointmentStatusValues(0, 0 , 0));
+            attendanceOptions.Add(ATTENDANCE_IGNORED, this.getAppointmentStatusValues(1, 1, 1));
+            attendanceOptions.Add(ATTENDANCE_NOT_CONFIRMED, this.getAppointmentStatusValues(0, 2, 0));
+            return attendanceOptions;
+        }
+
+        /** Method initiaties the proess of updating booking status */
+        public bool updateAttendanceStatus(BookingModel booking) {
+            if( Validator.validateBookingForUpdate(booking)) {
+                return repo.updateBookingStatus(booking);
+            }
+            return false;
+        }
+
+        /** Method returns list of booked appointments for a month since today */
+        public List<IModel> getBookedAppointmentsForNextMonth() {
+            string today = DateTime.Today.Date.ToString("yyyy-MM-dd");
+            string oneMonthFromToday = DateTime.Today.AddMonths(1).Date.ToString("yyyy-MM-dd");
+            return repo.getBookedAppointmentsForNextMonth(today, oneMonthFromToday); 
+        }
+
+        /** Method returns values representing appointments status */
+        private Dictionary<string, int> getAppointmentStatusValues(int attendance, int confirmation, int cancellation) {
+            Dictionary<string, int> attendedLate = new Dictionary<string, int>() {
+                { "attendance", attendance },
+                { "confirmation", confirmation},
+                { "lackOfCancellation", cancellation}
+            };
+            return attendedLate;
+        }
+
+        /** Method returns a string with attendance status */
+        public string getAttendanceTextPerBooking(BookingModel booking) {
+            if( booking.getAttendance() == 1 && booking.getConfirmation() == 1 && booking.getLackOfCancellation() == 0) {
+                return ATTENDANCE_ON_TIME;
+            }
+            if (booking.getAttendance() == 2 && booking.getConfirmation() == 1 && booking.getLackOfCancellation() == 0) {
+                return ATTENDANCE_LATE;
+            }
+            if (booking.getAttendance() == 0 && booking.getConfirmation() == 0 && booking.getLackOfCancellation() == 0) {
+                return ATTENDANCE_CANCELLED;
+            }
+            if (booking.getAttendance() == 1 && booking.getConfirmation() == 1 && booking.getLackOfCancellation() == 1) {
+                return ATTENDANCE_IGNORED;
+            }
+            if (booking.getAttendance() == 0 && booking.getConfirmation() == 2 && booking.getLackOfCancellation() == 0) {
+                return ATTENDANCE_NOT_CONFIRMED;
+            }
+            return ATTENDANCE_INCORRECT_DATA; 
         }
 
         /** Method returns full name of the most often attended staff member for patient */
@@ -77,6 +143,30 @@ namespace PatientBookingSystem.Controllers {
         /** Method initializes process of cancelling (deleting) appointment booking*/
         public bool cancelAppointment(int bookingId) {
             return repo.cancelAppointment(bookingId); 
+        }
+
+        public string getOnTimeAppointmentStatus() {
+            return ATTENDANCE_ON_TIME;
+        }
+
+        public string getLateAppointmentStatus() {
+            return ATTENDANCE_LATE;
+        }
+
+        public string getIgnoredAppointmentStatus() {
+            return ATTENDANCE_IGNORED; 
+        }
+
+        public string getCancelledAppointmentStatus() {
+            return ATTENDANCE_CANCELLED;
+        }
+
+        public string getIncorrectDataAppointmentStatus() {
+            return ATTENDANCE_INCORRECT_DATA;
+        }
+
+        public string getNotConfirmedAppointmentStatus() {
+            return ATTENDANCE_NOT_CONFIRMED;
         }
     }
 }

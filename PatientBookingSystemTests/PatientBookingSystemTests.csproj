@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\BookingControllerTests.cs" />
     <Compile Include="Helpers\DateHelperTests.cs" />
     <Compile Include="Helpers\TimeRangeTests.cs" />
     <Compile Include="Helpers\ValidatorTests.cs" />

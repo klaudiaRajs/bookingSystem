@@ -4,11 +4,11 @@ namespace PatientBookingSystem.Helpers {
     /** Class is responsible for providing surgery info - created due to limit put on a number of tables */
     class SurgeryInfo {
 
-        /** Surgery contact information */
-        string surgeryName = "Tay Court Surgery";
-        string firstLineOfAddress = "50 Tay Street";
-        string secondLineOfAddress = "DD11 Dundee";
-        string phoneNumber = "01382 228228";
+        /** Surgery information */
+        private string surgeryName = "Tay Court Surgery";
+        private string firstLineOfAddress = "50 Tay Street";
+        private string secondLineOfAddress = "DD11 Dundee";
+        private string phoneNumber = "01382 228228";
 
         public enum staffTypes { doctor = 1, nurse = 2, administration = 3 };
         public enum userTypes { patient = 1, admin = 2 };
@@ -27,19 +27,19 @@ namespace PatientBookingSystem.Helpers {
             closingTime = new TimeSpan(17, 45, 0);
         }
 
-        public String getSurgeryName() {
+        public string getSurgeryName() {
             return this.surgeryName; 
         }
 
-        public String getFirstLineOfAddress() {
+        public string getFirstLineOfAddress() {
             return this.firstLineOfAddress; 
         }
 
-        public String getSecondLineOfAddress() {
+        public string getSecondLineOfAddress() {
             return this.secondLineOfAddress; 
         }
 
-        public String getPhoneNumber() {
+        public string getPhoneNumber() {
             return this.phoneNumber; 
         }
     }

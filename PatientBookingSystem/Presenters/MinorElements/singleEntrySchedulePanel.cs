@@ -13,6 +13,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
     public partial class singleEntrySchedulePanel : UserControl {
 
         private FeedbackWindow feedback = new FeedbackWindow();
+        private const string END_DATE_EARLIER_THAN_START_DATE = "End date cannot be earlier than start date";
 
         /** Constructor prepares the view by filling in the dropdowns and preparing elements */
         public singleEntrySchedulePanel() {
@@ -43,6 +44,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method performs actions preparing data for saving and the firing the process */
         private void saveButton_Click(object sender, EventArgs e) {
+            List<string> validationErrors = Validator.validateScheduleEntry(workStartTime.Value, workEndTime.Value, breakStartTime.Value, breakEndTime.Value);
+            if ( validationErrors.Count != 0 ) {
+                feedback.setMessageForInvalidFieldsValues(validationErrors);
+                feedback.Show();
+                workStartTime.Value = new DateTime(2012, 12, 12, 9, 0, 0);
+                workEndTime.Value = new DateTime(2012, 12, 12, 17, 0, 0);
+                return;
+            }
             ScheduleModel schedule = new ScheduleModel();
             ScheduleController controller = new ScheduleController();
             int staffId = ((ListItem)allTheStaffMembers.SelectedItem).id;
@@ -78,6 +87,17 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 feedback.setMessageForSavingError();
             }
             feedback.Show();
+        }
+       
+
+        /**
+         *  Method prevents selecting end time earlier than start time 
+         */
+        private void workEndTime_ValueChanged(object sender, EventArgs e) {
+            if( workEndTime.Value.Date < workStartTime.Value.Date) {
+                feedback.setCustomizedMessage(END_DATE_EARLIER_THAN_START_DATE);
+                feedback.Show();
+            }
         }
     }
 }

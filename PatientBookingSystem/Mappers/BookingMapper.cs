@@ -21,14 +21,17 @@ namespace PatientBookingSystem.Mappers {
             } else {
                 booking.setComment("");
             }
+
             booking.setStartTime(reader.GetString("startTime"));
             booking.setEndTime(reader.GetString("endTime"));
+
             if (reader.GetSchemaTable().Columns.Contains("patientId")) {
                 booking.setUserId(reader.GetInt16("patientId"));
             }
             if (reader.GetSchemaTable().Columns.Contains("patientFirstName")) {
                 user.setFirstName(reader.GetString("patientFirstName"));
             }
+
             user.setFirstName(reader.GetString("patientFirstName"));
             user.setLastName(reader.GetString("patientLastName"));
             booking.setUserModel(user);

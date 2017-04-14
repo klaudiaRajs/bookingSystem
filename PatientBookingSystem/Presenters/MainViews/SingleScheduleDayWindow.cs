@@ -1,6 +1,5 @@
 ﻿using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Helpers;
-using PatientBookingSystem.Models;
 using PatientBookingSystem.Presenters.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,6 +29,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             generateTimeTableHeader();
             generateTimeTableSlots();
             timetable.CellClick += new DataGridViewCellEventHandler(dataGridView2_CellClick);
+            this.CenterToScreen();
         }
 
         /** Method is responsibke for handling onclick event on schedule table */ 
@@ -67,10 +67,6 @@ namespace PatientBookingSystem.Presenters.MainViews {
 
         /** Method generates timetable's header */
         private void generateTimeTableHeader() {
-            //List<IModel> availableStaffMembers = controller.getAllAvailableStaffMembersPerDate();
-            //foreach (StaffScheduleModel staffMember in availableStaffMembers) {
-            //    timetable.Columns.Add(staffMember.getStaffMember().getStaffId().ToString(), staffMember.getStaffMember().getFullStaffName());
-            //}
             Dictionary<int, string> availableDoctors = controller.getAllAvailableStaffMembersPerDate();
             foreach (KeyValuePair<int, string> entry in availableDoctors) {
                 timetable.Columns.Add(entry.Key.ToString(), entry.Value);

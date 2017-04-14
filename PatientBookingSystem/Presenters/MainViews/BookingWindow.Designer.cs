@@ -262,6 +262,7 @@
             this.Controls.Add(this.initialInstructionsPanel1);
             this.Name = "BookingWindow";
             this.Text = "BookingWindow";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BookingWindow_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

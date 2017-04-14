@@ -25,11 +25,10 @@ namespace PatientBookingSystem {
             appointmentsContainer.Controls.Clear();
             BookingController controller = new BookingController();
             List<IModel> bookedAppointments;
-            string today = DateTime.Today.ToString("yyyy-MM-dd");
             if (!ApplicationState.userType.Equals("admin")) {
                 bookedAppointments = controller.getAllUpcomingAppointments();
             } else {
-                bookedAppointments = controller.getBookedAppointmentsPerDate(today);
+                bookedAppointments = controller.getBookedAppointmentsForNextMonth();
             }
             if (bookedAppointments != null) {
                 foreach (BookingModel booking in bookedAppointments) {

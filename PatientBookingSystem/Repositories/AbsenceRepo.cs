@@ -10,7 +10,7 @@ namespace PatientBookingSystem.Repositories {
         string table = "pbs_absence";
 
         /** Method returns list of absences per day */
-        public List<IModel> getAbsencesPerDate(String date) {
+        public List<IModel> getAbsencesPerDate(string date) {
             string query = "SELECT * from pbs_absence WHERE pbs_absence.startDate <= " + '"' + date + '"' + " AND pbs_absence.endDate >= " + '"' + date + '"';
             List<IModel> absences = this.db.Query(query, new AbsenceMapper());
             return absences;       

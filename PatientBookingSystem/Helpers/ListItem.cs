@@ -9,7 +9,7 @@ namespace PatientBookingSystem.Helpers {
         /** Value to be returned from drop down list element */
         public int id { get; set; }
         /** Value to be displayed in the drop down list element */
-        public string text { get; set; }         
+        public string text { get; set; }
 
         /** Method returns a list of staff members prepared to be a data source for a drop down list */
         public List<ListItem> getDataSourceForAllStaffMembers() {
@@ -17,7 +17,7 @@ namespace PatientBookingSystem.Helpers {
             List<IModel> allTheStaffMembers = controller.getAllStaffMembers();
             List<ListItem> listOfStaffMembers = new List<ListItem>();
             listOfStaffMembers.Add(new ListItem { text = "Select staff member", id = 0 });
-            foreach ( StaffModel staffMember in allTheStaffMembers) {
+            foreach (StaffModel staffMember in allTheStaffMembers) {
                 listOfStaffMembers.Add(new ListItem { text = staffMember.getFullStaffName(), id = staffMember.getStaffId() });
             }
             return listOfStaffMembers;
@@ -28,8 +28,8 @@ namespace PatientBookingSystem.Helpers {
             List<ListItem> staffTypesData = new List<ListItem>();
             staffTypesData.Insert(0, new ListItem { text = "Select a staffType", id = 0 });
             string[] myEnumMember = Enum.GetNames(typeof(SurgeryInfo.staffTypes));
-            staffTypesData = fillInList(staffTypesData, myEnumMember);            
-            return staffTypesData; 
+            staffTypesData = fillInList(staffTypesData, myEnumMember);
+            return staffTypesData;
         }
 
         /** Method fills in the list with enum values */
@@ -58,5 +58,18 @@ namespace PatientBookingSystem.Helpers {
             return confirmationMethods;
         }
 
+        /** Method returns a list of attendance options for the admin to set */
+        public List<ListItem> getDateSourceOfAllPossibleAttendanceStatuses() {
+            List<ListItem> attendanceOptions = new List<ListItem>();
+            attendanceOptions.Insert(0, new ListItem { text = "Select attendance status", id = 0 });
+            int counter = 1;
+            BookingController controller = new BookingController();
+            Dictionary<string, Dictionary<string, int>> attendanceOptionsDescriptionsAndValues = controller.getAttendanceOptions();
+            foreach (KeyValuePair<string, Dictionary<string, int>> entry in attendanceOptionsDescriptionsAndValues) {
+                attendanceOptions.Add(new ListItem { text = entry.Key.ToString(), id =  counter});
+                counter++;
+            }
+            return attendanceOptions;
+        }
     }
 }

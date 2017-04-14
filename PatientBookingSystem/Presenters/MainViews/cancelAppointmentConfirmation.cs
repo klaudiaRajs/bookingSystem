@@ -22,6 +22,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.staffName = staffName;
             this.typeOfAppointment = typeOfAppointment;
             fillInAppointmentInformation();
+            this.CenterToScreen();
         }
 
         /** Method marks the process as reschedulling */
@@ -62,6 +63,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
         /** Method closes the window */
         private void rejectCancellationButton_Click(object sender, EventArgs e) {
             this.Hide();
+        }
+
+        private void cancelAppointmentConfirmation_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Escape) {
+                this.rejectCancellationButton_Click(this, new EventArgs());
+            }
         }
     }
 }

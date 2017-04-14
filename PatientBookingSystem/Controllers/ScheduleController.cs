@@ -100,8 +100,6 @@ namespace PatientBookingSystem.Controllers {
 
         /** Method returns a list of staffschedule models */
         internal Dictionary<int, string> getAllAvailableStaffMembersPerDate() {
-            //List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);
-            //return scheduleMap;
             Dictionary<int, string> staffMembers = new Dictionary<int, string>();
 
             List<IModel> scheduleMap = scheduleRepo.getAvailableStaffMembersWithAvailabilityTimes(date);

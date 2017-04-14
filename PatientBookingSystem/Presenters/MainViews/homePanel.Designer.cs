@@ -25,9 +25,7 @@
         private void InitializeComponent() {
             this.homeContent = new System.Windows.Forms.Panel();
             this.personalStatistics = new PatientBookingSystem.Presenters.statisticsOverviewBox();
-            this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
             this.upcomingAppointmentsBox1 = new PatientBookingSystem.Presenters.upcomingAppointmentsBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.theMostRecentAppointment = new System.Windows.Forms.Label();
             this.theMostAttendendedNurse = new System.Windows.Forms.Label();
             this.theMostAttendandedDoctor = new System.Windows.Forms.Label();
@@ -38,9 +36,7 @@
             // homeContent
             // 
             this.homeContent.Controls.Add(this.personalStatistics);
-            this.homeContent.Controls.Add(this.surgeryInfoBox1);
             this.homeContent.Controls.Add(this.upcomingAppointmentsBox1);
-            this.homeContent.Controls.Add(this.label7);
             this.homeContent.Controls.Add(this.theMostRecentAppointment);
             this.homeContent.Controls.Add(this.theMostAttendendedNurse);
             this.homeContent.Controls.Add(this.theMostAttendandedDoctor);
@@ -59,14 +55,6 @@
             this.personalStatistics.Size = new System.Drawing.Size(250, 150);
             this.personalStatistics.TabIndex = 41;
             // 
-            // surgeryInfoBox1
-            // 
-            this.surgeryInfoBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.surgeryInfoBox1.Location = new System.Drawing.Point(449, 303);
-            this.surgeryInfoBox1.Name = "surgeryInfoBox1";
-            this.surgeryInfoBox1.Size = new System.Drawing.Size(250, 150);
-            this.surgeryInfoBox1.TabIndex = 40;
-            // 
             // upcomingAppointmentsBox1
             // 
             this.upcomingAppointmentsBox1.BackColor = System.Drawing.Color.LightSlateGray;
@@ -74,16 +62,6 @@
             this.upcomingAppointmentsBox1.Name = "upcomingAppointmentsBox1";
             this.upcomingAppointmentsBox1.Size = new System.Drawing.Size(230, 140);
             this.upcomingAppointmentsBox1.TabIndex = 39;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(16, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Home";
             // 
             // theMostRecentAppointment
             // 
@@ -150,13 +128,11 @@
         #endregion
 
         private System.Windows.Forms.Panel homeContent;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label theMostRecentAppointment;
         private System.Windows.Forms.Label theMostAttendendedNurse;
         private System.Windows.Forms.Label theMostAttendandedDoctor;
         private System.Windows.Forms.Label essentailInformationLabel;
         private Presenters.statisticsOverviewBox personalStatistics;
-        private Presenters.surgeryInfoBox surgeryInfoBox1;
         private Presenters.upcomingAppointmentsBox upcomingAppointmentsBox1;
     }
 }

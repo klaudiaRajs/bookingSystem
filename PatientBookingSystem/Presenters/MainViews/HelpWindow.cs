@@ -7,6 +7,9 @@ namespace PatientBookingSystem {
 
         public HelpWindow() {
             InitializeComponent();
+            this.CenterToScreen();
+            string fullPath = System.IO.Path.GetFullPath("../../UserManual.pdf");
+            pdfHelpMessage.LoadFile(fullPath);
         }
 
         /** Method closes the help window  */

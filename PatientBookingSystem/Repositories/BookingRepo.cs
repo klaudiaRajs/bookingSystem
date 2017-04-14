@@ -61,6 +61,23 @@ namespace PatientBookingSystem.Repositories {
             return theMostAttendedDoctor.getFullStaffName();
         }
 
+        /** Method updates booking status (attendance status) */
+        public bool updateBookingStatus(BookingModel booking) {
+            string query = "UPDATE pbs_booking SET `attendance` = " + booking.getAttendance() 
+                + ", `confirmation` = " + booking.getConfirmation() 
+                + ", `lackOfCancellation` = " + booking.getLackOfCancellation() 
+                + " WHERE `bookingId` = " + booking.getId();
+            bool result = this.adjustDb(query);
+            return result;
+        }
+
+        /** Method returns a list of booking for all the patients for one month from today */
+        public List<IModel> getBookedAppointmentsForNextMonth(string today, string oneMonthFromToday) {
+            string query = "SELECT * from " + view + " where date >= \"" + today + "\" AND date <= \"" + oneMonthFromToday + "\" ORDER BY date ASC";
+            List<IModel> upcomingAppointments = this.db.Query(query, new BookingMapper());
+            return upcomingAppointments;
+        }
+
         /** Method cancells (delete) an appointment */
         public bool cancelAppointment(int bookingId) {
             string query = "DELETE FROM " + table + " WHERE bookingId = " + bookingId;
@@ -79,7 +96,7 @@ namespace PatientBookingSystem.Repositories {
             if( patientId != 0 ) {
                 query += " AND patientId = " + patientId; 
             }
-            if (staffId != 0 && patientId != 0 ) {
+            if (staffId != 0 ) {
                 query += " AND staffId = " + staffId;
             }
             List<IModel> bookings = this.db.Query(query, new BookingMapper());
@@ -148,34 +165,22 @@ namespace PatientBookingSystem.Repositories {
                 + staffScheduleTable + ".staffScheduleId" + " INNER JOIN " + scheduleTable + " on " + staffScheduleTable
                 + ".scheduleId = " + scheduleTable + ".scheduleId WHERE `userId` = "
                 + ApplicationState.userId + " AND `attendance` = " + 1 + " AND " + scheduleTable + ".date < " + '"' + today + '"';
-            MySqlDataReader reader = this.getFromDb(query);
-            int counter = 0;
-            while (reader.Read()) {
-                counter++;
-            }
-            return counter;
+            List<IModel> bookings = this.db.Query(query, new BookingMapper());
+            return bookings.Count;
         }
 
         /** Method returns number of appointments cancelled on time */
         public int countCancelledAppointents() {
             string query = getAttendanceCancellationStatisticsQueryPerUser(0, 0);
-            MySqlDataReader reader = this.getFromDb(query);
-            int counter = 0;
-            while (reader.Read()) {
-                counter++;
-            }
-            return counter;
+            List<IModel> bookings = this.db.Query(query, new BookingMapper());
+            return bookings.Count;
         }
 
         /** Method returns number of appointments that were not cancelled on time */
         public int countNotCancelledAppointents() {
             string query = getAttendanceCancellationStatisticsQueryPerUser(0, 1);
-            MySqlDataReader reader = this.getFromDb(query);
-            int counter = 0;
-            while (reader.Read()) {
-                counter++;
-            }
-            return counter;
+            List<IModel> bookings = this.db.Query(query, new BookingMapper());
+            return bookings.Count;
         }
 
         /** Method returns date (string) of the last attended appointment */

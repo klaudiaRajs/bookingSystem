@@ -35,11 +35,9 @@
             this.DobLabel = new System.Windows.Forms.Label();
             this.NiNLabel = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.theMostOftenAttendedStaffMemberLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
             this.personalStatistics = new PatientBookingSystem.Presenters.statisticsOverviewBox();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
@@ -177,23 +175,11 @@
             this.emailLabel.Size = new System.Drawing.Size(181, 17);
             this.emailLabel.TabIndex = 45;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(6, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Home > Personal information";
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.theMostOftenAttendedStaffMemberLabel);
             this.panel6.Controls.Add(this.label3);
-            this.panel6.Controls.Add(this.surgeryInfoBox1);
             this.panel6.Controls.Add(this.personalStatistics);
-            this.panel6.Controls.Add(this.label2);
             this.panel6.Controls.Add(this.emailLabel);
             this.panel6.Controls.Add(this.NiNLabel);
             this.panel6.Controls.Add(this.DobLabel);
@@ -234,14 +220,6 @@
             this.label3.TabIndex = 48;
             this.label3.Text = "The most often attended staff member";
             // 
-            // surgeryInfoBox1
-            // 
-            this.surgeryInfoBox1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.surgeryInfoBox1.Location = new System.Drawing.Point(454, 302);
-            this.surgeryInfoBox1.Name = "surgeryInfoBox1";
-            this.surgeryInfoBox1.Size = new System.Drawing.Size(250, 150);
-            this.surgeryInfoBox1.TabIndex = 47;
-            // 
             // personalStatistics
             // 
             this.personalStatistics.BackColor = System.Drawing.Color.LightSlateGray;
@@ -278,10 +256,8 @@
         private System.Windows.Forms.Label DobLabel;
         private System.Windows.Forms.Label NiNLabel;
         private System.Windows.Forms.Label emailLabel;
-        private System.Windows.Forms.Label label2;
         private Presenters.statisticsOverviewBox personalStatistics;
         private System.Windows.Forms.Panel panel6;
-        private Presenters.surgeryInfoBox surgeryInfoBox1;
         private System.Windows.Forms.Label theMostOftenAttendedStaffMemberLabel;
         private System.Windows.Forms.Label label3;
     }

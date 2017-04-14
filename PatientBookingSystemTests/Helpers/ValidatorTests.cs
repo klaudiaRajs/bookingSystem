@@ -360,5 +360,26 @@ namespace PatientBookingSystem.Helpers.Tests {
             int result = Validator.validateLoginCredentials("john", "").Count;
             Assert.AreEqual(expected, result);
         }
+
+        /** Method tests if validator returns true when booking contains valid id*/
+        [TestMethod()]
+        public void validateBookingForUpdateTestCorrect() {
+            BookingModel booking = new BookingModel();
+            booking.setId(2);
+            bool expected = true;
+            bool result = Validator.validateBookingForUpdate(booking);
+            Assert.AreEqual(expected, result);
+        }
+
+
+        /** Method tests if validator returns false when booking contains valid id*/
+        [TestMethod()]
+        public void validateBookingForUpdateTestIncorrect() {
+            BookingModel booking = new BookingModel();
+            booking.setId(0);
+            bool expected = false;
+            bool result = Validator.validateBookingForUpdate(booking);
+            Assert.AreEqual(expected, result);
+        }
     }
 }

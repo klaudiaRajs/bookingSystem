@@ -35,6 +35,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.attendanceLabel = new System.Windows.Forms.Label();
+            this.attendanceStatusLabel = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // appointmentDateLabel
@@ -85,7 +88,7 @@
             // printConfirmationButton
             // 
             this.printConfirmationButton.AutoSize = true;
-            this.printConfirmationButton.Location = new System.Drawing.Point(35, 144);
+            this.printConfirmationButton.Location = new System.Drawing.Point(35, 167);
             this.printConfirmationButton.Name = "printConfirmationButton";
             this.printConfirmationButton.Size = new System.Drawing.Size(98, 23);
             this.printConfirmationButton.TabIndex = 33;
@@ -95,7 +98,7 @@
             // 
             // cancelAppointmentButton
             // 
-            this.cancelAppointmentButton.Location = new System.Drawing.Point(220, 144);
+            this.cancelAppointmentButton.Location = new System.Drawing.Point(220, 167);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
             this.cancelAppointmentButton.Size = new System.Drawing.Size(75, 23);
             this.cancelAppointmentButton.TabIndex = 34;
@@ -105,7 +108,7 @@
             // 
             // Reschedule
             // 
-            this.Reschedule.Location = new System.Drawing.Point(139, 144);
+            this.Reschedule.Location = new System.Drawing.Point(139, 167);
             this.Reschedule.Name = "Reschedule";
             this.Reschedule.Size = new System.Drawing.Size(75, 23);
             this.Reschedule.TabIndex = 35;
@@ -117,7 +120,7 @@
             // 
             this.patientNameLabel.BackColor = System.Drawing.Color.Silver;
             this.patientNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientNameLabel.Location = new System.Drawing.Point(175, 110);
+            this.patientNameLabel.Location = new System.Drawing.Point(175, 133);
             this.patientNameLabel.Margin = new System.Windows.Forms.Padding(3);
             this.patientNameLabel.Name = "patientNameLabel";
             this.patientNameLabel.Size = new System.Drawing.Size(148, 17);
@@ -129,7 +132,7 @@
             // 
             this.patientLabel.BackColor = System.Drawing.Color.Silver;
             this.patientLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.patientLabel.Location = new System.Drawing.Point(9, 110);
+            this.patientLabel.Location = new System.Drawing.Point(9, 133);
             this.patientLabel.Margin = new System.Windows.Forms.Padding(3);
             this.patientLabel.Name = "patientLabel";
             this.patientLabel.Size = new System.Drawing.Size(147, 17);
@@ -170,11 +173,49 @@
             this.label4.TabIndex = 37;
             this.label4.Text = "Type of appointment: ";
             // 
+            // attendanceLabel
+            // 
+            this.attendanceLabel.BackColor = System.Drawing.Color.Silver;
+            this.attendanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attendanceLabel.Location = new System.Drawing.Point(9, 110);
+            this.attendanceLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.attendanceLabel.Name = "attendanceLabel";
+            this.attendanceLabel.Size = new System.Drawing.Size(147, 17);
+            this.attendanceLabel.TabIndex = 42;
+            this.attendanceLabel.Text = "Attendance";
+            // 
+            // attendanceStatusLabel
+            // 
+            this.attendanceStatusLabel.BackColor = System.Drawing.Color.Silver;
+            this.attendanceStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attendanceStatusLabel.Location = new System.Drawing.Point(175, 110);
+            this.attendanceStatusLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.attendanceStatusLabel.Name = "attendanceStatusLabel";
+            this.attendanceStatusLabel.Size = new System.Drawing.Size(148, 17);
+            this.attendanceStatusLabel.TabIndex = 41;
+            this.attendanceStatusLabel.Text = "Attendance";
+            // 
+            // editButton
+            // 
+            this.editButton.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.editButton.Location = new System.Drawing.Point(330, 109);
+            this.editButton.Margin = new System.Windows.Forms.Padding(0);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(33, 20);
+            this.editButton.TabIndex = 43;
+            this.editButton.Text = "Edit";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Visible = false;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
             // appointmentBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.Controls.Add(this.editButton);
+            this.Controls.Add(this.attendanceLabel);
+            this.Controls.Add(this.attendanceStatusLabel);
             this.Controls.Add(this.patientLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
@@ -189,7 +230,7 @@
             this.Controls.Add(this.appointmentDateLabel);
             this.Margin = new System.Windows.Forms.Padding(40, 3, 3, 3);
             this.Name = "appointmentBox";
-            this.Size = new System.Drawing.Size(352, 188);
+            this.Size = new System.Drawing.Size(369, 205);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,5 +250,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label attendanceLabel;
+        private System.Windows.Forms.Label attendanceStatusLabel;
+        private System.Windows.Forms.Button editButton;
     }
 }

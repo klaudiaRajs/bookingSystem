@@ -29,7 +29,6 @@
             this.emailVerification = new System.Windows.Forms.CheckBox();
             this.onThePhoneVerification = new System.Windows.Forms.CheckBox();
             this.confirmationMethodLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.saveUserSettings = new System.Windows.Forms.Button();
             this.sameDayNotification = new System.Windows.Forms.CheckBox();
             this.oneWeekNotificationCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,7 +44,6 @@
             this.panel4.Controls.Add(this.emailVerification);
             this.panel4.Controls.Add(this.onThePhoneVerification);
             this.panel4.Controls.Add(this.confirmationMethodLabel);
-            this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.saveUserSettings);
             this.panel4.Controls.Add(this.sameDayNotification);
             this.panel4.Controls.Add(this.oneWeekNotificationCheckBox);
@@ -112,16 +110,6 @@
             this.confirmationMethodLabel.Size = new System.Drawing.Size(134, 18);
             this.confirmationMethodLabel.TabIndex = 38;
             this.confirmationMethodLabel.Text = "Verification method";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(8, 11);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 13);
-            this.label7.TabIndex = 37;
-            this.label7.Text = "Home > Settings";
             // 
             // saveUserSettings
             // 
@@ -203,7 +191,6 @@
         private System.Windows.Forms.CheckBox oneWeekNotificationCheckBox;
         private System.Windows.Forms.CheckBox printableConfirmation;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox emailConfirmation;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox emailVerification;

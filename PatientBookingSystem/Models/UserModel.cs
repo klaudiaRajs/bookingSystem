@@ -52,19 +52,19 @@ namespace PatientBookingSystem.Models {
             return this.id;
         }
 
-        public String getFirstName() {
+        public string getFirstName() {
             return this.firstName;
         }
 
-        public String getLastName() {
+        public string getLastName() {
             return this.lastName;
         }
 
-        public String getLogin() {
+        public string getLogin() {
             return this.login; 
         }
 
-        public String getPassword() {
+        public string getPassword() {
             return this.password; 
         }
 
@@ -77,24 +77,24 @@ namespace PatientBookingSystem.Models {
             return this.DOBd.ToString("yyyy-MM-dd");
         }
 
-        public String getPhoneNumber() {
+        public string getPhoneNumber() {
             return this.phoneNumber; 
         }
 
-        public String getEmail() {
+        public string getEmail() {
             return this.email; 
         }
 
-        public String getNiN() {
+        public string getNiN() {
             return this.NiN; 
         }
 
-        public String getAddress() {
+        public string getAddress() {
             return this.address; 
         }
 
 
-        public String getUserType() {
+        public string getUserType() {
             return this.userType; 
         }
         
@@ -102,47 +102,47 @@ namespace PatientBookingSystem.Models {
             this.id = id; 
         }
 
-        public void setFirstName(String firstName) {
+        public void setFirstName(string firstName) {
             this.firstName = firstName;
         }
 
-        public void setLastName(String lastName) {
+        public void setLastName(string lastName) {
             this.lastName = lastName;
         }
 
-        public void setLogin(String login) {
+        public void setLogin(string login) {
             this.login = login;
         }
 
-        public void setPassword(String password) {
+        public void setPassword(string password) {
             this.password = password;
         }
 
-        public void setDOBs(String DOB) {
+        public void setDOBs(string DOB) {
             this.DOBs = DOB;
         }
 
         public void setDOBd(DateTime dob) {
             this.DOBd = dob;
         }
-        public void setPhoneNumber(String phoneNumber) {
+        public void setPhoneNumber(string phoneNumber) {
             this.phoneNumber = phoneNumber;
         }
 
-        public void setEmailAddress(String emailAddress) {
+        public void setEmailAddress(string emailAddress) {
             this.email = emailAddress;
         }
 
-        public void setNiN(String NiN) {
+        public void setNiN(string NiN) {
             this.NiN = NiN;
         }
 
-        public void setAddress(String address) {
+        public void setAddress(string address) {
             this.address = address;
         }
 
 
-        public void setUserType(String userType) {
+        public void setUserType(string userType) {
             this.userType = userType;
         }
 

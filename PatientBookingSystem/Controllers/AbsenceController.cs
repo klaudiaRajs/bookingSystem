@@ -6,10 +6,17 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Controllers {
-    /** Class is a communicator between absence repository and presenters */
+    /** 
+     * Class is a communicator between absence repository and presenters 
+     */
     class AbsenceController {
         
-        /** Public method for saving an absence */
+        /** 
+         * Public method for saving an absence 
+         * 
+         * @param absence absence model 
+         * @return result of saving
+         */
         public bool save(AbsenceModel absence) {
             bool result;
             if (absence.staffId != 0) {
@@ -23,40 +30,21 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
-        /** Method validates if all the data is valid for saving */
+        /** 
+         * Method initiates process of validating if all the data is valid for saving 
+         * 
+         * @param startDatePicker 
+         */
         public List<string> isDataValid(DateTimePicker startDatePicker, DateTimePicker endDatePicker, DateTimePicker startTimePicker, DateTimePicker endTimePicker, List<string> invalidFieldsList, ComboBox allTheDoctors = null) {
-            List<string> invalidFields = invalidFieldsList;
-            bool result = true;
-            if (allTheDoctors != null) {
-                if ((int)allTheDoctors.SelectedValue <= 0) {
-                    invalidFields.Add("doctor's name");
-                    result = false;
-                }
-            }
-
-            if (startDatePicker.Value < DateTime.Today) {
-                invalidFields.Add("start date");
-                result = false;
-            }
-
-            if (endDatePicker.Enabled && endDatePicker.Value.Date < startDatePicker.Value.Date) {
-                invalidFields.Add("end date");
-                result = false;
-            }
-
-            if (!endDatePicker.Enabled && startTimePicker.Value >= endTimePicker.Value) {
-                invalidFields.Add("time fields");
-                result = false;
-            }
-
-            if (!result) {
-                return invalidFields;
-            }
-
-            return null;
+            return Validator.validateAbsenceParameters(startDatePicker, endDatePicker, startTimePicker, endTimePicker, invalidFieldsList, allTheDoctors);         
         }
 
-        /** Methods saves the absence if correct data provided */
+        /** 
+         * Methods saves the absence if correct data provided 
+         * 
+         * @param abcence Absence model
+         * @return result of saving
+         */
         private bool saveAbsence(AbsenceModel absence) {
             AbsenceRepo repo = new AbsenceRepo(); 
             if (String.IsNullOrEmpty(absence.startTime)) {

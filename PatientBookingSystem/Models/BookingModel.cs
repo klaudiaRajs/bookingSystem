@@ -11,8 +11,8 @@ namespace PatientBookingSystem.Models {
         private string comment { get; set; }
         private int userId { get; set; }
         private int staffScheduleId { get; set; }
-        private String startTime;
-        private String endTime;
+        private string startTime;
+        private string endTime;
         private StaffModel staffMember;
         private ScheduleModel scheduleModel;
         private UserModel userModel { get; set; }
@@ -49,19 +49,19 @@ namespace PatientBookingSystem.Models {
             this.staffMember = staffModel;
         }
 
-        public String getStartTime() {
+        public string getStartTime() {
             return this.startTime; 
         }
 
-        public void setStartTime(String startTime) {
+        public void setStartTime(string startTime) {
             this.startTime = startTime; 
         }
 
-        public String getEndTime() {
+        public string getEndTime() {
             return this.endTime; 
         }
 
-        public void setEndTime(String endTime) {
+        public void setEndTime(string endTime) {
             this.endTime = endTime;
         }
 
@@ -97,11 +97,11 @@ namespace PatientBookingSystem.Models {
             return this.lackOfCancellation; 
         }
 
-        public void setComment(String comment) {
+        public void setComment(string comment) {
             this.comment = comment;
         }
 
-        public String getComment() {
+        public string getComment() {
             return this.comment; 
         }
 
@@ -112,7 +112,6 @@ namespace PatientBookingSystem.Models {
         public int getUserId() {
             return this.userId; 
         }
-
 
         public void setStaffScheduleId(int staffScheduleId) {
             this.staffScheduleId = staffScheduleId;

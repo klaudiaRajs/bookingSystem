@@ -31,6 +31,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
                 patientListBox.Visible = true;
                 fillInListOfAllPatients();
             }
+            this.CenterToScreen();
         }
 
         /** Method initiates process of saving a booking */
@@ -40,7 +41,14 @@ namespace PatientBookingSystem.Presenters.MainViews {
             string endTime = timeOfBooking.Text.Substring(7);
             int userId = ApplicationState.userId;
             if (ApplicationState.userType == "admin") {
-                userId = (int)patientListBox.SelectedValue;
+                if( (int)patientListBox.SelectedValue == 0) {
+                    FeedbackWindow message = new FeedbackWindow();
+                    message.setCustomizedMessage("You are required to choose a patient");
+                    message.Show();
+                    return;
+                } else {
+                    userId = (int)patientListBox.SelectedValue;
+                }
             }
             bool result = false;
             result = controller.bookAppointment(0, commentTextField.Text, 0, startTime, endTime, userId, staffScheduleId, 0);
@@ -76,9 +84,17 @@ namespace PatientBookingSystem.Presenters.MainViews {
 
         /** Method provides data source for patient drop down list */
         private void provideDataSourceForPatientDropDown(List<ListItem> dataSource ) {
+            patientListBox.DropDownStyle = ComboBoxStyle.DropDownList;
             patientListBox.DataSource = dataSource;
             patientListBox.DisplayMember = "text";
             patientListBox.ValueMember = "id";
+        }
+
+        
+        private void BookingWindow_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Escape) {
+                this.Close();
+            }
         }
     }
 }

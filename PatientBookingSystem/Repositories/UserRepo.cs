@@ -45,7 +45,7 @@ namespace PatientBookingSystem.Repositories {
         /** MEthod saves user to the database */
         internal bool save(UserModel user) {
             string query = "INSERT INTO " + table
-                + " (`firstName`, `lastName`, `login`, `password`, `DOB`, `phoneNumber`, `email`, `NiN`, `address`, `confirmationMethod`, `userType`) VALUES ("
+                + " (`firstName`, `lastName`, `login`, `password`, `DOB`, `phoneNumber`, `email`, `NiN`, `address`, `userType`, `notification`, `verification`, `confirmation`) VALUES ("
                 + this.getStringInMySqlInsertableFormat(user.getFirstName()) + ", "
                 + this.getStringInMySqlInsertableFormat(user.getLastName()) + ", "
                 + this.getStringInMySqlInsertableFormat(user.getLogin()) + ", "
@@ -55,7 +55,10 @@ namespace PatientBookingSystem.Repositories {
                 + this.getStringInMySqlInsertableFormat(user.getEmail()) + ", "
                 + (user.getNiN() == "NULL" ? user.getNiN() : this.getStringInMySqlInsertableFormat(user.getNiN())) + ", "
                 + (user.getAddress() == "NULL" ? user.getAddress() : this.getStringInMySqlInsertableFormat(user.getAddress())) + ", "
-                + this.getStringInMySqlInsertableFormat(user.getUserType()) + ")";
+                + this.getStringInMySqlInsertableFormat(user.getUserType()) + ", "
+                + "NULL" + ", "
+                + "NULL" + ", "
+                + this.getStringInMySqlInsertableFormat(user.getConfirmationSettings()) + ")";
             return this.db.Execute(query); 
         }
 
@@ -72,10 +75,6 @@ namespace PatientBookingSystem.Repositories {
 
         /** Method returns list of users by login credentials */
         public List<IModel> getListOfUsersByLoginCredentials(String login, String password) {
-            //this.db.printOutDatabases();
-            //this.db.printOutTables();
-            //this.db.printOutUsers();
-
             String query = "SELECT * FROM " + this.table + " WHERE login='" + login + "' and password ='" + password + "'";
             List<IModel> list = this.db.Query(query, new UserMapper());
 

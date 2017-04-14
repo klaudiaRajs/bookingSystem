@@ -20,7 +20,8 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.time = time;
             this.staffName = staffName;
             this.typeOfAppointment = typeOfAppointment;
-            fillInData(); 
+            fillInData();
+            this.CenterToScreen();
         }
 
         /** Method fills in the form */

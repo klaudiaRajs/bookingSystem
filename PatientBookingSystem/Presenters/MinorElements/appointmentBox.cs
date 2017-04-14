@@ -10,38 +10,43 @@ namespace PatientBookingSystem.Presenters.MinorElements {
     /** Class is responsible for managing appointmentBox element */
     partial class appointmentBox : UserControl {
 
-        int bookingId;
-        string typeOfAppointment;
-        string doctorsName;
-        string comment;
-        string date;
-        string time;
-        string patient;
-        AppointmentBoxI parent;
-        cancelAppointmentConfirmation confirmation;
+        private BookingController controller = new BookingController();
+        private int bookingId;
+        private string typeOfAppointment;
+        private string stafffMembersFullName;
+        private string comment;
+        private string date;
+        private string time;
+        private string patient;
+        private string attendanceStatus;
+        private AppointmentBoxI parent;
+        private cancelAppointmentConfirmation confirmation;
+        private BookingModel booking;
 
         /** Constructor prepares element by initializing fields and filling appointment information */
         public appointmentBox(AppointmentBoxI parent, BookingModel booking, string time) {
             InitializeComponent();
             this.initializeFields(parent, booking, time);
             this.fillInAppointmentData();
+            this.booking = booking;
         }
 
         /** Method initializes fields with values passed as parametrs */
         private void initializeFields(AppointmentBoxI parent, BookingModel booking, string time) {
             this.typeOfAppointment = booking.getStaffModel().getStaffType();
-            this.doctorsName = booking.getStaffModel().getFullStaffName();
+            this.stafffMembersFullName = booking.getStaffModel().getFullStaffName();
             if (!String.IsNullOrEmpty(booking.getComment())) {
                 this.comment = booking.getComment();
             } else {
                 this.comment = "No comment provided";
             }
+            this.attendanceStatus = controller.getAttendanceTextPerBooking(booking);
             this.date = booking.getScheduleModel().getDate();
             this.time = time;
             this.bookingId = booking.getBookingId();
             this.patient = booking.getUserModel().getFirstName() + " " + booking.getUserModel().getLastName();
             this.parent = parent;
-            this.confirmation = new cancelAppointmentConfirmation(this.date, this.time, this.doctorsName, this.typeOfAppointment, this);
+            this.confirmation = new cancelAppointmentConfirmation(this.date, this.time, this.stafffMembersFullName, this.typeOfAppointment, this);
         }
 
         /** Method hides reschedule button */
@@ -52,13 +57,15 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         /** Method fills the appointment data in */
         private void fillInAppointmentData() {
             typeOfAppointmentLabel.Text = this.typeOfAppointment;
-            doctorsNameLabel.Text = this.doctorsName;
+            doctorsNameLabel.Text = this.stafffMembersFullName;
             commentLabel.Text = this.comment;
             appointmentDateLabel.Text = this.date + " " + this.time;
+            attendanceStatusLabel.Text = this.attendanceStatus;
             if (ApplicationState.userType.Equals("admin")) {
                 patientLabel.Visible = true;
                 patientNameLabel.Visible = true;
                 patientNameLabel.Text = this.patient;
+                editButton.Visible = true;
             }
         }
 
@@ -69,7 +76,6 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method calls the controller for cancelling the appointment and reloads appointment boxes in parent window */
         public bool cancelAppointmentAfterConfirmation() {
-            BookingController controller = new BookingController();
             bool result = controller.cancelAppointment(this.bookingId);
             if (!result) {
                 // set some message here
@@ -86,7 +92,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method opens dialog allowing user to print confirmation for the appointment */
         private void printConfirmationButton_Click(object sender, EventArgs e) {
-            PrintConfirmationWindow print = new PrintConfirmationWindow(this.date, this.time, this.doctorsName, this.typeOfAppointment, this);
+            PrintConfirmationWindow print = new PrintConfirmationWindow(this.date, this.time, this.stafffMembersFullName, this.typeOfAppointment, this);
             print.Show();
         }
 
@@ -102,6 +108,12 @@ namespace PatientBookingSystem.Presenters.MinorElements {
                 SingleScheduleDayWindow dayOfBookedAppointment = new SingleScheduleDayWindow(parent, DateHelper.getDateInMySqlFormat(this.date));
                 dayOfBookedAppointment.Show();
             }
+        }
+
+        /** Method opens a window allowing to */
+        private void editButton_Click(object sender, EventArgs e) {
+            AttendanceEditWindow editWindow = new AttendanceEditWindow(this.parent, this.booking);
+            editWindow.Show();
         }
     }
 }

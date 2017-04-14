@@ -12,9 +12,12 @@ namespace PatientBookingSystem {
         public leftPanel(Main parent) {
             InitializeComponent();
             if (ApplicationState.userType.Equals("admin")) {
-                this.changePastAppointmentsToSurgeryManagementLabel(); 
+                this.changePastAppointmentsToSurgeryManagementLabel();
             }
             this.parent = parent;
+            if( ApplicationState.userType == "admin") {
+                upcomingAppointmentsBox1.Visible = false;
+            }
         }
 
         /** Method changes past appointments label to surgery management label */
@@ -29,7 +32,11 @@ namespace PatientBookingSystem {
 
         /** Method loads home panel */
         private void homeButton_Click(object sender, EventArgs e) {
-            parent.loadHomePanel();
+            if (ApplicationState.userType == "admin") {
+                parent.loadSurgeryManagementPanel();
+            } else {
+                parent.loadHomePanel();
+            }
         }
 
         /** Method loads personal information panel */

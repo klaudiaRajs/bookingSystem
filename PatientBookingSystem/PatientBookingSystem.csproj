@@ -95,6 +95,12 @@
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Models\StaffScheduleModel.cs" />
+    <Compile Include="Presenters\MainViews\AttendanceEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\AttendanceEditWindow.Designer.cs">
+      <DependentUpon>AttendanceEditWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presenters\PresenterInterfaces\AppointmentBoxI.cs" />
     <Compile Include="Presenters\Downloaded libraries\CheckedComboBox.cs">
       <SubType>Component</SubType>
@@ -296,6 +302,9 @@
     <Compile Include="Repositories\ScheduleRepo.cs" />
     <Compile Include="Repositories\StaffRepo.cs" />
     <Compile Include="Repositories\UserRepo.cs" />
+    <EmbeddedResource Include="Presenters\MainViews\AttendanceEditWindow.resx">
+      <DependentUpon>AttendanceEditWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\BookingWindow.resx">
       <DependentUpon>BookingWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,6 +423,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="UserManual.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -431,6 +441,23 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="AxOPTSHOLDLib">
       <Guid>{3050F4E0-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
       <VersionMajor>1</VersionMajor>

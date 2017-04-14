@@ -24,12 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.managementMenuPanel = new System.Windows.Forms.Panel();
+            this.addScheduleButton = new System.Windows.Forms.Label();
             this.cancelAppointmentButton = new System.Windows.Forms.Label();
             this.addPatient = new System.Windows.Forms.Label();
             this.addExceptionDayForStaffMember = new System.Windows.Forms.Label();
             this.addStaffMember = new System.Windows.Forms.Label();
             this.managementContentPanel = new System.Windows.Forms.Panel();
-            this.addScheduleButton = new System.Windows.Forms.Label();
             this.managementMenuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,17 +45,30 @@
             this.managementMenuPanel.Size = new System.Drawing.Size(854, 43);
             this.managementMenuPanel.TabIndex = 0;
             // 
+            // addScheduleButton
+            // 
+            this.addScheduleButton.AutoSize = true;
+            this.addScheduleButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.addScheduleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addScheduleButton.Location = new System.Drawing.Point(659, 13);
+            this.addScheduleButton.Margin = new System.Windows.Forms.Padding(3);
+            this.addScheduleButton.Name = "addScheduleButton";
+            this.addScheduleButton.Size = new System.Drawing.Size(94, 17);
+            this.addScheduleButton.TabIndex = 27;
+            this.addScheduleButton.Text = "Add schedule";
+            this.addScheduleButton.Click += new System.EventHandler(this.addScheduleButton_Click);
+            // 
             // cancelAppointmentButton
             // 
             this.cancelAppointmentButton.AutoSize = true;
             this.cancelAppointmentButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.cancelAppointmentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelAppointmentButton.Location = new System.Drawing.Point(495, 13);
+            this.cancelAppointmentButton.Location = new System.Drawing.Point(485, 13);
             this.cancelAppointmentButton.Margin = new System.Windows.Forms.Padding(3);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
-            this.cancelAppointmentButton.Size = new System.Drawing.Size(133, 17);
+            this.cancelAppointmentButton.Size = new System.Drawing.Size(168, 17);
             this.cancelAppointmentButton.TabIndex = 26;
-            this.cancelAppointmentButton.Text = "Cancel appointment";
+            this.cancelAppointmentButton.Text = "Cancel / edit appointment";
             this.cancelAppointmentButton.Click += new System.EventHandler(this.cancelAppointmentButton_Click);
             // 
             // addPatient
@@ -63,7 +76,7 @@
             this.addPatient.AutoSize = true;
             this.addPatient.BackColor = System.Drawing.Color.LightSteelBlue;
             this.addPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addPatient.Location = new System.Drawing.Point(210, 13);
+            this.addPatient.Location = new System.Drawing.Point(200, 13);
             this.addPatient.Margin = new System.Windows.Forms.Padding(3);
             this.addPatient.Name = "addPatient";
             this.addPatient.Size = new System.Drawing.Size(109, 17);
@@ -76,7 +89,7 @@
             this.addExceptionDayForStaffMember.AutoSize = true;
             this.addExceptionDayForStaffMember.BackColor = System.Drawing.Color.LightSteelBlue;
             this.addExceptionDayForStaffMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addExceptionDayForStaffMember.Location = new System.Drawing.Point(325, 13);
+            this.addExceptionDayForStaffMember.Location = new System.Drawing.Point(315, 13);
             this.addExceptionDayForStaffMember.Margin = new System.Windows.Forms.Padding(3);
             this.addExceptionDayForStaffMember.Name = "addExceptionDayForStaffMember";
             this.addExceptionDayForStaffMember.Size = new System.Drawing.Size(164, 17);
@@ -89,7 +102,7 @@
             this.addStaffMember.AutoSize = true;
             this.addStaffMember.BackColor = System.Drawing.Color.LightSteelBlue;
             this.addStaffMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addStaffMember.Location = new System.Drawing.Point(85, 13);
+            this.addStaffMember.Location = new System.Drawing.Point(75, 13);
             this.addStaffMember.Margin = new System.Windows.Forms.Padding(3);
             this.addStaffMember.Name = "addStaffMember";
             this.addStaffMember.Size = new System.Drawing.Size(119, 17);
@@ -103,19 +116,6 @@
             this.managementContentPanel.Name = "managementContentPanel";
             this.managementContentPanel.Size = new System.Drawing.Size(850, 499);
             this.managementContentPanel.TabIndex = 1;
-            // 
-            // addScheduleButton
-            // 
-            this.addScheduleButton.AutoSize = true;
-            this.addScheduleButton.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.addScheduleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addScheduleButton.Location = new System.Drawing.Point(634, 13);
-            this.addScheduleButton.Margin = new System.Windows.Forms.Padding(3);
-            this.addScheduleButton.Name = "addScheduleButton";
-            this.addScheduleButton.Size = new System.Drawing.Size(94, 17);
-            this.addScheduleButton.TabIndex = 27;
-            this.addScheduleButton.Text = "Add schedule";
-            this.addScheduleButton.Click += new System.EventHandler(this.addScheduleButton_Click);
             // 
             // surgeryManagement
             // 

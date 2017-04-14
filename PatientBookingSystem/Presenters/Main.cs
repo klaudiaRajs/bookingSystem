@@ -8,13 +8,14 @@ using PatientBookingSystem.Helpers;
 namespace PatientBookingSystem {
     /** Entry point to the system */ 
     public partial class Main : Form {
-        const string helpMessageForLoggin = " Your login and password should be obtained from your surgery."
+        const string HELP_MESSAGE_FOR_LOGGER = " Your login and password should be obtained from your surgery."
             + "Please contact the surgery if the one provided by them doesn't work";
 
         public Main() {
             InitializeComponent();
             HomePanel.Visible = false;
             LogInPanel.Visible = true;
+            this.CenterToScreen();
         }
 
         /** Method loads upcoming appointments panel */ 
@@ -34,6 +35,7 @@ namespace PatientBookingSystem {
                     if (logger.logUserIn(loginField.Text, passwordField.Text) == true) {
                         LogInPanel.Visible = false;
                         HomePanel.Visible = true;
+                        this.CenterToScreen();
                         loadLeftPanel();
                         loadInitialInformationPanel();
                         if (ApplicationState.userType != "admin") {
@@ -137,7 +139,7 @@ namespace PatientBookingSystem {
         /** Method shows up a help window */
         private void helpButton_Click(object sender, EventArgs e) {
             HelpWindow help = new HelpWindow();
-            help.setHelpMessage(helpMessageForLoggin);
+            help.setHelpMessage(HELP_MESSAGE_FOR_LOGGER);
             help.Show();
         }
     }

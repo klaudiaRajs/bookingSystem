@@ -33,6 +33,7 @@
             this.upcomingUppointmentsButton = new System.Windows.Forms.Label();
             this.MenuSchedule = new System.Windows.Forms.Label();
             this.upcomingAppointmentsBox1 = new PatientBookingSystem.Presenters.upcomingAppointmentsBox();
+            this.surgeryInfoBox1 = new PatientBookingSystem.Presenters.surgeryInfoBox();
             this.leftPanelTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,11 +165,20 @@
             this.upcomingAppointmentsBox1.Size = new System.Drawing.Size(199, 150);
             this.upcomingAppointmentsBox1.TabIndex = 4;
             // 
+            // surgeryInfoBox1
+            // 
+            this.surgeryInfoBox1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.surgeryInfoBox1.Location = new System.Drawing.Point(0, 511);
+            this.surgeryInfoBox1.Name = "surgeryInfoBox1";
+            this.surgeryInfoBox1.Size = new System.Drawing.Size(218, 133);
+            this.surgeryInfoBox1.TabIndex = 5;
+            // 
             // leftPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
+            this.Controls.Add(this.surgeryInfoBox1);
             this.Controls.Add(this.upcomingAppointmentsBox1);
             this.Controls.Add(this.leftPanelTop);
             this.Name = "leftPanel";
@@ -190,5 +200,6 @@
         private System.Windows.Forms.Label homeButton;
         private Presenters.upcomingAppointmentsBox upcomingAppointmentsBox1;
         private System.Windows.Forms.Label historicAppointments;
+        private Presenters.surgeryInfoBox surgeryInfoBox1;
     }
 }

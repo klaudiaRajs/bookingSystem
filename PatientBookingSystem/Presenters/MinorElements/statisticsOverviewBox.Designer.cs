@@ -39,7 +39,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(181, 17);
             this.label15.TabIndex = 39;
-            this.label15.Text = "Not attended: 0";
+            this.label15.Text = "Not attended: ";
             // 
             // label14
             // 
@@ -50,7 +50,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(181, 17);
             this.label14.TabIndex = 38;
-            this.label14.Text = "Cancelled: 0";
+            this.label14.Text = "Cancelled: ";
             // 
             // label13
             // 
@@ -61,7 +61,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(181, 17);
             this.label13.TabIndex = 37;
-            this.label13.Text = "Attended late: 3";
+            this.label13.Text = "Attended late: ";
             // 
             // label12
             // 
@@ -72,7 +72,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(181, 17);
             this.label12.TabIndex = 36;
-            this.label12.Text = "Attended on time: 5";
+            this.label12.Text = "Attended on time: ";
             // 
             // label11
             // 

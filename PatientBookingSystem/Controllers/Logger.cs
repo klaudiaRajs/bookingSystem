@@ -9,7 +9,7 @@ namespace PatientBookingSystem.Controllers {
     class Logger {
 
         /** Method is resposible for logging user in and setting the user as logged in */
-        public Boolean logUserIn(String login, String password) {
+        public Boolean logUserIn(string login, string password) {
             List<string> errors = Validator.validateLoginCredentials(login, password);
             if (errors.Count == 0) {
                 UserModel user = this.getUserByLoginCredentials(login, password);

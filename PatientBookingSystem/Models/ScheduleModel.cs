@@ -26,12 +26,12 @@ namespace PatientBookingSystem.Models {
             this.scheduleId = scheduleId;
         }
 
-        public String getDate() {
+        public string getDate() {
             return this.date; 
         }
 
         /** Method sets model's date and if required deletes time part from date string */
-        public void setDate(String date) {
+        public void setDate(string date) {
             bool isDateTime = date.IndexOf(" ") >= 0;
             if (isDateTime) {
                 date = date.Remove(date.IndexOf(" "));
@@ -39,19 +39,19 @@ namespace PatientBookingSystem.Models {
             this.date = date; 
         }
 
-        public String getStartTime() {
+        public string getStartTime() {
             return this.startTime; 
         }
 
-        public void setStartTime(String startTime) {
+        public void setStartTime(string startTime) {
             this.startTime = startTime;
         }
 
-        public String getEndTime() {
+        public string getEndTime() {
             return this.endTime;
         }
 
-        public void setEndTime(String endTime) {
+        public void setEndTime(string endTime) {
             this.endTime = endTime; 
         }
     }

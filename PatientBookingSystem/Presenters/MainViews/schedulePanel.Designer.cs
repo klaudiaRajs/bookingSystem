@@ -30,7 +30,6 @@
             this.afternoonAppointmentsCheckbox = new System.Windows.Forms.CheckBox();
             this.morningAppointmentsCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.previousMonthButton = new System.Windows.Forms.Label();
             this.monthLabel = new System.Windows.Forms.Label();
@@ -61,7 +60,6 @@
             this.scheduleHeaderPanel.Controls.Add(this.afternoonAppointmentsCheckbox);
             this.scheduleHeaderPanel.Controls.Add(this.morningAppointmentsCheckbox);
             this.scheduleHeaderPanel.Controls.Add(this.label1);
-            this.scheduleHeaderPanel.Controls.Add(this.label7);
             this.scheduleHeaderPanel.Controls.Add(this.flowLayoutPanel1);
             this.scheduleHeaderPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.scheduleHeaderPanel.Location = new System.Drawing.Point(0, 0);
@@ -121,16 +119,6 @@
             this.label1.Size = new System.Drawing.Size(92, 17);
             this.label1.TabIndex = 36;
             this.label1.Text = "Filter by time:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(5, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 13);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "Home > Find appointment";
             // 
             // flowLayoutPanel1
             // 
@@ -230,7 +218,6 @@
         private System.Windows.Forms.FlowLayoutPanel appointmentDaysPanel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label yearLabel;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox afternoonAppointmentsCheckbox;
         private System.Windows.Forms.CheckBox morningAppointmentsCheckbox;
         private System.Windows.Forms.Label label1;

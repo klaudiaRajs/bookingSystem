@@ -15,15 +15,22 @@ namespace PatientBookingSystem.Helpers {
             setEnd(to);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public TimeRange(TimeSpan from, TimeSpan to) {
             this.start = from;
             this.end = to;
         }
-
+        
+        /** Method parses the string time into timespan */
         public void setStart(string start) {
             this.start = TimeSpan.Parse(start);
         }
 
+        /** Method parses the string time into timespan */
         public void setEnd(string end) {
             this.end = TimeSpan.Parse(end);
         }
