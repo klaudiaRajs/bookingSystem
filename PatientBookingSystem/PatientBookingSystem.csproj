@@ -101,6 +101,12 @@
     <Compile Include="Presenters\MainViews\AttendanceEditWindow.Designer.cs">
       <DependentUpon>AttendanceEditWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\MainViews\PrintingPrompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\MainViews\PrintingPrompt.Designer.cs">
+      <DependentUpon>PrintingPrompt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presenters\PresenterInterfaces\AppointmentBoxI.cs" />
     <Compile Include="Presenters\Downloaded libraries\CheckedComboBox.cs">
       <SubType>Component</SubType>
@@ -316,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\cancelAppointmentConfirmation.resx">
       <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presenters\MainViews\PrintingPrompt.resx">
+      <DependentUpon>PrintingPrompt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\SingleScheduleDayWindow.resx">
       <DependentUpon>SingleScheduleDayWindow.cs</DependentUpon>

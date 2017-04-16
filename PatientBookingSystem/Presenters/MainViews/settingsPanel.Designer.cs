@@ -150,6 +150,7 @@
             // printableConfirmation
             // 
             this.printableConfirmation.AutoSize = true;
+            this.printableConfirmation.Enabled = false;
             this.printableConfirmation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printableConfirmation.Location = new System.Drawing.Point(306, 247);
             this.printableConfirmation.Name = "printableConfirmation";

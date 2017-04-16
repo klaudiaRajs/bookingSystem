@@ -13,6 +13,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
         private AppointmentBoxI parent;
         private const string ATTENDANCE_OPTION_NOT_SELECTED = "Please select attendance status!";
 
+        /** 
+         * Constructor 
+         * 
+         * @param parent a view class implementing AppointmentBoxI interface 
+         * @param booking BookingModel
+         */
         public AttendanceEditWindow(AppointmentBoxI parent, BookingModel booking) {
             InitializeComponent();
             this.booking = booking;
@@ -62,6 +68,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             message.Show();
         }
 
+        /** Method allows closing the window by pressing "Esc" */
         private void AttendanceEditWindow_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.Hide();

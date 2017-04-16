@@ -23,56 +23,56 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.appointmentsIgnored = new System.Windows.Forms.Label();
+            this.appointmentsCancelled = new System.Windows.Forms.Label();
+            this.appointmentsAttendedLate = new System.Windows.Forms.Label();
+            this.appointmentAttendedOnTime = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label15
+            // appointmentsIgnored
             // 
-            this.label15.BackColor = System.Drawing.Color.Silver;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(8, 93);
-            this.label15.Margin = new System.Windows.Forms.Padding(3);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(181, 17);
-            this.label15.TabIndex = 39;
-            this.label15.Text = "Not attended: ";
+            this.appointmentsIgnored.BackColor = System.Drawing.Color.Silver;
+            this.appointmentsIgnored.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appointmentsIgnored.Location = new System.Drawing.Point(8, 93);
+            this.appointmentsIgnored.Margin = new System.Windows.Forms.Padding(3);
+            this.appointmentsIgnored.Name = "appointmentsIgnored";
+            this.appointmentsIgnored.Size = new System.Drawing.Size(181, 17);
+            this.appointmentsIgnored.TabIndex = 39;
+            this.appointmentsIgnored.Text = "Ignored: ";
             // 
-            // label14
+            // appointmentsCancelled
             // 
-            this.label14.BackColor = System.Drawing.Color.Silver;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(8, 70);
-            this.label14.Margin = new System.Windows.Forms.Padding(3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(181, 17);
-            this.label14.TabIndex = 38;
-            this.label14.Text = "Cancelled: ";
+            this.appointmentsCancelled.BackColor = System.Drawing.Color.Silver;
+            this.appointmentsCancelled.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appointmentsCancelled.Location = new System.Drawing.Point(8, 70);
+            this.appointmentsCancelled.Margin = new System.Windows.Forms.Padding(3);
+            this.appointmentsCancelled.Name = "appointmentsCancelled";
+            this.appointmentsCancelled.Size = new System.Drawing.Size(181, 17);
+            this.appointmentsCancelled.TabIndex = 38;
+            this.appointmentsCancelled.Text = "Cancelled: ";
             // 
-            // label13
+            // appointmentsAttendedLate
             // 
-            this.label13.BackColor = System.Drawing.Color.Silver;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(8, 47);
-            this.label13.Margin = new System.Windows.Forms.Padding(3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(181, 17);
-            this.label13.TabIndex = 37;
-            this.label13.Text = "Attended late: ";
+            this.appointmentsAttendedLate.BackColor = System.Drawing.Color.Silver;
+            this.appointmentsAttendedLate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appointmentsAttendedLate.Location = new System.Drawing.Point(8, 47);
+            this.appointmentsAttendedLate.Margin = new System.Windows.Forms.Padding(3);
+            this.appointmentsAttendedLate.Name = "appointmentsAttendedLate";
+            this.appointmentsAttendedLate.Size = new System.Drawing.Size(181, 17);
+            this.appointmentsAttendedLate.TabIndex = 37;
+            this.appointmentsAttendedLate.Text = "Attended late: ";
             // 
-            // label12
+            // appointmentAttendedOnTime
             // 
-            this.label12.BackColor = System.Drawing.Color.Silver;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(8, 23);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(181, 17);
-            this.label12.TabIndex = 36;
-            this.label12.Text = "Attended on time: ";
+            this.appointmentAttendedOnTime.BackColor = System.Drawing.Color.Silver;
+            this.appointmentAttendedOnTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appointmentAttendedOnTime.Location = new System.Drawing.Point(8, 23);
+            this.appointmentAttendedOnTime.Margin = new System.Windows.Forms.Padding(3);
+            this.appointmentAttendedOnTime.Name = "appointmentAttendedOnTime";
+            this.appointmentAttendedOnTime.Size = new System.Drawing.Size(181, 17);
+            this.appointmentAttendedOnTime.TabIndex = 36;
+            this.appointmentAttendedOnTime.Text = "Attended on time: ";
             // 
             // label11
             // 
@@ -91,10 +91,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.appointmentsIgnored);
+            this.Controls.Add(this.appointmentsCancelled);
+            this.Controls.Add(this.appointmentsAttendedLate);
+            this.Controls.Add(this.appointmentAttendedOnTime);
             this.Controls.Add(this.label11);
             this.Name = "statisticsOverviewBox";
             this.Size = new System.Drawing.Size(250, 150);
@@ -105,10 +105,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label appointmentsIgnored;
+        private System.Windows.Forms.Label appointmentsCancelled;
+        private System.Windows.Forms.Label appointmentsAttendedLate;
+        private System.Windows.Forms.Label appointmentAttendedOnTime;
         private System.Windows.Forms.Label label11;
     }
 }

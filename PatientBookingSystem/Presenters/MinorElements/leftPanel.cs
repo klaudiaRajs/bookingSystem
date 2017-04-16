@@ -8,7 +8,11 @@ namespace PatientBookingSystem {
 
         Main parent;
 
-        /** Constructor prepares element base on user type */
+        /** 
+         * Constructor prepares element base on user type 
+         * 
+         * @param parent object of a Main class 
+         */
         public leftPanel(Main parent) {
             InitializeComponent();
             if (ApplicationState.userType.Equals("admin")) {

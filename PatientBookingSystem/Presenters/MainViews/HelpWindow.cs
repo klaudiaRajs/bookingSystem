@@ -5,6 +5,9 @@ namespace PatientBookingSystem {
     /** Class is responsible for displaying and closing help window */
     public partial class HelpWindow : Form {
 
+        /** 
+         * Constructor loads pdf manual to the window
+         */
         public HelpWindow() {
             InitializeComponent();
             this.CenterToScreen();

@@ -13,8 +13,16 @@ namespace PatientBookingSystem.Presenters.MainViews {
         string staffName;
         string typeOfAppointment;
 
-        /** Constructor initializes fields and build the view up */
-        public PrintConfirmationWindow(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
+        /** 
+         * Constructor initializes fields and build the view up 
+         * 
+         * @param date
+         * @param time
+         * @param staffName 
+         * @param typeOfAppointment
+         * @param parent appointmentBox objects
+         */
+        public PrintConfirmationWindow(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent = null) {
             InitializeComponent();
             this.date = date;
             this.time = time;
@@ -48,15 +56,15 @@ namespace PatientBookingSystem.Presenters.MainViews {
 
         /** Method prepares view for printing */
         private void prepareViewForPrinting() {
-            this.BackColor = System.Drawing.Color.White;
-            dateLabel.BackColor = System.Drawing.Color.White;
-            timeLabel.BackColor = System.Drawing.Color.White;
-            staffNameLabel.BackColor = System.Drawing.Color.White;
-            typeOfAppointmentLabel.BackColor = System.Drawing.Color.White;
-            appointmentDate.BackColor = System.Drawing.Color.White;
-            timeLabelLabel.BackColor = System.Drawing.Color.White;
-            staffNameLabelLabel.BackColor = System.Drawing.Color.White;
-            typeOfAppointmentLabelLabel.BackColor = System.Drawing.Color.White;
+            this.BackColor = Color.White;
+            dateLabel.BackColor = Color.White;
+            timeLabel.BackColor = Color.White;
+            staffNameLabel.BackColor = Color.White;
+            typeOfAppointmentLabel.BackColor = Color.White;
+            appointmentDate.BackColor = Color.White;
+            timeLabelLabel.BackColor = Color.White;
+            staffNameLabelLabel.BackColor = Color.White;
+            typeOfAppointmentLabelLabel.BackColor = Color.White;
         }
 
         /** Method prints the image of the confirmation window */

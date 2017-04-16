@@ -27,7 +27,7 @@ namespace PatientBookingSystem {
         /** Method fills in information in the view */
         private void fillInViewInformation() {
             BookingController controller = new BookingController(); 
-            theMostRecentAppointment.Text += getDateInPresenterFormat(controller.getLastAppointment());
+            theMostRecentAppointment.Text += getDateInPresenterFormat(controller.getDateOfTheLastAppointment());
             theMostAttendandedDoctor.Text += controller.getTheMostOftenAttendedDoctor();
             if (controller.getTheMostOftenAttendedNurse().Count != 0) {
                 theMostAttendendedNurse.Text += (controller.getTheMostOftenAttendedNurse().First() as StaffModel).getFullStaffName();
@@ -45,7 +45,12 @@ namespace PatientBookingSystem {
             personalStatistics.Visible = false;
         }
 
-        /** Method converts date based to format displayable in the view */
+        /** 
+         * Method converts date based to format displayable in the view 
+         * 
+         * @param date
+         * @return date in format well displayed in the view
+         */
         protected string getDateInPresenterFormat(string date) {
             string[] separator = new string[] { ".", " " };
             if (String.IsNullOrEmpty(date)) {

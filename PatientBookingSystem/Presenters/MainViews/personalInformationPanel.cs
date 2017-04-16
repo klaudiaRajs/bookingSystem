@@ -33,18 +33,27 @@ namespace PatientBookingSystem {
             theMostOftenAttendedStaffMemberLabel.Text = getTheMostOftenAttendedStaffMember();
         }
 
-        /** Method returns the most often attended staff member for the user */
+        /** 
+         * Method returns the most often attended staff member for the user 
+         * 
+         * @return full name of the most often attendanded staff member 
+         */
         private string getTheMostOftenAttendedStaffMember() {
             BookingController bookingController = new BookingController(); 
             return bookingController.getFullNameOfTheMostOftenAttendedDoctor(); 
         }
 
-        /** Method returns date in prestable format */
-        protected String getDateInPresenterFormat(String date) {
+        /** 
+         * Method returns date in prestable format 
+         * 
+         * @param date
+         * @return date in the human readable format
+         */
+        protected string getDateInPresenterFormat(string date) {
             string[] separator = new string[] { ".", " " };
             string[] dateContent = date.Split(separator, StringSplitOptions.None);
             DateTime newDate = new DateTime(Int32.Parse(dateContent[2]), Int32.Parse(dateContent[1]), Int32.Parse(dateContent[0]));
-            String dateInFormat = newDate.ToString("dddd dd MMMM, yyyy");
+            string dateInFormat = newDate.ToString("dddd dd MMMM, yyyy");
             return dateInFormat;
         }
     }

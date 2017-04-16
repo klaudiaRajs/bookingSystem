@@ -23,7 +23,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         private cancelAppointmentConfirmation confirmation;
         private BookingModel booking;
 
-        /** Constructor prepares element by initializing fields and filling appointment information */
+        /** 
+         * Constructor prepares element by initializing fields and filling appointment information 
+         * 
+         * @param parent an object implementing AppointmentBoxI interface 
+         * @param booking booking model 
+         * @param time 
+         */
         public appointmentBox(AppointmentBoxI parent, BookingModel booking, string time) {
             InitializeComponent();
             this.initializeFields(parent, booking, time);
@@ -31,7 +37,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.booking = booking;
         }
 
-        /** Method initializes fields with values passed as parametrs */
+        /** 
+         * Method initializes fields with values passed as parametrs 
+         * 
+         * @param parent  an object implementing AppointmentBoxI interface 
+         * @param booking booking model 
+         * @param time 
+         */
         private void initializeFields(AppointmentBoxI parent, BookingModel booking, string time) {
             this.typeOfAppointment = booking.getStaffModel().getStaffType();
             this.stafffMembersFullName = booking.getStaffModel().getFullStaffName();
@@ -74,7 +86,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             confirmation.Show();
         }
 
-        /** Method calls the controller for cancelling the appointment and reloads appointment boxes in parent window */
+        /** 
+         * Method calls the controller for cancelling the appointment and reloads appointment boxes in parent window 
+         * 
+         * @return result of cancelling the appointment
+         */
         public bool cancelAppointmentAfterConfirmation() {
             bool result = controller.cancelAppointment(this.bookingId);
             if (!result) {
@@ -102,7 +118,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.confirmation.Show();
         }
 
-        /** Method shows timetable if method calling passes true */
+        /** 
+         * Method shows timetable if method calling passes true 
+         * 
+         * @return information on opening the schedule
+         */
         public void shouldOpenSchedule(bool shouldOpen) {
             if (shouldOpen) {
                 SingleScheduleDayWindow dayOfBookedAppointment = new SingleScheduleDayWindow(parent, DateHelper.getDateInMySqlFormat(this.date));

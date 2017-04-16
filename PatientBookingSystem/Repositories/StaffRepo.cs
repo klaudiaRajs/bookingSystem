@@ -2,15 +2,21 @@
 using PatientBookingSystem.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace PatientBookingSystem.Repositories {
     /** Class is responsible for communicating rest of the system with pbs_staff table in the database */
     class StaffRepo : BaseRepo {
         
-        string table = "pbs_staff";
+        private string table = "pbs_staff";
 
-        /** Returns staff model based on staff id */
-        internal StaffModel getStaffMemberById(int id) {
+        /** 
+         * Method returns staff model based on staff id 
+         * 
+         * @param id staff id 
+         * @return staff model 
+         */
+        public StaffModel getStaffMemberById(int id) {
             string query = "SELECT * from " + table + " WHERE staffId = " + id;
 
             List<IModel> staffMembers = this.db.Query(query, new StaffMapper());
@@ -20,8 +26,28 @@ namespace PatientBookingSystem.Repositories {
             return (staffMembers.First() as StaffModel); 
         }
 
-        /** Saves staff model to the database and returns result (true/false) */
-        internal bool addStaffMember(StaffModel staffMember) {
+        /** 
+         * Method returns staff type base on staff schedule id 
+         * 
+         * @param staffScheduleId
+         * @return staff type
+         */
+        public string getStaffTypeBasedOnStaffScheduleId(int staffScheduleId) {
+            string query = "SELECT * from scheduleview where staffScheduleId = " + staffScheduleId;
+            List<IModel> staffMembers = this.db.Query(query, new StaffScheduleMapper());
+            if( staffMembers.Count == 0) {
+                return "Invalid";
+            }
+            return (staffMembers.First() as StaffScheduleModel).getStaffMember().getStaffType();
+        }
+
+        /** 
+         * Saves staff model to the database and returns result (true/false) 
+         * 
+         * @param staffMember 
+         * @return result of saving 
+         */
+        public bool addStaffMember(StaffModel staffMember) {
             string query = "INSERT INTO " + table + "(`firstName`, `lastName`, `phoneNumber`, `staffType`) VALUES( "
                 + this.getStringInMySqlInsertableFormat(staffMember.getFirstName()) + ", "
                 + this.getStringInMySqlInsertableFormat(staffMember.getLastName()) + ", "
@@ -30,8 +56,12 @@ namespace PatientBookingSystem.Repositories {
             return this.db.Execute(query);
         }
 
-        /** Return list of all staff members */
-        internal List<IModel> getAllStaffMembers() {
+        /** 
+         * Method return list of all staff members 
+         * 
+         * @return list of all staff members
+         */
+        public List<IModel> getAllStaffMembers() {
             string query = "SELECT * from " + table; 
             List<IModel> staffMembers = this.db.Query(query, new StaffMapper()); 
             if( staffMembers.Count == 0) {

@@ -6,42 +6,58 @@ using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Presenters;
 
 namespace PatientBookingSystem {
+    /** Class is responsible for managing the setting panel view */
     public partial class settingsPanel : UserControl {
 
-        private enum verificationOptions { call, email };
-        private enum confirmationOptions { email, print };
+        private enum verificationOptions { call = 1, email = 0 };
+        private enum confirmationOptions { email = 0, print = 1 };
         UserController controller = new UserController();
 
         public settingsPanel() {
             InitializeComponent();
             fillInSettingsBasedOnUserData();
+            adjustAvailableConfirmationMethods();
         }
 
+        /** Method adjusts available confirmation methods */
+        private void adjustAvailableConfirmationMethods() {
+            emailConfirmation.Enabled = settingsPanel.confirmationOptions.email != 0;
+            printableConfirmation.Enabled = settingsPanel.confirmationOptions.print != 0;
+        }
+
+        /** Method adjusts available confirmation methods */
+        private void adjustAvailableVerificationMethods() {
+            emailVerification.Enabled = settingsPanel.verificationOptions.email != 0;
+            onThePhoneVerification.Enabled = settingsPanel.verificationOptions.call != 0;
+        }
+
+        /** Method is responsible for filling in settings for logged in user*/
         private void fillInSettingsBasedOnUserData() {
             ApplicationState.refreshUser();
             string notifications = ApplicationState.notifications;
             string verification = ApplicationState.verifications;
-            string confirmation = ApplicationState.confirmations; 
-            if( oneWeekNotificationCheckBox.Enabled && notifications.Contains("1week")) {
+            string confirmation = ApplicationState.confirmations;
+            if (oneWeekNotificationCheckBox.Enabled && notifications.Contains("1week")) {
                 oneWeekNotificationCheckBox.Checked = true;
             }
-            if(sameDayNotification.Enabled && notifications.Contains("1day")) {
+            if (sameDayNotification.Enabled && notifications.Contains("1day")) {
                 sameDayNotification.Checked = true;
             }
-            if( onThePhoneVerification.Enabled && verification.Contains(settingsPanel.verificationOptions.call.ToString())) {
+            if (onThePhoneVerification.Enabled && verification.Contains(settingsPanel.verificationOptions.call.ToString())) {
                 onThePhoneVerification.Checked = true;
             }
-            if( emailVerification.Enabled && verification.Contains(settingsPanel.verificationOptions.email.ToString())) {
+            if (emailVerification.Enabled && verification.Contains(settingsPanel.verificationOptions.email.ToString())) {
                 emailVerification.Checked = true;
             }
-            if( emailConfirmation.Enabled && confirmation.Contains(settingsPanel.confirmationOptions.email.ToString())) {
+            if (emailConfirmation.Enabled && confirmation.Contains(settingsPanel.confirmationOptions.email.ToString())) {
                 emailConfirmation.Checked = true;
             }
-            if( printableConfirmation.Enabled && confirmation.Contains(settingsPanel.confirmationOptions.print.ToString())) {
+            if (printableConfirmation.Enabled && confirmation.Contains(settingsPanel.confirmationOptions.print.ToString())) {
                 printableConfirmation.Checked = true;
             }
         }
 
+        /** Method is responsible for initiation of the process of saving the settings */
         private void saveUserSettings_Click(object sender, EventArgs e) {
             List<string> notification = new List<string>();
             List<string> verification = new List<string>();

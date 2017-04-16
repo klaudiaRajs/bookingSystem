@@ -22,5 +22,10 @@ namespace PatientBookingSystem.Helpers {
             ApplicationState.verifications = user.getVerificationSettings() == null ? "" : user.getVerificationSettings();
             ApplicationState.confirmations = user.getConfirmationSettings() == null ? "" : user.getConfirmationSettings();
         } 
+
+        /** Method returns user's confirmation settings as array of strings */
+        public static string[] getConfirmationArray() {
+            return ApplicationState.confirmations.Split(',');
+        }
     }
 }

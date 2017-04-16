@@ -72,7 +72,11 @@ namespace PatientBookingSystem.Models {
             return this.DOBd; 
         }
 
-        /** Method returns date in mysql format */
+        /** 
+         * Method returns date in mysql format
+         * 
+         * @return date in MySQL format
+         */
         public string getDobInMySqlFormat() {
             return this.DOBd.ToString("yyyy-MM-dd");
         }

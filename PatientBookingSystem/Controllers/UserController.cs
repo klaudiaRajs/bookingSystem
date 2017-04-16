@@ -9,12 +9,22 @@ namespace PatientBookingSystem.Controllers {
 
         private UserRepo repo = new UserRepo();
 
-        /** Method returns all the users */
+        /** 
+         * Method returns all the users 
+         * 
+         * @return list of all users
+         */
         public List<IModel> getAllUsers() {
             return repo.getListOfAllUsers();
         }
 
-        /** Method returns user model for given login and password */
+        /** 
+         * Method returns user model for given login and password 
+         * 
+         * @param login 
+         * @param password 
+         * @return user model corresponding to the credentials
+         */
         public UserModel getUserByLoginCredentials(string login, string password) {
             List<IModel> usersByCredentials = repo.getListOfUsersByLoginCredentials(login, password);
             if (usersByCredentials.Count == 0 || usersByCredentials.Count > 2) {
@@ -23,12 +33,24 @@ namespace PatientBookingSystem.Controllers {
             return usersByCredentials[0] as UserModel; 
         } 
 
-        /** Method initiates process of saving user to the database */ 
+        /** 
+         * Method initiates process of saving user to the database 
+         * 
+         * @param user userModel
+         * @return result of saving user
+         */ 
         public bool save(UserModel user) {
             return repo.save(user);
         }
 
-        /** Method initiates saving user settings for notifications, confirmations and verifications */
+        /** 
+         * Method initiates saving user settings for notifications, confirmations and verifications 
+         * 
+         * @param notification 
+         * @param verification
+         * @param confirmation 
+         * @return result of saving the settings
+         */
         internal bool saveSettings(List<string> notification, List<string> verification, List<string> confirmation) {
             string notifications = (string.Join(",", notification.ToArray()).Length == 0 ? "NULL" : string.Join(",", notification.ToArray()));
             string confirmations = (string.Join(",", confirmation.ToArray()).Length == 0 ? "NULL" : string.Join(",", confirmation.ToArray()));
@@ -37,12 +59,21 @@ namespace PatientBookingSystem.Controllers {
             return repo.saveSettings(notifications, verifications, confirmations);
         }
 
-        /** Method returns list of all patients */
+        /** 
+         * Method returns list of all patients
+         * 
+         * @return list of all the patients 
+         */
         public List<IModel> getListOfAllPatients() {
             return repo.getListOfAllPatients();
         }
 
-        /** Method returns list of patients having upcoming appointments for given staff member */
+        /** 
+         * Method returns list of patients having upcoming appointments for given staff member 
+         * 
+         * @param selectedStaffMember
+         * @return list of patients having upcoming appointments for selected staff member
+         */
         public List<IModel> getListOfPatientsHavingUpcomingAppointmentsForGivenStaffMember(int selectedStaffMember) {
             return repo.getListOfPatientsHavingUpcomingAppointmentsForGivenStaffMember(selectedStaffMember);
         }

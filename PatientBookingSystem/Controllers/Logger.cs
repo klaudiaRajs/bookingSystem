@@ -5,10 +5,18 @@ using PatientBookingSystem.Helpers;
 using System.Collections.Generic;
 
 namespace PatientBookingSystem.Controllers {
-    /** Class manages processes of logging user in */
+    /** 
+     * Class manages processes of logging user in 
+     */
     class Logger {
 
-        /** Method is resposible for logging user in and setting the user as logged in */
+        /** 
+         * Method is resposible for logging user in and setting the user as logged in 
+         * 
+         * @param login
+         * @param password
+         * @return result of logging the user in
+         */
         public Boolean logUserIn(string login, string password) {
             List<string> errors = Validator.validateLoginCredentials(login, password);
             if (errors.Count == 0) {
@@ -22,7 +30,13 @@ namespace PatientBookingSystem.Controllers {
             return false;
         }
 
-        /** Method returns user model retrieved based on login and password */
+        /** 
+         * Method returns user model retrieved based on login and password 
+         * 
+         * @param login 
+         * @param password
+         * @return user model for given credentials
+         */
         public UserModel getUserByLoginCredentials(string login, string password) {
             UserRepo repo = new UserRepo();
             List<IModel> users = repo.getListOfUsersByLoginCredentials(login, password);

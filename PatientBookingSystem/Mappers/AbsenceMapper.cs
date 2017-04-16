@@ -5,7 +5,12 @@ namespace PatientBookingSystem.Mappers {
     /** Class is responsible for mapping database fields to Absence model  */
     class AbsenceMapper : IDataMapper {
         
-        /** Method returns a mapped (database to model) absence model */
+        /** 
+         * Method returns a mapped (database to model) absence model 
+         * 
+         * @param reader MySqlDataReader 
+         * @return Model implementing IModel interface - absence
+         */
         public IModel map(MySqlDataReader reader) {
             AbsenceModel absence = new AbsenceModel();
             absence.absenceId = reader.GetInt16("absenceId");

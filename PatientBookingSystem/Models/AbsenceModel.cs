@@ -30,7 +30,12 @@ namespace PatientBookingSystem.Models {
             return DateTime.ParseExact(this.endDate + " " + this.endTime, "dd.MM.yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        /** Method normalizes format of the date (removes time) */
+        /**
+         *  Method normalizes format of the date (removes time) 
+         *  
+         *  @param date
+         *  @return date in normalized format
+         */
         private string getNormalizedDate(string date) {
             bool isDateTime = date.IndexOf(" ") >= 0;
             if (isDateTime) {

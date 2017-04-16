@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
     /** Class is responsible for managing a single schedule day window and communicating with relevant controllers */
-    partial class SingleScheduleDayWindow : Form {
+    public partial class SingleScheduleDayWindow : Form {
 
         private SurgeryInfo surgeryInfo;
         private ScheduleController controller;
@@ -16,7 +16,12 @@ namespace PatientBookingSystem.Presenters.MainViews {
 
         private AppointmentBoxI parent;
 
-        /** Contructor is responsible for creating the object, initializing fields and calling on methods generating schedule */
+        /** 
+         * Contructor is responsible for creating the object, initializing fields and calling on methods generating schedule 
+         * 
+         * @param parent class implementing AppointmentBoxI interface 
+         * @param date 
+         */
         public SingleScheduleDayWindow(AppointmentBoxI parent, string date) {
             InitializeComponent();
             controller = new ScheduleController(date);
@@ -45,7 +50,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             ScheduleController.slotStatus slotStatus = controller.getSlotStatus(slotTime, staffId);
             int staffScheduleId = controller.getStaffScheduleId(slotTime, staffId);
             if (slotStatus == ScheduleController.slotStatus.Available) {
-                BookingWindow booking = new BookingWindow(this, this.date, timeRange, doctorsName, surgeryInfo.getFirstLineOfAddress(), surgeryInfo.getSecondLineOfAddress(), surgeryInfo.getPhoneNumber(), staffScheduleId);
+                BookingWindow booking = new BookingWindow(this, this.date, timeRange, doctorsName, staffScheduleId);
                 booking.Show();
             }
         }
@@ -60,7 +65,11 @@ namespace PatientBookingSystem.Presenters.MainViews {
             Console.WriteLine("------------ Diff: " + diff);
         }
 
-        /** Method returns all the staff members per date */
+        /** 
+         * Method returns all the staff members per date 
+         * 
+         * @return dictionary representing staff members per date
+         */
         internal Dictionary<int,string> getAllTheStaffMembersPerDate() {
             return controller.getAllAvailableStaffMembersPerDate(); 
         }

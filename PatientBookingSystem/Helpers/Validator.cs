@@ -1,5 +1,4 @@
 ﻿using PatientBookingSystem.Models;
-using PatientBookingSystem.Presenters.MinorElements;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -18,15 +17,16 @@ namespace PatientBookingSystem.Helpers {
             return Validator.ENTER_PASSWORD_MESSAGE;
         }
 
-        /** 
-         * Returns message for empty login 
-         */
+        /** Returns message for empty login */
         public static string getEmptyLoginMessage() {
             return ENTER_LOGIN_MESSAGE;
         }
 
         /** 
          * Method validates data for staffSchedule model  
+         * 
+         * @param staffId 
+         * @param scheduleIdList list of schedule id to be linked with staffmember
          */
         public static bool validateStaffSchedule(int staffId, List<int> scheduleIdList) {
             bool result = true;
@@ -93,7 +93,19 @@ namespace PatientBookingSystem.Helpers {
             return errors;
         }
 
-        public static List<string> validateAbsenceParameters(DateTimePicker startDatePicker, DateTimePicker endDatePicker, DateTimePicker startTimePicker, DateTimePicker endTimePicker, List<string> invalidFieldsList, ComboBox allTheDoctors = null) {
+        /** 
+         * Method validates absence parametrs 
+         * 
+         * @param startDatePicker absence start date 
+         * @param endDatePicker absence end date 
+         * @param startTimePicker absence start time 
+         * @param endTimePicker absence end time 
+         * @param invalidFieldsList list of invalid fields
+         * @param allTheDoctors comboBox with staff members 
+         * @return list of errors
+         */
+        public static List<string> validateAbsenceParameters(DateTimePicker startDatePicker, DateTimePicker endDatePicker, 
+            DateTimePicker startTimePicker, DateTimePicker endTimePicker, List<string> invalidFieldsList, ComboBox allTheDoctors = null) {
             List<string> invalidFields = invalidFieldsList;
             bool result = true;
             if (allTheDoctors != null) {
@@ -145,7 +157,13 @@ namespace PatientBookingSystem.Helpers {
             return errors;
         }
 
-        /** Method validates staff member model */
+        /** 
+         * Method validates staff member model 
+         * 
+         * @param staffMember stafFModel
+         * @param staffType default value indicating that no staffType is passed
+         * @return list of errors
+         */
         public static List<string> validateStaffMember(StaffModel staffMember, int staffType = -1) {
             List<string> errors = new List<string>();
             if (String.IsNullOrEmpty(staffMember.getFirstName())) {
@@ -166,7 +184,12 @@ namespace PatientBookingSystem.Helpers {
             return errors;
         }
 
-        /** Method validates user model */
+        /** 
+         * Method validates user model 
+         * 
+         * @param user UserModel 
+         * @return list of errors
+         */
         public static List<string> validateUser(UserModel user) {
             List<string> errors = new List<string>();
             if (String.IsNullOrEmpty(user.getFirstName())) {
@@ -196,7 +219,12 @@ namespace PatientBookingSystem.Helpers {
             return errors;
         }
 
-        /** Method validates if booking model contains required information */
+        /** 
+         * Method validates if booking model contains required information 
+         * 
+         * @param booking BookingModel
+         * @return result
+         */
         public static bool validateBookingForUpdate(BookingModel booking) {
             bool result = true;
             if (booking.getBookingId() == 0) {
@@ -205,7 +233,13 @@ namespace PatientBookingSystem.Helpers {
             return result;
         }
 
-        /** Method validates login and password for their requirements */
+        /** 
+         * Method validates login and password for their requirements 
+         * 
+         * @param login
+         * @param password
+         * @return result
+         */
         public static bool validateLogger(string login, string password) {
             bool result = true;
             if (login.Length < 3) {
@@ -218,7 +252,12 @@ namespace PatientBookingSystem.Helpers {
 
         }
 
-        /** Method validates if absence model meet the requirements for saving */
+        /** 
+         * Method validates if absence model meet the requirements for saving 
+         * 
+         * @param abcence AbsenceModel
+         * @return list of errors
+         */
         public static List<string> validateAbsenceForSaving(AbsenceModel absence) {
             List<string> errors = new List<string>();
             if (DateHelper.getDateTimeObjectFromString(absence.startDate).Date < DateTime.Today.Date) {
@@ -227,7 +266,13 @@ namespace PatientBookingSystem.Helpers {
             return errors;
         }
 
-        /** Method validates if login credentials meet the requirements */
+        /** 
+         * Method validates if login credentials meet the requirements 
+         * 
+         * @param login
+         * @param password 
+         * @return list of errors
+         */
         public static List<string> validateLoginCredentials(string login, string password) {
             List<string> errors = new List<string>();
             if (!(login.Length > 0 && login != ENTER_LOGIN_MESSAGE &&

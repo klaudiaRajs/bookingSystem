@@ -12,7 +12,11 @@ namespace PatientBookingSystem.Presenters.MainViews {
         /** Used in appointmentBox */
         private Main main; 
 
-        /** Constructor prepares view by generating appointment boxes */
+        /** 
+         * Constructor prepares view by generating appointment boxes 
+         * 
+         * @param main Main class required to be passed to one of the appointment box to modify the main window
+         */
         public pastAppointmentsPanel(Main main) {
             InitializeComponent();
             getAppointmentBoxes();
@@ -33,11 +37,18 @@ namespace PatientBookingSystem.Presenters.MainViews {
             }
         }
 
-        /** Method returns time in displayable format */
+        /** 
+         * Method returns time in displayable format 
+         * 
+         * @param startTime
+         * @param endTime 
+         * @return time range in human readable format
+         */
         private string getTimeInDisplayableFormat(string startTime, string endTime) {
             return startTime.Substring(0, 5) + " - " + endTime.Substring(0, 5);
         }
 
+        /** Implementation not required */
         public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
             //Implementation not required
         }

@@ -30,7 +30,11 @@ namespace PatientBookingSystem.Models {
             return this.date; 
         }
 
-        /** Method sets model's date and if required deletes time part from date string */
+        /** 
+         * Method sets model's date and if required deletes time part from date string 
+         * 
+         * @param date
+         */
         public void setDate(string date) {
             bool isDateTime = date.IndexOf(" ") >= 0;
             if (isDateTime) {

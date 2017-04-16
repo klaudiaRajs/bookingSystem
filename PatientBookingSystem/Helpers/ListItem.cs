@@ -11,7 +11,11 @@ namespace PatientBookingSystem.Helpers {
         /** Value to be displayed in the drop down list element */
         public string text { get; set; }
 
-        /** Method returns a list of staff members prepared to be a data source for a drop down list */
+        /** 
+         * Method returns a list of staff members prepared to be a data source for a drop down list 
+         * 
+         * @return list of all the staff members
+         */
         public List<ListItem> getDataSourceForAllStaffMembers() {
             StaffController controller = new StaffController();
             List<IModel> allTheStaffMembers = controller.getAllStaffMembers();
@@ -23,7 +27,11 @@ namespace PatientBookingSystem.Helpers {
             return listOfStaffMembers;
         }
 
-        /** Method returns a list of staff types prepared to be a data source for a drop down list */
+        /** 
+         * Method returns a list of staff types prepared to be a data source for a drop down list 
+         * 
+         * @return list of staff types 
+         */
         public List<ListItem> getListOfStaffTypesForComboBox() {
             List<ListItem> staffTypesData = new List<ListItem>();
             staffTypesData.Insert(0, new ListItem { text = "Select a staffType", id = 0 });
@@ -32,15 +40,11 @@ namespace PatientBookingSystem.Helpers {
             return staffTypesData;
         }
 
-        /** Method fills in the list with enum values */
-        private List<ListItem> fillInList(List<ListItem> list, string[] enumNames) {
-            for (int i = 0; i < enumNames.Length; i++) {
-                list.Add(new ListItem { text = enumNames[i], id = i + 1 });
-            }
-            return list;
-        }
-
-        /** Method returns a list of user types prepared to be a data source for a drop down list */
+        /** 
+         * Method returns a list of user types prepared to be a data source for a drop down list 
+         * 
+         * @return prepared for combobox list of user types
+         */
         public List<ListItem> getListOfUserTypes() {
             List<ListItem> userTypesData = new List<ListItem>();
             userTypesData.Insert(0, new ListItem { text = "Select a user type", id = 0 });
@@ -49,16 +53,24 @@ namespace PatientBookingSystem.Helpers {
             return userTypesData;
         }
 
-        /** Method returns a list of confirmation methods to be a data source for a drop down list */
+        /** 
+         * Method returns a list of confirmation methods to be a data source for a drop down list 
+         * 
+         * @return prepared for comboBox list of confirmation methods
+         */
         public List<ListItem> getListOfConfirmationMethodsForComboBox() {
             List<ListItem> confirmationMethods = new List<ListItem>();
             confirmationMethods.Insert(0, new ListItem { text = "Select confirmation method", id = 0 });
-            string[] availableMethods = Enum.GetNames(typeof(SurgeryInfo.confirmationMethod));
+            string[] availableMethods = Enum.GetNames(typeof(SurgeryInfo.verificationMethod));
             confirmationMethods = fillInList(confirmationMethods, availableMethods);
             return confirmationMethods;
         }
 
-        /** Method returns a list of attendance options for the admin to set */
+        /** 
+         * Method returns a list of attendance options for the admin to set 
+         * 
+         * @return prepared for comboBox list of possible attendance statuses
+         */
         public List<ListItem> getDateSourceOfAllPossibleAttendanceStatuses() {
             List<ListItem> attendanceOptions = new List<ListItem>();
             attendanceOptions.Insert(0, new ListItem { text = "Select attendance status", id = 0 });
@@ -70,6 +82,21 @@ namespace PatientBookingSystem.Helpers {
                 counter++;
             }
             return attendanceOptions;
+        }
+
+        /** 
+         * Method fills in the list with enum values 
+         * 
+         * @param list list of items prepared to be list elements
+         * @param enumNames list of possible names
+         * 
+         * @return 
+         */
+        private List<ListItem> fillInList(List<ListItem> list, string[] enumNames) {
+            for (int i = 0; i < enumNames.Length; i++) {
+                list.Add(new ListItem { text = enumNames[i], id = i + 1 });
+            }
+            return list;
         }
     }
 }

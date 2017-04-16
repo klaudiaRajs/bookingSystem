@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using PatientBookingSystem.Models;
 using PatientBookingSystem.Mappers;
@@ -9,24 +8,39 @@ namespace PatientBookingSystem.Repositories {
     /** Class is responsible for communication with database user table */
     class UserRepo : BaseRepo {
 
-        string table = "pbs_user";
+        private string table = "pbs_user";
 
-        /** Method returns list of all the users (admins and patients) */
-        internal List<IModel> getListOfAllUsers() {
+        /** 
+         * Method returns list of all the users (admins and patients) 
+         * 
+         * @return list of all users
+         */
+        public List<IModel> getListOfAllUsers() {
             string query = "SELECT * FROM " + this.table;
             List<IModel> users = this.db.Query(query, new UserMapper());
             return users; 
         }
 
-        /** Method returns list of all the patients */
-        internal List<IModel> getListOfAllPatients() {
+        /** 
+         * Method returns list of all the patients 
+         * 
+         * @return list of all patients 
+         */
+        public List<IModel> getListOfAllPatients() {
             string query = "SELECT * FROM " + this.table + " WHERE userType = \"patient\"";
             List<IModel> patients = this.db.Query(query, new UserMapper());
             return patients;
         }
 
-        /** Method saves user settings (updates row in the database) */
-        internal bool saveSettings(string notification, string verification, string confirmation) {
+        /** 
+         * Method saves user settings (updates row in the database) 
+         * 
+         * @param notification value representing notification preferences 
+         * @param verificaiton value representing verification preferences 
+         * @param confirmation value representing confirmation preferences 
+         * @return saving result
+         */
+        public bool saveSettings(string notification, string verification, string confirmation) {
             string query = "UPDATE " + this.table
                 + " SET `notification` = " + this.getStringInMySqlInsertableFormat(notification)
                 + ", `verification` = " + this.getStringInMySqlInsertableFormat(verification)
@@ -35,15 +49,24 @@ namespace PatientBookingSystem.Repositories {
             return this.db.Execute(query);
         }
 
-        /** Method returns user's notification settings */
-        internal string getNotificationSettings() {
+        /** 
+         * Method returns user's notification settings 
+         * 
+         * @return notification settings for user
+         */
+        public string getNotificationSettings() {
             string query = "SELECT notification FROM " + table + " WHERE id = " + ApplicationState.userId;
             List<IModel> user = this.db.Query(query, new UserMapper());
             return ((UserModel)user.First()).getNotificationSettings();
         }
 
-        /** MEthod saves user to the database */
-        internal bool save(UserModel user) {
+        /** 
+         * MEthod saves user to the database 
+         * 
+         * @param user userModel 
+         * @return result of saving
+         */
+        public bool save(UserModel user) {
             string query = "INSERT INTO " + table
                 + " (`firstName`, `lastName`, `login`, `password`, `DOB`, `phoneNumber`, `email`, `NiN`, `address`, `userType`, `notification`, `verification`, `confirmation`) VALUES ("
                 + this.getStringInMySqlInsertableFormat(user.getFirstName()) + ", "
@@ -62,7 +85,12 @@ namespace PatientBookingSystem.Repositories {
             return this.db.Execute(query); 
         }
 
-        /** Method returns list of all the patients having upcoming appointments for given staff member */
+        /** 
+         * Method returns list of all the patients having upcoming appointments for given staff member 
+         * 
+         * @param staffMember staff Member id 
+         * @return list of all patients having upcoming appointments for given staff member
+         */
         public List<IModel> getListOfPatientsHavingUpcomingAppointmentsForGivenStaffMember(int staffMember) {
             string query = "SELECT u.* from " + this.table
                 + " u JOIN pbs_booking b on b.userId = u.id "
@@ -73,13 +101,18 @@ namespace PatientBookingSystem.Repositories {
             return patients;
         }
 
-        /** Method returns list of users by login credentials */
-        public List<IModel> getListOfUsersByLoginCredentials(String login, String password) {
-            String query = "SELECT * FROM " + this.table + " WHERE login='" + login + "' and password ='" + password + "'";
+        /** 
+         * Method returns list of users by login credentials 
+         * 
+         * @param login the login 
+         * @param password the password
+         * @return list of users by login credentials 
+         */
+        public List<IModel> getListOfUsersByLoginCredentials(string login, string password) {
+            string query = "SELECT * FROM " + this.table + " WHERE login='" + login + "' and password ='" + password + "'";
             List<IModel> list = this.db.Query(query, new UserMapper());
 
             return list;
         }
-
     }
 }

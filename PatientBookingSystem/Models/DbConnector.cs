@@ -17,7 +17,9 @@ namespace PatientBookingSystem.Models {
             connection = new MySqlConnection(config.connectionString);
         }
 
-        /** Method prints out databases available on given host - used for debugging purposes */
+        /** 
+         * Method prints out databases available on given host - used for debugging purposes 
+         */
         public void printOutDatabases() {
             if (!this.OpenConnection()) {
                 return;

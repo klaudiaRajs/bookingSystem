@@ -46,7 +46,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             feedback.Show();
         }
 
-        /**  Method prepares staff model from data get from form */
+        /**  
+         * Method prepares staff model from data get from form 
+         * 
+         * @return staff model 
+         */
         private StaffModel getStaffModelFromForm() {
             StaffModel staffMember = new StaffModel();
             staffMember.setFirstName(doctorsFirstName.Text);

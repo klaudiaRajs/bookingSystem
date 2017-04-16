@@ -44,7 +44,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.save(Validator.validateUser(user), user);
         }
 
-        /** Method wrapps data from the form into user model */
+        /** 
+         * Method wrapps data from the form into user model 
+         * 
+         * @return user model
+         */
         private UserModel getUserModelFromDataForm() {
             SurgeryInfo surgery = new SurgeryInfo();
             UserModel user = new UserModel();
@@ -68,7 +72,12 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return user;
         }
 
-        /** Method calls on saving controller method based on validation */
+        /** 
+         * Method calls on saving controller method based on validation 
+         * 
+         * @param errors list of errors 
+         * @param user user model
+         */
         private void save(List<string> errors, UserModel user) {
             UserController controller = new UserController();
             FeedbackWindow feedback = new FeedbackWindow();
@@ -82,7 +91,13 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             feedback.Show();
         }
 
-        /** Method returns value from passed drop down */
+        /** 
+         * Method returns value from passed drop down 
+         * 
+         * @param dropDown elements 
+         * @param default value 
+         * @return value from the drop-down
+         */
         private string getValueFromDropDown(ComboBox dropDown, string defaultValue) {
             if (dropDown.Enabled) {
                 if ((int)dropDown.SelectedValue == 0) {

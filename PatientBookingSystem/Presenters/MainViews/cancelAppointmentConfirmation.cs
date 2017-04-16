@@ -13,7 +13,15 @@ namespace PatientBookingSystem.Presenters.MainViews {
         private appointmentBox parent;
         private bool reschedule = false;
 
-        /** Constructor assings values to fields and prepares the view */
+        /** 
+         * Constructor assings values to fields and prepares the view 
+         * 
+         * @param date 
+         * @param time
+         * @param staffName name of the staff member 
+         * @param typeOfAppointment appointmentType 
+         * @param parent appointmentBox object
+         */
         public cancelAppointmentConfirmation(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
             InitializeComponent();
             this.parent = parent;
@@ -65,6 +73,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.Hide();
         }
 
+        /** Method allows closing the window by using escape key on keyboard*/
         private void cancelAppointmentConfirmation_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.rejectCancellationButton_Click(this, new EventArgs());

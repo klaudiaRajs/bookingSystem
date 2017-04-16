@@ -13,7 +13,11 @@ namespace PatientBookingSystem {
 
         Main parent;
 
-        /** Constructor initializes components and calls on method that generates appointment boxes */
+        /** 
+         * Constructor initializes components and calls on method that generates appointment boxes 
+         * 
+         * @param parent Main window to be passed to windows opened from this window
+         */
         public upcomingAppointmentsContainer(Main parent) {
             InitializeComponent();
             this.parent = parent;
@@ -39,6 +43,7 @@ namespace PatientBookingSystem {
             }
         }
 
+        /** Implementation not required */
         public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
             //Implementation not required
         }

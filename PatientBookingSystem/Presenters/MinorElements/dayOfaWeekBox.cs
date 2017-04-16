@@ -23,7 +23,14 @@ namespace PatientBookingSystem {
             InitializeComponent();
         }
 
-        /** Method is responsible for creating a day box */
+        /** 
+         * Method is responsible for creating a day box 
+         * 
+         * @param dayNo number representing day of month
+         * @param month
+         * @param year 
+         * @return modified day of a week box
+         */
         public dayOfaWeekBox getBox(int dayNo, int month, int year) {
             DateTime dateObject = new DateTime(year, month, dayNo);
             this.date = dateObject.ToString("yyyy-MM-dd");
@@ -34,45 +41,32 @@ namespace PatientBookingSystem {
             return this;
         }
 
+
+        /** 
+         * Method sets number of appointments per day (total) 
+         * 
+         * @param morningAppointments number of morning appointments
+         * @param afternoonAppoinments number of afternoon appointments
+         */
+        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
+            this.morningAppointments = morningAppointments;
+            this.afternoonAppointments = afternoonAppointments;
+            this.setNumberMorningAppointments(morningAppointments);
+            this.setNumberOfAfternoonAppointments(afternoonAppointments);
+            this.setTotalNumberOfAvailableAppointments(morningAppointments, afternoonAppointments);
+        }
+
         /** Method opens single day window */
         internal void openSingleDayAppointmentsView_Click(object sender, EventArgs e) {
             this.singleDay = new SingleScheduleDayWindow(this, date); 
             this.singleDay.Show(); 
         }
 
-        /** Method sets number of morning appointments */
-        private void setNumberMorningAppointments(int numberOfMorningAppointments) {
-            this.numberOfMorningAppointmentsLabel.Text = numberOfMorningAppointments.ToString();
-        }
-
-        public void getAppointmentBoxes() {
-            //Implementation not required
-        }
-
-        /** Method sets number of appointments per day (total) */
-        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
-            this.morningAppointments = morningAppointments;
-            this.afternoonAppointments = afternoonAppointments; 
-            this.setNumberMorningAppointments(morningAppointments);
-            this.setNumberOfAfternoonAppointments(afternoonAppointments);
-            this.setTotalNumberOfAvailableAppointments(morningAppointments, afternoonAppointments);
-        }
-
-        /** Method sets total number of available appointments */
-        private void setTotalNumberOfAvailableAppointments(int morningAppointments, int afternoonAppointments) {
-            numberOfFreeAppointmentsLabel.Text = (morningAppointments + afternoonAppointments).ToString();
-        }
-
-        /** Method sets a number of afternoon appointments */
-        private void setNumberOfAfternoonAppointments(int afternoonAppointments) {
-            this.numberOfAfternoonAppointmentsLabel.Text = afternoonAppointments.ToString();
-        }
-
         /** Method open a pop-up window informing the user that there are no appointments for this date */
         internal void openNoAppointmentsFeedbackMessage_Click(object sender, EventArgs e) {
             FeedbackWindow message = new FeedbackWindow();
             message.setMessageForNoAppointmentsPerDay();
-            message.Show(); 
+            message.Show();
         }
 
         /** 
@@ -83,6 +77,39 @@ namespace PatientBookingSystem {
             FeedbackWindow message = new FeedbackWindow();
             message.setMessageForBookingNotAvailableForDateDueToDateInThePast();
             message.Show();
+        }
+
+        /** 
+         * Method sets number of morning appointments 
+         * 
+         * @param numberOfMorningAppointments 
+         */
+        private void setNumberMorningAppointments(int numberOfMorningAppointments) {
+            this.numberOfMorningAppointmentsLabel.Text = numberOfMorningAppointments.ToString();
+        }
+
+        /** 
+         * Method sets total number of available appointments 
+         * 
+         * @param morningAppointments number of morning appointments
+         * @param afternoonAppoinments number of afternoon appointments
+         */
+        private void setTotalNumberOfAvailableAppointments(int morningAppointments, int afternoonAppointments) {
+            numberOfFreeAppointmentsLabel.Text = (morningAppointments + afternoonAppointments).ToString();
+        }
+
+        /** 
+         * Method sets a number of afternoon appointments 
+         * 
+         * @param afternoonAppointments number of afternoon appointments
+         */
+        private void setNumberOfAfternoonAppointments(int afternoonAppointments) {
+            this.numberOfAfternoonAppointmentsLabel.Text = afternoonAppointments.ToString();
+        }
+
+        /** Implementation not required */
+        public void getAppointmentBoxes() {
+            //Implementation not required
         }
     }
 }

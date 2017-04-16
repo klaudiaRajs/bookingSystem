@@ -5,7 +5,11 @@ namespace PatientBookingSystem.Mappers {
     /** Class is responsible for mapping database fields to BookingModel */
     class BookingMapper : IDataMapper {
 
-        /** Method returns a mapped (database to model) BookingModel*/
+        /** 
+         * Method returns a mapped (database to model) BookingModel
+         * @param reader MySqlDataReader 
+         * @return Model implementing IModel interface - booking
+         */
         public IModel map(MySqlDataReader reader) {
             BookingModel booking = new BookingModel();
             UserModel user = new UserModel();
@@ -14,7 +18,7 @@ namespace PatientBookingSystem.Mappers {
             booking.setBookingId(reader.GetInt16("bookingId"));
             booking.setConfirmation(reader.GetInt16("confirmation"));
             booking.setAttendance(reader.GetInt16("attendance"));
-                booking.setLackOfCancellation(reader.GetInt16("lackOfCancellation"));
+            booking.setLackOfCancellation(reader.GetInt16("lackOfCancellation"));
 
             if (!reader.IsDBNull(14)) {
                 booking.setComment(reader.GetString("comment"));

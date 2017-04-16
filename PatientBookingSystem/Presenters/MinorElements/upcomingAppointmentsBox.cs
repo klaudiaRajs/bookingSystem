@@ -15,7 +15,12 @@ namespace PatientBookingSystem.Presenters {
             this.fillInUpcomingAppointments();
         }
 
-        /** Method returns date in displayable format */
+        /** 
+         * Method returns date in displayable format 
+         * 
+         * @param date
+         * @return date in human readable format 
+         */
         protected string getDateInPresenterFormat(string date) {
             string[] separator = new string[] { ".", " " };
             string[] dateContent = date.Split(separator, StringSplitOptions.None);

@@ -6,7 +6,12 @@ namespace PatientBookingSystem.Mappers {
     /** Class is responsible for mapping database fields to UserModel */
     class UserMapper : IDataMapper {
 
-        /** Method returns a mapped (database to model) UserModel */
+        /** 
+         * Method returns a mapped (database to model) UserModel 
+         * 
+         * @param reader MySqlDataReader 
+         * @return Model implementing IModel interface - user
+         */
         public IModel map(MySqlDataReader record) {
             UserModel user = new UserModel();
             user.setId(record.GetInt32("id"));

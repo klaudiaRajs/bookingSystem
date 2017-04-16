@@ -8,30 +8,56 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
-    /** Class is responsible for managing booking window view and communicating with relevant controllers */
-    partial class BookingWindow : Form {
+    /** 
+     * Class is responsible for managing booking window view and communicating with relevant controllers 
+     */
+    public partial class BookingWindow : Form {
 
-        private string date;
+        internal string date;
         private SingleScheduleDayWindow parent;
         private int staffScheduleId;
+        private string doctorsName;
 
-        /** Constructor assigns parameters to fields */
-        public BookingWindow(SingleScheduleDayWindow parent, string date, string time, string doctorsName, string surgeryFirstLineOfAddress, string surgerySecondLineOfAddress, string surgeryPhoneNumber, int staffScheduleId) {
+        /** 
+         * Constructor assigns parameters to fields 
+         * 
+         * @param parent parent window 
+         * @param date 
+         * @param time 
+         * @param doctorsName name of the staff member 
+         * @param staffScheudleId
+         */
+        public BookingWindow(SingleScheduleDayWindow parent, string date, string time, string doctorsName, int staffScheduleId) {
             InitializeComponent();
+            SurgeryInfo surgeryInfo = new SurgeryInfo();
             this.date = date;
             dateBooking.Text = this.date;
             timeOfBooking.Text = time;
             doctorsNameLabel.Text = doctorsName;
-            surgeryAddress1Line.Text = surgeryFirstLineOfAddress;
-            surgeryAddressSecondLine.Text = surgerySecondLineOfAddress;
-            surgeryPhoneNumberLabel.Text = surgeryPhoneNumber;
+            surgeryAddress1Line.Text = surgeryInfo.getFirstLineOfAddress();
+            surgeryAddressSecondLine.Text = surgeryInfo.getSecondLineOfAddress();
+            surgeryPhoneNumberLabel.Text = surgeryInfo.getPhoneNumber();
             this.parent = parent;
             this.staffScheduleId = staffScheduleId;
+            this.doctorsName = doctorsName;
             if (ApplicationState.userType.Equals("admin")) {
                 patientListBox.Visible = true;
                 fillInListOfAllPatients();
             }
+            manageUserConfirmationSettings();
             this.CenterToScreen();
+        }
+
+        /** Method manages user confirmation settings */
+        private void manageUserConfirmationSettings() {
+            ApplicationState.refreshUser();
+            string[] confirmationPreferances = ApplicationState.getConfirmationArray(); 
+            if( Array.IndexOf(confirmationPreferances, "print") != -1) {
+                printCheckBox.Checked = true;
+            }
+            if (Array.IndexOf(confirmationPreferances, "email") != -1) {
+                emailCheckBox.Checked = true;
+            }
         }
 
         /** Method initiates process of saving a booking */
@@ -51,11 +77,19 @@ namespace PatientBookingSystem.Presenters.MainViews {
                 }
             }
             bool result = false;
-            result = controller.bookAppointment(0, commentTextField.Text, 0, startTime, endTime, userId, staffScheduleId, 0);
+            result = controller.bookAppointment(commentTextField.Text, startTime, endTime, userId, staffScheduleId);
             this.reloadScheduleOrShowFeedbackWindowBasedOnResult(result);
+            if( result && (printCheckBox.Checked || emailCheckBox.Checked)) {
+                PrintingPrompt printingPrompt = new PrintingPrompt(this.date, startTime, endTime, this.doctorsName, staffScheduleId );
+                printingPrompt.Show();
+            }
         }
 
-        /** Method reloads schedule or shows feedback windown based on result passed as parameter */
+        /** 
+         * Method reloads schedule or shows feedback windown based on result passed as parameter 
+         * 
+         * @param result of saving the appointment
+         */
         private void reloadScheduleOrShowFeedbackWindowBasedOnResult(bool result) {
             if (result) {
                 parent.reloadSchedule();
@@ -82,7 +116,11 @@ namespace PatientBookingSystem.Presenters.MainViews {
             this.provideDataSourceForPatientDropDown(patients);
         }
 
-        /** Method provides data source for patient drop down list */
+        /** 
+         * Method provides data source for patient drop down list 
+         * 
+         * @param dataSource date source for patient drop-down
+         */
         private void provideDataSourceForPatientDropDown(List<ListItem> dataSource ) {
             patientListBox.DropDownStyle = ComboBoxStyle.DropDownList;
             patientListBox.DataSource = dataSource;
@@ -90,7 +128,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
             patientListBox.ValueMember = "id";
         }
 
-        
+        /** Method allows the user to close the booking window by pressing escape button on the keyabord */
         private void BookingWindow_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Escape) {
                 this.Close();

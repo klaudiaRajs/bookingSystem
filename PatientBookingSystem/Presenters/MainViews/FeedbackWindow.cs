@@ -9,23 +9,17 @@ namespace PatientBookingSystem.Presenters {
             this.CenterToScreen();
         }
 
-        /** 
-         * Method sets message for promting user to enable the day in adding multiple schedule entries view 
-         */
+        /** Method sets message for promting user to enable the day in adding multiple schedule entries view */
         public void setPromptToEnableDay() {
             this.feedbackMessage.Text = "Enable this day first.";
         }
 
-        /** 
-         * Method sets message for booking not available for the date due to the date being in the past 
-         */
+        /** Method sets message for booking not available for the date due to the date being in the past */
         public void setMessageForBookingNotAvailableForDateDueToDateInThePast() {
             this.feedbackMessage.Text = "Bookings are available only dates no earlier than today";
         }
 
-        /** 
-         * Method sets message for no appointments per day 
-         */
+        /** Method sets message for no appointments per day */
         public void setMessageForNoAppointmentsPerDay() {
             this.feedbackMessage.Text = "There are no appointments for this day";
         }
@@ -39,23 +33,17 @@ namespace PatientBookingSystem.Presenters {
             feedbackMessage.Text = message;
         }
 
-        /** 
-         * Method sets message for wrong credentials 
-         */
+        /** Method sets message for wrong credentials */
         public void setMessageForWrongCredentials() {
             feedbackMessage.Text = "Please, enter valid credentials";
         }
 
-        /** 
-         * Method sets message for exception reporting 
-         */
+        /** Method sets message for exception reporting */
         public void setMessageForExceptionReporting() {
             feedbackMessage.Text = "Something went wrong. Please contact administration."; 
         }
 
-        /** 
-         * Method sets message for booking problem
-         */
+        /** Method sets message for booking problem */
         public void setMessageForBookingProblem() {
             feedbackMessage.Text = "Something's wrong with your booking. You can't book this slot. Contact administration";
         }
@@ -67,16 +55,12 @@ namespace PatientBookingSystem.Presenters {
             feedbackMessage.Text = "Something's wrong. You can't save this absence. Contact administration";
         }
 
-        /**
-         *  Method sets message for saving problems 
-         */
+        /** Method sets message for saving problems */
         public void setMessageForSavingError() {
             feedbackMessage.Text = "Something went terribly wrong. Try again or contact administration"; 
         }
 
-        /**
-         *  Method sets message for successful operation
-         */
+        /** Method sets message for successful operation */
         public void setMessageForSuccessfullOperation() {
             feedbackMessage.Text = "Success!";
         }
@@ -96,9 +80,7 @@ namespace PatientBookingSystem.Presenters {
             }
         }
 
-        /** 
-         * Method allows to close feedback window on pressing enter or escape button on keyboard 
-         */
+        /** Method allows to close feedback window on pressing enter or escape button on keyboard */
         private void keyHandler(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 this.Hide();
@@ -108,9 +90,7 @@ namespace PatientBookingSystem.Presenters {
             }
         }
 
-        /** 
-         * Method prevents problems with reopening feedback window after resending forms 
-         */
+        /** Method prevents problems with reopening feedback window after resending forms */
         private void FeedbackWindow_FormClosing(object sender, FormClosingEventArgs e) {
             if (e.CloseReason == CloseReason.UserClosing) {
                 e.Cancel = true;

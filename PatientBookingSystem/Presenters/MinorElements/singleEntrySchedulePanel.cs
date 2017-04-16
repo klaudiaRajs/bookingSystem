@@ -90,9 +90,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         }
        
 
-        /**
-         *  Method prevents selecting end time earlier than start time 
-         */
+        /** Method prevents selecting end time earlier than start time */
         private void workEndTime_ValueChanged(object sender, EventArgs e) {
             if( workEndTime.Value.Date < workStartTime.Value.Date) {
                 feedback.setCustomizedMessage(END_DATE_EARLIER_THAN_START_DATE);

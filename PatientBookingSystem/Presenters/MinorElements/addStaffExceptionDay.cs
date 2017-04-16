@@ -62,7 +62,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             feedbackWindow.Show();
         }
 
-        /** Method wrapps the data from the presenters form into a model */
+        /** 
+         * Method wrapps the data from the presenters form into a model 
+         * 
+         * @return absence model 
+         */
         private AbsenceModel getAbsenceModelFromPresenterForm() {
             AbsenceModel absence = new AbsenceModel();
 
@@ -124,7 +128,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             }
         }
 
-        /** Method makes sure that start time and end time are valid */
+        /** 
+         * Method makes sure that start time and end time are valid 
+         * 
+         * @return validation of time from the form
+         */
         private bool checkTimeValidity() {
             if( (endTimePicker.Value.TimeOfDay < startTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date)) {
                 endTimePicker.Value = startTimePicker.Value;

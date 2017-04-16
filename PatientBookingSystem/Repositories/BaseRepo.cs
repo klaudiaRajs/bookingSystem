@@ -9,12 +9,22 @@ namespace PatientBookingSystem.Repositories {
             db = new DbConnector();
         }
 
-        /** Method returns a string in MySQL insertable format */
+        /** 
+         * Method returns a string in MySQL insertable format 
+         * 
+         * @param content 
+         * @return string in format that can be saved by MySQL database
+         */
         protected string getStringInMySqlInsertableFormat(string content) {
             return content.Equals("NULL") ? content : '"' + content + '"';
         }
 
-        /** Method updates contents of the database */
+        /** 
+         * Method updates contents of the database 
+         * 
+         * @param query
+         * @return result of updating
+         */
         protected bool adjustDb(string query) {
             MySqlCommand command = db.connection.CreateCommand();
             command.CommandText = query;

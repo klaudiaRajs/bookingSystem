@@ -28,6 +28,24 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.updatePatientList();
         }
 
+        /** Method generates appointment boxes meeting requirements from search parameters */
+        public void getAppointmentBoxes() {
+            List<IModel> bookedAppointments = this.getAllTheBookingsForSearch();
+            appointmentBoxesContainer.Controls.Clear();
+            if (bookedAppointments.Count != 0) {
+                foreach (BookingModel booking in bookedAppointments) {
+                    string time = booking.getStartTime().Substring(0, 5) + " - " + booking.getEndTime().Substring(0, 5);
+                    appointmentBox box = new appointmentBox(this, booking, time);
+                    box.disableRescheduleButton();
+                    appointmentBoxesContainer.Controls.Add(box);
+                    noAppointmentInformation.Visible = false;
+                }
+            } else {
+                appointmentBoxesContainer.Controls.Add(noAppointmentInformation);
+                noAppointmentInformation.Visible = true;
+            }
+        }
+
         /** Method is responsible for preparing appointment date picker */
         private void prepareAppointmentDatePicker() {
             appointmentDatePicker.Value = DateTime.Today;
@@ -64,7 +82,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.updatePatientList();
         }
 
-        /** Method returns list of all the staff members */
+        /** 
+         * Method returns list of all the staff members 
+         * 
+         * @return list of all staff members 
+         */
         private List<IModel> getStaffMembers() {
             StaffController controller = new StaffController();
             if (selectedPatient == 0) {
@@ -79,7 +101,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return staffMembers;
         }
 
-        /** Method returns list of all patients */
+        /** 
+         * Method returns list of all patients 
+         * 
+         * @return list of all patients
+         */
         private List<IModel> getPatients() {
             UserController controller = new UserController();
             if (selectedDoctor == 0) {
@@ -146,25 +172,11 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.getAppointmentBoxes();
         }
 
-        /** Method generates appointment boxes meeting requirements from search parameters */
-        public void getAppointmentBoxes() {
-            List<IModel> bookedAppointments = this.getAllTheBookingsForSearch();
-            appointmentBoxesContainer.Controls.Clear();
-            if (bookedAppointments.Count != 0) {
-                foreach (BookingModel booking in bookedAppointments) {
-                    string time = booking.getStartTime().Substring(0, 5) + " - " + booking.getEndTime().Substring(0, 5);
-                    appointmentBox box = new appointmentBox(this, booking, time);
-                    box.disableRescheduleButton();
-                    appointmentBoxesContainer.Controls.Add(box);
-                    noAppointmentInformation.Visible = false;
-                }
-            } else {
-                appointmentBoxesContainer.Controls.Add(noAppointmentInformation);
-                noAppointmentInformation.Visible = true;
-            }
-        }
-
-        /** Method returns list of bookings meeting requirements from search parameters */
+        /** 
+         * Method returns list of bookings meeting requirements from search parameters 
+         * 
+         * @return list of all the booking per search
+         */
         private List<IModel> getAllTheBookingsForSearch() {
             int staffId = ((ListItem)staffMemberDropDown.SelectedItem).id;
             DateTime date = appointmentDatePicker.Enabled ? appointmentDatePicker.Value.Date : new DateTime(1890, 12, 12);
@@ -172,14 +184,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             return bookingController.getAllUpcomingAppointmentsForSearchParameters(staffId, date, patientId);
         }
 
-        /** Method included into interface - not required in this implementation */
-        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
-            //Implementation not required
-        }
-
         /** Method disables/enables dateTime picker for search parametrs */
         private void dateCheck_CheckedChanged(object sender, EventArgs e) {
             appointmentDatePicker.Enabled = !dateCheck.Checked;
+        }
+
+        /** Method included into interface - not required in this implementation */
+        public void setNumberOfAppointmentsPerDay(int morningAppointments, int afternoonAppointments) {
+            //Implementation not required
         }
     }
 }

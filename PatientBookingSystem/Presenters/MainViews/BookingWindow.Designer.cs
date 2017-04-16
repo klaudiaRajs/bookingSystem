@@ -152,7 +152,6 @@
             this.emailCheckBox.TabIndex = 30;
             this.emailCheckBox.Text = "Email";
             this.emailCheckBox.UseVisualStyleBackColor = true;
-            this.emailCheckBox.Visible = false;
             // 
             // printCheckBox
             // 
@@ -163,7 +162,6 @@
             this.printCheckBox.TabIndex = 31;
             this.printCheckBox.Text = "Print";
             this.printCheckBox.UseVisualStyleBackColor = true;
-            this.printCheckBox.Visible = false;
             // 
             // initialInstructionsPanel1
             // 

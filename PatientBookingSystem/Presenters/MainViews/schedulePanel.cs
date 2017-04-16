@@ -51,7 +51,13 @@ namespace PatientBookingSystem {
             appointmentDaysPanel.Visible = true;
         }
 
-        /** Method adjusts event handlers based on booking availability */
+        /** 
+         * Method adjusts event handlers based on booking availability 
+         * 
+         * @param boxToBeDisplayed_ dayOfaWeekBox object
+         * @param dayNo number representing month day
+         * @return dayOfaWeekBox adjusted box
+         */
         private dayOfaWeekBox adjustEventHandlersBasedOnBookingAvailability(dayOfaWeekBox boxToBeDisplayed_, int dayNo) {
             dayOfaWeekBox boxToBeDisplayed = boxToBeDisplayed_;
             if (boxToBeDisplayed.morningAppointments + boxToBeDisplayed.afternoonAppointments == 0) {
@@ -68,7 +74,13 @@ namespace PatientBookingSystem {
             return boxToBeDisplayed;
         }
 
-        /** Method generates working days (according to surgery working days) per given month */
+        /** 
+         * Method generates working days (according to surgery working days) per given month 
+         * 
+         * @param year
+         * @param month
+         * @return list od numbers representing working days of the month
+         */
         private List<int> getWorkingDays(int year, int month) {
             DayOfWeek[] nonWorkingDays = SurgeryInfo.nonWorkingDays;
             List<int> workingDaysPerMonth = new List<int>();
@@ -119,7 +131,13 @@ namespace PatientBookingSystem {
             }
         }
 
-        /** Method filters results to days containing appointments for selected staff member */
+        /** 
+         * Method filters results to days containing appointments for selected staff member 
+         * 
+         * @param box dayOfaWeekBox object
+         * @param selectedStaffMember object representing selected staff member
+         * @return indicates if staff member is available
+         */
         private bool isStaffMemberAvailable(dayOfaWeekBox box, ListItem selectedStaffMember) {
             if (selectedStaffMember.id != 0) {
                 foreach (KeyValuePair<int, string> entry in box.staffMembersPerDate) {
@@ -132,7 +150,12 @@ namespace PatientBookingSystem {
             return true;
         }
 
-        /** Method checks if there are any morning appointmnets in given dayBox */
+        /** 
+         * Method checks if there are any morning appointmnets in given dayBox 
+         * 
+         * @param box dayOfWeekBox object
+         * @return indicates if the morning appointments were requested and available
+         */
         private bool areMorningAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
             if (morningAppointmentsCheckbox.Checked) {
                 return (box.morningAppointments > 0);
@@ -140,7 +163,12 @@ namespace PatientBookingSystem {
             return true;
         }
 
-        /** Method checks if there are any afternoon appointments in given dayBox */
+        /** 
+         * Method checks if there are any afternoon appointments in given dayBox 
+         * 
+         * @param box dayOfWeekBox object
+         * @return indicates if the afternoon appointments were requested and available
+         */
         private bool areAfternoonAppointmentsRequestedAndAvailable(dayOfaWeekBox box) {
             if (afternoonAppointmentsCheckbox.Checked) {
                 return (box.morningAppointments > 0);
