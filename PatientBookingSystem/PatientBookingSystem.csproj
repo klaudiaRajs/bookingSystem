@@ -82,6 +82,7 @@
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Exceptions\LoggerException.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\ListDate.cs" />
     <Compile Include="Helpers\ListItem.cs" />

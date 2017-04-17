@@ -117,4 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="introductionPanel.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="introductionPanel.Text" xml:space="preserve">
+    <value>For any help, please refer to the user manual available under help button on the left panel
+or email the development team on this address: email@email.com.
+Make sure you are taking sensible decisions! 
+Actions taken in this program affect a real life business! 
+With each unnecessarily booked appointment, another appointment is not available to a person that really needs it! </value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ namespace PatientBookingSystem.Mappers {
             user.setLastName(record.GetString("lastName"));
             user.setLogin(record.GetString("login"));
             user.setPassword(record.GetString("password"));
-            user.setDOBs(record.GetString("DOB"));
+            user.setDOBs(DateHelper.getDateTimeStringFromReader(record, "DOB"));
             user.setDOBd(DateHelper.getDateTimeObjectFromString(record.GetString("DOB"))); 
             user.setEmailAddress(record.GetString("email"));
             if (!record.IsDBNull(6)) {

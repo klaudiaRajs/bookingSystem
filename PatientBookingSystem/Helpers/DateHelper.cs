@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace PatientBookingSystem.Helpers {
     /** Class is responsible for converting dates into different string formats */
@@ -67,6 +68,25 @@ namespace PatientBookingSystem.Helpers {
          */
         public static DateTime convertToLastDayOfMonth(DateTime date) {
             return new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
+        }
+
+        public static string getDateTimeStringFromReader(MySqlDataReader reader, string fieldName) {
+            try {
+                return reader.GetDateTime(fieldName).ToString("dd.MM.yyyy HH:mm:ss");
+            }
+            catch(FormatException) {
+                string stringDate = reader.GetString(fieldName);
+                int spacePos = stringDate.IndexOf(' ');
+                if (spacePos != -1) {
+                    string datePart = stringDate.Substring(0, spacePos);
+                    DateTime datePartObject = getDateTimeObjectFromString(datePart);
+                    string timePart = stringDate.Substring(spacePos + 1);
+                    string[] timeParts = timePart.Split(':');
+                    return new DateTime(datePartObject.Year, datePartObject.Month, datePartObject.Day,
+                                        Int32.Parse(timeParts[0]), Int32.Parse(timeParts[1]), Int32.Parse(timeParts[2])).ToString("dd.MM.yyyy HH:mm:ss");
+                }
+                return getDateTimeObjectFromString(stringDate).ToString("dd.MM.yyyy HH:mm:ss");
+            }
         }
     }
 }

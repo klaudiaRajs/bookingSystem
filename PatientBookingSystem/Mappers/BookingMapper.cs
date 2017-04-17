@@ -44,7 +44,7 @@ namespace PatientBookingSystem.Mappers {
             staff.setLastName(reader.GetString("staffLastName"));
             staff.setStaffType(reader.GetString("staffType"));
             booking.setStaffMember(staff);
-            schedule.setDate(reader.GetString("date"));
+            schedule.setDate(Helpers.DateHelper.getDateTimeStringFromReader(reader, "date"));
             booking.setScheduleModel(schedule);
             return booking;
         }

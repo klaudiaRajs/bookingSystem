@@ -34,7 +34,6 @@ namespace PatientBookingSystem.Presenters.MainViews {
             generateTimeTableHeader();
             generateTimeTableSlots();
             timetable.CellClick += new DataGridViewCellEventHandler(dataGridView2_CellClick);
-            this.CenterToScreen();
         }
 
         /** Method is responsibke for handling onclick event on schedule table */ 
@@ -133,6 +132,10 @@ namespace PatientBookingSystem.Presenters.MainViews {
         /** Method closes the single schedule day window */
         private void exitButton_Click(object sender, EventArgs e) {
             this.Hide();
+        }
+
+        private void SingleScheduleDayWindow_Shown(object sender, EventArgs e) {
+            this.CenterToScreen();
         }
     }
 }

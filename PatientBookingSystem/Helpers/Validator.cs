@@ -1,4 +1,5 @@
-﻿using PatientBookingSystem.Models;
+﻿using PatientBookingSystem.Exceptions;
+using PatientBookingSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -244,9 +245,11 @@ namespace PatientBookingSystem.Helpers {
             bool result = true;
             if (login.Length < 3) {
                 result = false;
+                //throw new LoggerException("Login is too short!");
             }
             if (password.Length < 3) {
                 result = false;
+                //throw new LoggerException("Password does not meet the requirements!");
             }
             return result;
 

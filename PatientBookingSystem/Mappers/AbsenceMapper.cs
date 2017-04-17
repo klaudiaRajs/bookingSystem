@@ -24,8 +24,8 @@ namespace PatientBookingSystem.Mappers {
             if (!reader.IsDBNull(4)) {
                 absence.staffId = reader.GetInt16("staffId");
             }
-            absence.startDate = reader.GetString("startDate");
-            absence.endDate = reader.GetString("endDate");
+            absence.startDate = Helpers.DateHelper.getDateTimeStringFromReader(reader, "startDate");
+            absence.endDate = Helpers.DateHelper.getDateTimeStringFromReader(reader, "endDate");
             return absence;
         }
     }

@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.dayNumber = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
+            this.freeAppointmentsLabel = new System.Windows.Forms.Label();
             this.numberOfAfternoonAppointmentsLabel = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.numberOfMorningAppointmentsLabel = new System.Windows.Forms.Label();
@@ -41,18 +41,18 @@
             this.dayNumber.Size = new System.Drawing.Size(28, 26);
             this.dayNumber.TabIndex = 1;
             this.dayNumber.Text = "D";
-            this.dayNumber.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
+            this.dayNumber.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
-            // label34
+            // freeAppointmentsLabel
             // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(3, 32);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(41, 17);
-            this.label34.TabIndex = 3;
-            this.label34.Text = "Free:";
-            this.label34.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
+            this.freeAppointmentsLabel.AutoSize = true;
+            this.freeAppointmentsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freeAppointmentsLabel.Location = new System.Drawing.Point(3, 32);
+            this.freeAppointmentsLabel.Name = "freeAppointmentsLabel";
+            this.freeAppointmentsLabel.Size = new System.Drawing.Size(41, 17);
+            this.freeAppointmentsLabel.TabIndex = 3;
+            this.freeAppointmentsLabel.Text = "Free:";
+            this.freeAppointmentsLabel.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // numberOfAfternoonAppointmentsLabel
             // 
@@ -62,6 +62,7 @@
             this.numberOfAfternoonAppointmentsLabel.Name = "numberOfAfternoonAppointmentsLabel";
             this.numberOfAfternoonAppointmentsLabel.Size = new System.Drawing.Size(0, 17);
             this.numberOfAfternoonAppointmentsLabel.TabIndex = 9;
+            this.numberOfAfternoonAppointmentsLabel.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // label32
             // 
@@ -72,7 +73,7 @@
             this.label32.Size = new System.Drawing.Size(74, 17);
             this.label32.TabIndex = 8;
             this.label32.Text = "Afternoon:";
-            this.label32.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
+            this.label32.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // numberOfMorningAppointmentsLabel
             // 
@@ -82,6 +83,7 @@
             this.numberOfMorningAppointmentsLabel.Name = "numberOfMorningAppointmentsLabel";
             this.numberOfMorningAppointmentsLabel.Size = new System.Drawing.Size(0, 17);
             this.numberOfMorningAppointmentsLabel.TabIndex = 7;
+            this.numberOfMorningAppointmentsLabel.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // label35
             // 
@@ -92,7 +94,7 @@
             this.label35.Size = new System.Drawing.Size(63, 17);
             this.label35.TabIndex = 6;
             this.label35.Text = "Morning:";
-            this.label35.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
+            this.label35.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // numberOfFreeAppointmentsLabel
             // 
@@ -102,6 +104,7 @@
             this.numberOfFreeAppointmentsLabel.Name = "numberOfFreeAppointmentsLabel";
             this.numberOfFreeAppointmentsLabel.Size = new System.Drawing.Size(0, 17);
             this.numberOfFreeAppointmentsLabel.TabIndex = 10;
+            this.numberOfFreeAppointmentsLabel.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             // 
             // dayOfaWeekBox
             // 
@@ -113,11 +116,11 @@
             this.Controls.Add(this.label32);
             this.Controls.Add(this.numberOfMorningAppointmentsLabel);
             this.Controls.Add(this.label35);
-            this.Controls.Add(this.label34);
+            this.Controls.Add(this.freeAppointmentsLabel);
             this.Controls.Add(this.dayNumber);
             this.Name = "dayOfaWeekBox";
             this.Size = new System.Drawing.Size(100, 100);
-            this.Click += new System.EventHandler(this.openSingleDayAppointmentsView_Click);
+            this.Click += new System.EventHandler(this.dayOfaWeekBox_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,7 +129,7 @@
         #endregion
 
         private System.Windows.Forms.Label dayNumber;
-        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label freeAppointmentsLabel;
         private System.Windows.Forms.Label numberOfAfternoonAppointmentsLabel;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label numberOfMorningAppointmentsLabel;

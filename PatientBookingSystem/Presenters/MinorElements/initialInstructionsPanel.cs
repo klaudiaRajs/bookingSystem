@@ -6,6 +6,9 @@ namespace PatientBookingSystem {
 
         public initialInstructionsPanel() {
             InitializeComponent();
+            introductionPanel.SelectAll();
+            introductionPanel.BackColor = System.Drawing.Color.LightSlateGray;
+            introductionPanel.SelectionAlignment = HorizontalAlignment.Center;
         }
     }
 }

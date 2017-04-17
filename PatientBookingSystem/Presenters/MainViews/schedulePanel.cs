@@ -41,37 +41,12 @@ namespace PatientBookingSystem {
                 string dateToBeAdded = new DateTime(this.date.Year, this.date.Month, dayNo).ToString("yyyy-MM-dd");
                 List<IModel> absences = absenceRepo.getSurgeryAbsencesPerDate(dateToBeAdded);
                 if (absences == null) {
-                    dayOfaWeekBox dayBox = new dayOfaWeekBox();
-                    dayOfaWeekBox boxToBeDisplayed = dayBox.getBox(dayNo, this.date.Month, this.date.Year);
-                    boxToBeDisplayed = this.adjustEventHandlersBasedOnBookingAvailability(boxToBeDisplayed, dayNo);
-                    appointmentDaysPanel.Controls.Add(boxToBeDisplayed);
+                    dayOfaWeekBox dayBox = new dayOfaWeekBox(new DateTime(this.date.Year, this.date.Month, dayNo));
+                    appointmentDaysPanel.Controls.Add(dayBox);
                     this.dayBoxes.Add(dayBox);
                 }
             }
             appointmentDaysPanel.Visible = true;
-        }
-
-        /** 
-         * Method adjusts event handlers based on booking availability 
-         * 
-         * @param boxToBeDisplayed_ dayOfaWeekBox object
-         * @param dayNo number representing month day
-         * @return dayOfaWeekBox adjusted box
-         */
-        private dayOfaWeekBox adjustEventHandlersBasedOnBookingAvailability(dayOfaWeekBox boxToBeDisplayed_, int dayNo) {
-            dayOfaWeekBox boxToBeDisplayed = boxToBeDisplayed_;
-            if (boxToBeDisplayed.morningAppointments + boxToBeDisplayed.afternoonAppointments == 0) {
-                boxToBeDisplayed.BackColor = System.Drawing.Color.Silver;
-                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
-                boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
-            }
-            if (new DateTime(this.date.Year, this.date.Month, dayNo).Date < DateTime.Today.Date) {
-                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openSingleDayAppointmentsView_Click);
-                boxToBeDisplayed.Click -= new System.EventHandler(boxToBeDisplayed.openNoAppointmentsFeedbackMessage_Click);
-                boxToBeDisplayed.BackColor = System.Drawing.Color.Silver;
-                boxToBeDisplayed.Click += new System.EventHandler(boxToBeDisplayed.openBookingNotAvailableFeedbackMessage_Click);
-            }
-            return boxToBeDisplayed;
         }
 
         /** 

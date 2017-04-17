@@ -123,6 +123,10 @@ namespace PatientBookingSystem.Models {
         }
 
         public void setDOBs(string DOB) {
+            bool isDateTime = DOB.IndexOf(" ") >= 0;
+            if (isDateTime) {
+                DOB = DOB.Remove(DOB.IndexOf(" "));
+            }
             this.DOBs = DOB;
         }
 

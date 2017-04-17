@@ -13,7 +13,7 @@ namespace PatientBookingSystem.Mappers {
         public IModel map(MySqlDataReader reader) {
             ScheduleModel schedule = new ScheduleModel();
             schedule.setScheduleId(reader.GetInt32("scheduleId"));
-            schedule.setDate(reader.GetString("date"));
+            schedule.setDate(Helpers.DateHelper.getDateTimeStringFromReader(reader, "date"));
             schedule.setStartTime(reader.GetString("startTime"));
             schedule.setEndTime(reader.GetString("endTime"));
             return schedule;

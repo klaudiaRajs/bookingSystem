@@ -4,9 +4,10 @@ using PatientBookingSystem.Controllers;
 using PatientBookingSystem.Presenters;
 using PatientBookingSystem.Presenters.MainViews;
 using PatientBookingSystem.Helpers;
+using PatientBookingSystem.Exceptions;
 
 namespace PatientBookingSystem {
-    /** Entry point to the system */ 
+    /** Entry point to the system */
     public partial class Main : Form {
         const string HELP_MESSAGE_FOR_LOGGER = " Your login and password should be obtained from your surgery."
             + "Please contact the surgery if the one provided by them doesn't work";
@@ -18,7 +19,7 @@ namespace PatientBookingSystem {
             this.CenterToScreen();
         }
 
-        /** Method loads upcoming appointments panel */ 
+        /** Method loads upcoming appointments panel */
         public void loadUpcomingAppointmentsPanel() {
             windowContentContainer.Controls.Clear();
             upcomingAppointmentsContainer upcomingAppointments = new upcomingAppointmentsContainer(this);
@@ -26,24 +27,28 @@ namespace PatientBookingSystem {
             windowContentContainer.Controls.Add(upcomingAppointments);
         }
 
-        /** Method is responsible for starting process of logging the user in or showing feedback message */ 
+        /** Method is responsible for starting process of logging the user in or showing feedback message */
         private void logInButton_Click(object sender, EventArgs e) {
             Logger logger = new Logger();
             FeedbackWindow message = new FeedbackWindow();
             try {
                 if (Validator.validateLogger(loginField.Text, passwordField.Text)) {
-                    if (logger.logUserIn(loginField.Text, passwordField.Text) == true) {
-                        LogInPanel.Visible = false;
-                        HomePanel.Visible = true;
-                        this.CenterToScreen();
-                        loadLeftPanel();
-                        loadInitialInformationPanel();
-                        if (ApplicationState.userType != "admin") {
-                            loadHomePanel();
-                        } else {
-                            loadSurgeryManagementPanel();
+                    try {
+                        if (logger.logUserIn(loginField.Text, passwordField.Text) == true) {
+                            LogInPanel.Visible = false;
+                            HomePanel.Visible = true;
+                            this.CenterToScreen();
+                            loadLeftPanel();
+                            loadInitialInformationPanel();
+                            if (ApplicationState.userType != "admin") {
+                                loadHomePanel();
+                            } else {
+                                loadSurgeryManagementPanel();
+                            }
                         }
-                    } else {
+                    }
+                    catch (LoggerException ex) {
+                        message.setCustomizedMessage(ex.Message);
                         message.Show();
                     }
                 } else {

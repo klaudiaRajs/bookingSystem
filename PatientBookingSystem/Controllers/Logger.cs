@@ -3,6 +3,7 @@ using PatientBookingSystem.Models;
 using PatientBookingSystem.Repositories;
 using PatientBookingSystem.Helpers;
 using System.Collections.Generic;
+using PatientBookingSystem.Exceptions;
 
 namespace PatientBookingSystem.Controllers {
     /** 
@@ -41,7 +42,7 @@ namespace PatientBookingSystem.Controllers {
             UserRepo repo = new UserRepo();
             List<IModel> users = repo.getListOfUsersByLoginCredentials(login, password);
             if (users.Count == 0 || users.Count > 2) {
-                throw new Exception("Such user doesn't exit");
+                throw new LoggerException("Such user doesn't exit");
             }
             return users[0] as UserModel;
         }

@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(initialInstructionsPanel));
             this.introductionPanel = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -37,7 +38,8 @@
             this.introductionPanel.ReadOnly = true;
             this.introductionPanel.Size = new System.Drawing.Size(1102, 118);
             this.introductionPanel.TabIndex = 35;
-            this.introductionPanel.Text = "All ";
+            this.introductionPanel.TabStop = false;
+            this.introductionPanel.Text = resources.GetString("introductionPanel.Text");
             // 
             // initialInstructionsPanel
             // 

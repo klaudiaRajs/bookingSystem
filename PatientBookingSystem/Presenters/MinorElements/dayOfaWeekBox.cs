@@ -17,30 +17,24 @@ namespace PatientBookingSystem {
 
         internal Dictionary<int, string> staffMembersPerDate;
 
-        string date; 
+        DateTime date; 
 
-        public dayOfaWeekBox() {
+        public dayOfaWeekBox(DateTime date) {
             InitializeComponent();
-        }
 
-        /** 
-         * Method is responsible for creating a day box 
-         * 
-         * @param dayNo number representing day of month
-         * @param month
-         * @param year 
-         * @return modified day of a week box
-         */
-        public dayOfaWeekBox getBox(int dayNo, int month, int year) {
-            DateTime dateObject = new DateTime(year, month, dayNo);
-            this.date = dateObject.ToString("yyyy-MM-dd");
+            this.date = date;
             // this line need to be here, so the morning and evening appointments on schedule panel counts correctly 
-            this.singleDay = new SingleScheduleDayWindow(this, date);
-            this.staffMembersPerDate = this.singleDay.getAllTheStaffMembersPerDate(); 
-            dayNumber.Text = dayNo.ToString();
-            return this;
-        }
+            this.singleDay = new SingleScheduleDayWindow(this, date.ToString("yyyy-MM-dd"));
+            this.staffMembersPerDate = this.singleDay.getAllTheStaffMembersPerDate();
+            dayNumber.Text = date.Day.ToString();
 
+            if (this.morningAppointments + this.afternoonAppointments == 0) {
+                this.BackColor = System.Drawing.Color.Silver;
+            }
+            if (this.date.Date < DateTime.Today.Date) {
+                this.BackColor = System.Drawing.Color.Silver;
+            }
+        }
 
         /** 
          * Method sets number of appointments per day (total) 
@@ -54,29 +48,6 @@ namespace PatientBookingSystem {
             this.setNumberMorningAppointments(morningAppointments);
             this.setNumberOfAfternoonAppointments(afternoonAppointments);
             this.setTotalNumberOfAvailableAppointments(morningAppointments, afternoonAppointments);
-        }
-
-        /** Method opens single day window */
-        internal void openSingleDayAppointmentsView_Click(object sender, EventArgs e) {
-            this.singleDay = new SingleScheduleDayWindow(this, date); 
-            this.singleDay.Show(); 
-        }
-
-        /** Method open a pop-up window informing the user that there are no appointments for this date */
-        internal void openNoAppointmentsFeedbackMessage_Click(object sender, EventArgs e) {
-            FeedbackWindow message = new FeedbackWindow();
-            message.setMessageForNoAppointmentsPerDay();
-            message.Show();
-        }
-
-        /** 
-         * Method open a pop-up window informing the user that booking for this date 
-         * is impossible due to the date being in the past 
-         */
-        internal void openBookingNotAvailableFeedbackMessage_Click(object sender, EventArgs e) {
-            FeedbackWindow message = new FeedbackWindow();
-            message.setMessageForBookingNotAvailableForDateDueToDateInThePast();
-            message.Show();
         }
 
         /** 
@@ -110,6 +81,23 @@ namespace PatientBookingSystem {
         /** Implementation not required */
         public void getAppointmentBoxes() {
             //Implementation not required
+        }
+
+        private void dayOfaWeekBox_Click(object sender, EventArgs e) {
+            if (this.morningAppointments + this.afternoonAppointments == 0) {
+                FeedbackWindow message = new FeedbackWindow();
+                message.setMessageForNoAppointmentsPerDay();
+                message.Show();
+                return;
+            }
+            if (this.date.Date < DateTime.Today.Date) {
+                FeedbackWindow message = new FeedbackWindow();
+                message.setMessageForBookingNotAvailableForDateDueToDateInThePast();
+                message.Show();
+                return;
+            }
+
+            this.singleDay.ShowDialog();
         }
     }
 }
