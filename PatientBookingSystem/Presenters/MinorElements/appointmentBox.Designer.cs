@@ -160,7 +160,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 17);
             this.label3.TabIndex = 38;
-            this.label3.Text = "Doctor\'s name";
+            this.label3.Text = "Staff member\'s name";
             // 
             // label4
             // 

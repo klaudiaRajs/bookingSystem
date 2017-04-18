@@ -10,7 +10,7 @@ namespace PatientBookingSystem.Helpers {
         private string secondLineOfAddress = "DD11 Dundee";
         private string phoneNumber = "01382 228228";
 
-        public enum staffTypes { doctor = 1, nurse = 2, administration = 3 };
+        public enum staffTypes { doctor = 1, nurse = 2};
         public enum userTypes { patient = 1, admin = 2 };
         public enum verificationMethod { email = 1, call = 2 };
         public enum confirmationMethod { print = 1};

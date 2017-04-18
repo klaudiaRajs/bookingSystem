@@ -70,7 +70,7 @@
             // allTheStaffMembers
             // 
             this.allTheStaffMembers.FormattingEnabled = true;
-            this.allTheStaffMembers.Location = new System.Drawing.Point(252, 35);
+            this.allTheStaffMembers.Location = new System.Drawing.Point(284, 34);
             this.allTheStaffMembers.Name = "allTheStaffMembers";
             this.allTheStaffMembers.Size = new System.Drawing.Size(121, 21);
             this.allTheStaffMembers.TabIndex = 41;
@@ -83,9 +83,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.Location = new System.Drawing.Point(182, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 17);
+            this.label2.Size = new System.Drawing.Size(96, 17);
             this.label2.TabIndex = 40;
-            this.label2.Text = "Doctor:";
+            this.label2.Text = "Staff member:";
             // 
             // afternoonAppointmentsCheckbox
             // 
@@ -126,7 +126,7 @@
             this.flowLayoutPanel1.Controls.Add(this.monthLabel);
             this.flowLayoutPanel1.Controls.Add(this.yearLabel);
             this.flowLayoutPanel1.Controls.Add(this.nextMonthButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(434, 11);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(441, 11);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(382, 53);
             this.flowLayoutPanel1.TabIndex = 34;

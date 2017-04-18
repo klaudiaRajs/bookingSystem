@@ -20,7 +20,7 @@ namespace PatientBookingSystem.Helpers {
             StaffController controller = new StaffController();
             List<IModel> allTheStaffMembers = controller.getAllStaffMembers();
             List<ListItem> listOfStaffMembers = new List<ListItem>();
-            listOfStaffMembers.Add(new ListItem { text = "Select staff member", id = 0 });
+            listOfStaffMembers.Add(new ListItem { text = "Select a staff member", id = 0 });
             foreach (StaffModel staffMember in allTheStaffMembers) {
                 listOfStaffMembers.Add(new ListItem { text = staffMember.getFullStaffName(), id = staffMember.getStaffId() });
             }

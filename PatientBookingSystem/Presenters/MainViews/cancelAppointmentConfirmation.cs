@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PatientBookingSystem.Presenters.MainViews {
     /** Class is responsible for managing appointment cancellation view */
-    partial class cancelAppointmentConfirmation : Form {
+    partial class CancelAppointmentConfirmation : Form {
 
         private string date;
         private string time;
@@ -22,7 +22,7 @@ namespace PatientBookingSystem.Presenters.MainViews {
          * @param typeOfAppointment appointmentType 
          * @param parent appointmentBox object
          */
-        public cancelAppointmentConfirmation(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
+        public CancelAppointmentConfirmation(string date, string time, string staffName, string typeOfAppointment, appointmentBox parent) {
             InitializeComponent();
             this.parent = parent;
             this.date = date;

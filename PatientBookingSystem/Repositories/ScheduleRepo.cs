@@ -16,7 +16,7 @@ namespace PatientBookingSystem.Repositories {
          * @return list of available staff members with their schedules
          */
         public List<IModel> getAvailableStaffMembersWithAvailabilityTimes(string date) {
-            string query = "SELECT * FROM scheduleView WHERE date = " + '"' + date + '"';
+            string query = "SELECT * FROM scheduleview WHERE date = " + '"' + date + '"';
             List<IModel> scheduleCollection = this.db.Query(query, new StaffScheduleMapper());
             return scheduleCollection;
         }

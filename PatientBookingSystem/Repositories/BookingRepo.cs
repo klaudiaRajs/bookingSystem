@@ -10,7 +10,7 @@ namespace PatientBookingSystem.Repositories {
     class BookingRepo : BaseRepo {
 
         private string table = "pbs_booking";
-        private string view = "bookingView";
+        private string view = "bookingview";
         private string today = DateTime.Today.ToString("yyyy-MM-dd");
 
         /** 
@@ -171,7 +171,7 @@ namespace PatientBookingSystem.Repositories {
          * @return list of booked appointments per date per patient 
          */
         public List<IModel> getBookedAppointmentsPerDatePerLoggedInPatient(string date) {
-            string query = "SELECT * FROM " + view + " WHERE date = " + '"' + date + '"' + " AND bookingView.patientId = " + ApplicationState.userId;
+            string query = "SELECT * FROM " + view + " WHERE date = " + '"' + date + '"' + " AND bookingview.patientId = " + ApplicationState.userId;
             List<IModel> bookings = this.db.Query(query, new BookingMapper());
             return bookings;
         }

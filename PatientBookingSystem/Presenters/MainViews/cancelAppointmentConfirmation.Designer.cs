@@ -1,5 +1,5 @@
 ﻿namespace PatientBookingSystem.Presenters.MainViews {
-    partial class cancelAppointmentConfirmation {
+    partial class CancelAppointmentConfirmation {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -98,12 +98,12 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(73, 125);
+            this.label4.Location = new System.Drawing.Point(9, 125);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 17);
+            this.label4.Size = new System.Drawing.Size(149, 17);
             this.label4.TabIndex = 34;
-            this.label4.Text = "Staff name: ";
+            this.label4.Text = "Staff member\'s name: ";
             // 
             // staffNameLabel
             // 
@@ -114,7 +114,7 @@
             this.staffNameLabel.Name = "staffNameLabel";
             this.staffNameLabel.Size = new System.Drawing.Size(185, 17);
             this.staffNameLabel.TabIndex = 35;
-            this.staffNameLabel.Text = "Staff name";
+            this.staffNameLabel.Text = "Staff member\'s name";
             // 
             // label6
             // 
@@ -169,7 +169,7 @@
             this.rejectCancellationButton.UseVisualStyleBackColor = true;
             this.rejectCancellationButton.Click += new System.EventHandler(this.rejectCancellationButton_Click);
             // 
-            // cancelAppointmentConfirmation
+            // CancelAppointmentConfirmation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -188,7 +188,7 @@
             this.Controls.Add(this.appointmentDate);
             this.Controls.Add(this.firstPartOfText);
             this.KeyPreview = true;
-            this.Name = "cancelAppointmentConfirmation";
+            this.Name = "CancelAppointmentConfirmation";
             this.Text = "cancelAppointmentConfirmation";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cancelAppointmentConfirmation_KeyDown);
             this.ResumeLayout(false);

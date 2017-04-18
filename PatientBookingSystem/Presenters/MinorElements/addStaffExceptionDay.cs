@@ -10,6 +10,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
     public partial class addStaffExceptionDay : UserControl {
 
         private FeedbackWindow feedbackWindow;
+        private string validationMessage = ""; 
 
         /** Method constructs the class and fills the doctors menu */
         public addStaffExceptionDay() {
@@ -17,7 +18,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.feedbackWindow = new FeedbackWindow();
             this.fillInTheDropDownMenuWithAllTheDoctors();
             allTheDoctors.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.prepareDateTimePickers(); 
+            this.prepareDateTimePickers();
         }
 
         /** Method prepares dateTime pickers to prevent setting absence with the date in the past */
@@ -37,11 +38,14 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         /** Method initializes a process of saving and absance model to the database */
         private void saveButton_Click(object sender, EventArgs e) {
 
-            if ( this.checkTimeValidity()) {
+            if (!this.isDateTimeValid()) {
+                feedbackWindow.setCustomizedMessage(validationMessage);
+                feedbackWindow.ShowDialog();
+                validationMessage = "";
                 return;
             }
-
             AbsenceModel absence = this.getAbsenceModelFromPresenterForm();
+
             List<string> invalidFields = new List<string>();
             AbsenceController controller = new AbsenceController();
 
@@ -59,7 +63,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             } else {
                 feedbackWindow.setMessageForInvalidFieldsValues(invalidFields);
             }
-            feedbackWindow.Show();
+            feedbackWindow.ShowDialog();
         }
 
         /** 
@@ -72,7 +76,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
             absence.endTime = endTimePicker.Value.ToString("HH:mm:ss");
             absence.startTime = startTimePicker.Value.ToString("HH:mm:ss");
-            if (wholeDayCheckBox.Checked || ( !wholeDayCheckBox.Checked && (startTimePicker.Value.TimeOfDay == endTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date))) {
+            if (wholeDayCheckBox.Checked || (!wholeDayCheckBox.Checked && (startTimePicker.Value.TimeOfDay == endTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date))) {
                 absence.startTime = "NULL";
                 absence.endTime = "NULL";
             } else {
@@ -83,7 +87,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             absence.staffId = (allTheDoctors.Enabled ? (int)allTheDoctors.SelectedValue : -1);
             absence.startDate = startDatePicker.Value.ToString("yyyy-MM-dd");
             absence.endDate = endDatePicker.Value.ToString("yyyy-MM-dd");
-            if (singleDayCheckBox.Checked || (!singleDayCheckBox.Checked && startDatePicker.Value.Date == endDatePicker.Value.Date )) {
+            if (singleDayCheckBox.Checked || (!singleDayCheckBox.Checked && startDatePicker.Value.Date == endDatePicker.Value.Date)) {
                 absence.endDate = "NULL";
             }
             return absence;
@@ -102,7 +106,9 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method changes value of end date if start date is changed (to make sure that end date won't be earlier than start date) */
         private void startDatePicker_ValueChanged(object sender, EventArgs e) {
-            endDatePicker.Value = startDatePicker.Value;
+            if( startDatePicker.Value.Date > endDatePicker.Value.Date) {
+                endDatePicker.Value = startDatePicker.Value;
+            }
         }
 
         /** Method enables/disables staff members drop down list if the absence is to be set for the whole surgery */
@@ -112,19 +118,19 @@ namespace PatientBookingSystem.Presenters.MinorElements {
 
         /** Method displays feedback message if the end date is earlier than start date */
         private void endDatePicker_ValueChanged(object sender, EventArgs e) {
-            if( endDatePicker.Value.Date < startDatePicker.Value.Date) {
-                endDatePicker.Value = DateTime.Today.Date; 
+            if (endDatePicker.Value.Date < startDatePicker.Value.Date) {
                 feedbackWindow.setCustomizedMessage("End date cannot be earlier than start date. Please correct the form.");
-                feedbackWindow.Show(); 
+                endDatePicker.Value = startDatePicker.Value.Date;
+                feedbackWindow.ShowDialog();
             }
         }
 
         /** Method prevents setting earlier end time than start time */
         private void endTimePicker_ValueChanged(object sender, EventArgs e) {
-            if( (endTimePicker.Value.TimeOfDay < startTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date)) {
+            if ((endTimePicker.Value.TimeOfDay < startTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date)) {
                 endTimePicker.Value = startTimePicker.Value;
                 feedbackWindow.setCustomizedMessage("End time cannot be earlier than start time while setting absence for the same day. End time was changed to equal start time ");
-                feedbackWindow.Show();
+                feedbackWindow.ShowDialog();
             }
         }
 
@@ -133,14 +139,19 @@ namespace PatientBookingSystem.Presenters.MinorElements {
          * 
          * @return validation of time from the form
          */
-        private bool checkTimeValidity() {
-            if( (endTimePicker.Value.TimeOfDay < startTimePicker.Value.TimeOfDay) && (startDatePicker.Value.Date == endDatePicker.Value.Date)) {
-                endTimePicker.Value = startTimePicker.Value;
-                feedbackWindow.setCustomizedMessage("End time cannot be earlier than start time while setting absence for the same day. End time was changed to equal start time ");
-                feedbackWindow.Show();
-                return true; 
+        private bool isDateTimeValid() {
+            bool result = true;
+            if (startDatePicker.Value.Date > endDatePicker.Value.Date) {
+                result = false;
+                validationMessage += "Start date is later than end date. ";
+                endDatePicker.Value = startDatePicker.Value;
             }
-            return false;
+            if (startTimePicker.Value.TimeOfDay > endTimePicker.Value.TimeOfDay) {
+                result = false;
+                validationMessage += "Start time is later than end time. ";
+                endTimePicker.Value = startTimePicker.Value;
+            }
+            return result;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
         private string patient;
         private string attendanceStatus;
         private AppointmentBoxI parent;
-        private cancelAppointmentConfirmation confirmation;
+        private CancelAppointmentConfirmation confirmation;
         private BookingModel booking;
 
         /** 
@@ -58,7 +58,7 @@ namespace PatientBookingSystem.Presenters.MinorElements {
             this.bookingId = booking.getBookingId();
             this.patient = booking.getUserModel().getFirstName() + " " + booking.getUserModel().getLastName();
             this.parent = parent;
-            this.confirmation = new cancelAppointmentConfirmation(this.date, this.time, this.stafffMembersFullName, this.typeOfAppointment, this);
+            this.confirmation = new CancelAppointmentConfirmation(this.date, this.time, this.stafffMembersFullName, this.typeOfAppointment, this);
         }
 
         /** Method hides reschedule button */

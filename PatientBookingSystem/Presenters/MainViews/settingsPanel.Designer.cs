@@ -34,11 +34,23 @@
             this.oneWeekNotificationCheckBox = new System.Windows.Forms.CheckBox();
             this.printableConfirmation = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.emailNotificationQuestionMark = new System.Windows.Forms.Label();
+            this.emailNotificationQuestion = new System.Windows.Forms.RichTextBox();
+            this.verificationMethodQuestionMark = new System.Windows.Forms.Label();
+            this.verificationMethodQuestion = new System.Windows.Forms.RichTextBox();
+            this.bookingConfirmationQuestionMark = new System.Windows.Forms.Label();
+            this.bookingConfirmationQuestion = new System.Windows.Forms.RichTextBox();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.bookingConfirmationQuestion);
+            this.panel4.Controls.Add(this.bookingConfirmationQuestionMark);
+            this.panel4.Controls.Add(this.verificationMethodQuestion);
+            this.panel4.Controls.Add(this.verificationMethodQuestionMark);
+            this.panel4.Controls.Add(this.emailNotificationQuestion);
+            this.panel4.Controls.Add(this.emailNotificationQuestionMark);
             this.panel4.Controls.Add(this.emailConfirmation);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.emailVerification);
@@ -170,6 +182,87 @@
             this.label21.TabIndex = 1;
             this.label21.Text = "Email notification";
             // 
+            // emailNotificationQuestionMark
+            // 
+            this.emailNotificationQuestionMark.AutoSize = true;
+            this.emailNotificationQuestionMark.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.emailNotificationQuestionMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailNotificationQuestionMark.Location = new System.Drawing.Point(130, 48);
+            this.emailNotificationQuestionMark.Name = "emailNotificationQuestionMark";
+            this.emailNotificationQuestionMark.Size = new System.Drawing.Size(16, 18);
+            this.emailNotificationQuestionMark.TabIndex = 43;
+            this.emailNotificationQuestionMark.Text = "?";
+            this.emailNotificationQuestionMark.MouseEnter += new System.EventHandler(this.emailNotificationQuestionMark_MouseEnter);
+            this.emailNotificationQuestionMark.MouseLeave += new System.EventHandler(this.emailNotificationQuestionMark_MouseLeave);
+            // 
+            // emailNotificationQuestion
+            // 
+            this.emailNotificationQuestion.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.emailNotificationQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailNotificationQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.emailNotificationQuestion.Location = new System.Drawing.Point(6, 74);
+            this.emailNotificationQuestion.Name = "emailNotificationQuestion";
+            this.emailNotificationQuestion.ReadOnly = true;
+            this.emailNotificationQuestion.Size = new System.Drawing.Size(273, 54);
+            this.emailNotificationQuestion.TabIndex = 44;
+            this.emailNotificationQuestion.Text = "By choosing this options you are subscribing to email notifications prior to appo" +
+    "intment. Available only if clickable. ";
+            this.emailNotificationQuestion.Visible = false;
+            // 
+            // verificationMethodQuestionMark
+            // 
+            this.verificationMethodQuestionMark.AutoSize = true;
+            this.verificationMethodQuestionMark.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.verificationMethodQuestionMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verificationMethodQuestionMark.Location = new System.Drawing.Point(123, 131);
+            this.verificationMethodQuestionMark.Name = "verificationMethodQuestionMark";
+            this.verificationMethodQuestionMark.Size = new System.Drawing.Size(16, 18);
+            this.verificationMethodQuestionMark.TabIndex = 45;
+            this.verificationMethodQuestionMark.Text = "?";
+            this.verificationMethodQuestionMark.MouseEnter += new System.EventHandler(this.verificationMethodQuestionMark_MouseEnter);
+            this.verificationMethodQuestionMark.MouseLeave += new System.EventHandler(this.verificationMethodQuestionMark_MouseLeave);
+            // 
+            // verificationMethodQuestion
+            // 
+            this.verificationMethodQuestion.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.verificationMethodQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.verificationMethodQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.verificationMethodQuestion.Location = new System.Drawing.Point(6, 152);
+            this.verificationMethodQuestion.Name = "verificationMethodQuestion";
+            this.verificationMethodQuestion.ReadOnly = true;
+            this.verificationMethodQuestion.Size = new System.Drawing.Size(273, 64);
+            this.verificationMethodQuestion.TabIndex = 46;
+            this.verificationMethodQuestion.Text = "By choosing this options you are setting a method how you would inform surgery th" +
+    "at intentionally booked the appointment. Only clickable options are available.";
+            this.verificationMethodQuestion.Visible = false;
+            // 
+            // bookingConfirmationQuestionMark
+            // 
+            this.bookingConfirmationQuestionMark.AutoSize = true;
+            this.bookingConfirmationQuestionMark.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.bookingConfirmationQuestionMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bookingConfirmationQuestionMark.Location = new System.Drawing.Point(111, 221);
+            this.bookingConfirmationQuestionMark.Name = "bookingConfirmationQuestionMark";
+            this.bookingConfirmationQuestionMark.Size = new System.Drawing.Size(16, 18);
+            this.bookingConfirmationQuestionMark.TabIndex = 47;
+            this.bookingConfirmationQuestionMark.Text = "?";
+            this.bookingConfirmationQuestionMark.MouseEnter += new System.EventHandler(this.bookingConfirmationQuestionMark_MouseEnter);
+            this.bookingConfirmationQuestionMark.MouseLeave += new System.EventHandler(this.bookingConfirmationQuestionMark_MouseLeave);
+            // 
+            // bookingConfirmationQuestion
+            // 
+            this.bookingConfirmationQuestion.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.bookingConfirmationQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bookingConfirmationQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bookingConfirmationQuestion.Location = new System.Drawing.Point(6, 248);
+            this.bookingConfirmationQuestion.Name = "bookingConfirmationQuestion";
+            this.bookingConfirmationQuestion.ReadOnly = true;
+            this.bookingConfirmationQuestion.Size = new System.Drawing.Size(273, 67);
+            this.bookingConfirmationQuestion.TabIndex = 48;
+            this.bookingConfirmationQuestion.Text = "By choosing this options you are setting a method how you would inform surgery th" +
+    "at intentionally booked the appointment. Only clickable options are available.";
+            this.bookingConfirmationQuestion.Visible = false;
+            // 
             // settingsPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,5 +290,11 @@
         private System.Windows.Forms.CheckBox emailVerification;
         private System.Windows.Forms.CheckBox onThePhoneVerification;
         private System.Windows.Forms.Label confirmationMethodLabel;
+        private System.Windows.Forms.RichTextBox emailNotificationQuestion;
+        private System.Windows.Forms.Label emailNotificationQuestionMark;
+        private System.Windows.Forms.RichTextBox verificationMethodQuestion;
+        private System.Windows.Forms.Label verificationMethodQuestionMark;
+        private System.Windows.Forms.RichTextBox bookingConfirmationQuestion;
+        private System.Windows.Forms.Label bookingConfirmationQuestionMark;
     }
 }

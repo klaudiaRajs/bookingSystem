@@ -85,5 +85,29 @@ namespace PatientBookingSystem {
             feedback.Show();
             fillInSettingsBasedOnUserData();
         }
+
+        private void emailNotificationQuestionMark_MouseEnter(object sender, EventArgs e) {
+            emailNotificationQuestion.Visible = true; 
+        }
+
+        private void emailNotificationQuestionMark_MouseLeave(object sender, EventArgs e) {
+            emailNotificationQuestion.Visible = false;
+        }
+
+        private void verificationMethodQuestionMark_MouseEnter(object sender, EventArgs e) {
+            verificationMethodQuestion.Visible = true;
+        }
+
+        private void verificationMethodQuestionMark_MouseLeave(object sender, EventArgs e) {
+            verificationMethodQuestion.Visible = false;
+        }
+
+        private void bookingConfirmationQuestionMark_MouseEnter(object sender, EventArgs e) {
+            bookingConfirmationQuestion.Visible = true;
+        }
+
+        private void bookingConfirmationQuestionMark_MouseLeave(object sender, EventArgs e) {
+            bookingConfirmationQuestion.Visible = false;
+        }
     }
 }

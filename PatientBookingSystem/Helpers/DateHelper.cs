@@ -70,6 +70,12 @@ namespace PatientBookingSystem.Helpers {
             return new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
         }
 
+        /** 
+         * Method returns DateTime string from reader 
+         * 
+         * @param reader gets a value from mySQL reader and returns it in format. 
+         * @param fieldName
+         */
         public static string getDateTimeStringFromReader(MySqlDataReader reader, string fieldName) {
             try {
                 return reader.GetDateTime(fieldName).ToString("dd.MM.yyyy HH:mm:ss");

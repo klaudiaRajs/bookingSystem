@@ -6,7 +6,6 @@ namespace PatientBookingSystem.Presenters {
     public partial class FeedbackWindow : Form {
         public FeedbackWindow() {
             InitializeComponent();
-            this.CenterToScreen();
         }
 
         /** Method sets message for promting user to enable the day in adding multiple schedule entries view */
@@ -96,6 +95,10 @@ namespace PatientBookingSystem.Presenters {
                 e.Cancel = true;
                 Hide();
             }
+        }
+
+        private void FeedbackWindow_Shown(object sender, System.EventArgs e) {
+            this.CenterToScreen();
         }
     }
 }

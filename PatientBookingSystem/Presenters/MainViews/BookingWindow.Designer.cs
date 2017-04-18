@@ -34,13 +34,15 @@
             this.surgeryAddress1Line = new System.Windows.Forms.Label();
             this.emailCheckBox = new System.Windows.Forms.CheckBox();
             this.printCheckBox = new System.Windows.Forms.CheckBox();
-            this.initialInstructionsPanel1 = new PatientBookingSystem.initialInstructionsPanel();
             this.surgeryAddressSecondLine = new System.Windows.Forms.Label();
             this.surgeryPhoneNumberLabel = new System.Windows.Forms.Label();
             this.saveBookingButton = new System.Windows.Forms.Button();
             this.commentTextField = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.patientListBox = new System.Windows.Forms.ComboBox();
+            this.printAnswer = new System.Windows.Forms.RichTextBox();
+            this.initialInstructionsPanel1 = new PatientBookingSystem.initialInstructionsPanel();
+            this.emailAnswer = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // homeButton
@@ -60,12 +62,12 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(200, 202);
+            this.label1.Location = new System.Drawing.Point(158, 202);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.Size = new System.Drawing.Size(149, 17);
             this.label1.TabIndex = 22;
-            this.label1.Text = "Doctor\'s name: ";
+            this.label1.Text = "Staff member\'s name: ";
             // 
             // label2
             // 
@@ -152,6 +154,8 @@
             this.emailCheckBox.TabIndex = 30;
             this.emailCheckBox.Text = "Email";
             this.emailCheckBox.UseVisualStyleBackColor = true;
+            this.emailCheckBox.MouseEnter += new System.EventHandler(this.emailCheckBox_MouseEnter);
+            this.emailCheckBox.MouseLeave += new System.EventHandler(this.emailCheckBox_MouseLeave);
             // 
             // printCheckBox
             // 
@@ -162,14 +166,8 @@
             this.printCheckBox.TabIndex = 31;
             this.printCheckBox.Text = "Print";
             this.printCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // initialInstructionsPanel1
-            // 
-            this.initialInstructionsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.initialInstructionsPanel1.Location = new System.Drawing.Point(0, 0);
-            this.initialInstructionsPanel1.Name = "initialInstructionsPanel1";
-            this.initialInstructionsPanel1.Size = new System.Drawing.Size(643, 118);
-            this.initialInstructionsPanel1.TabIndex = 0;
+            this.printCheckBox.MouseEnter += new System.EventHandler(this.printCheckBox_MouseEnter);
+            this.printCheckBox.MouseLeave += new System.EventHandler(this.printCheckBox_MouseLeave);
             // 
             // surgeryAddressSecondLine
             // 
@@ -234,12 +232,46 @@
             this.patientListBox.Text = "Patient\'s name, DOB";
             this.patientListBox.Visible = false;
             // 
+            // printAnswer
+            // 
+            this.printAnswer.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.printAnswer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.printAnswer.Location = new System.Drawing.Point(435, 316);
+            this.printAnswer.Name = "printAnswer";
+            this.printAnswer.Size = new System.Drawing.Size(183, 52);
+            this.printAnswer.TabIndex = 38;
+            this.printAnswer.Text = "Checking this box will result in the application propting for printing right afte" +
+    "r booking. It still can be rejected!";
+            this.printAnswer.Visible = false;
+            // 
+            // initialInstructionsPanel1
+            // 
+            this.initialInstructionsPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.initialInstructionsPanel1.Location = new System.Drawing.Point(0, 0);
+            this.initialInstructionsPanel1.Name = "initialInstructionsPanel1";
+            this.initialInstructionsPanel1.Size = new System.Drawing.Size(643, 118);
+            this.initialInstructionsPanel1.TabIndex = 0;
+            // 
+            // emailAnswer
+            // 
+            this.emailAnswer.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.emailAnswer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailAnswer.Location = new System.Drawing.Point(435, 316);
+            this.emailAnswer.Name = "emailAnswer";
+            this.emailAnswer.Size = new System.Drawing.Size(183, 52);
+            this.emailAnswer.TabIndex = 39;
+            this.emailAnswer.Text = "Checking this box will result in the application propting for email confirmation " +
+    "sending. It still can be rejected! Available only if clickable. ";
+            this.emailAnswer.Visible = false;
+            // 
             // BookingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(643, 409);
+            this.Controls.Add(this.emailAnswer);
+            this.Controls.Add(this.printAnswer);
             this.Controls.Add(this.patientListBox);
             this.Controls.Add(this.commentTextField);
             this.Controls.Add(this.label6);
@@ -286,5 +318,7 @@
         private System.Windows.Forms.Label commentTextField;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox patientListBox;
+        private System.Windows.Forms.RichTextBox printAnswer;
+        private System.Windows.Forms.RichTextBox emailAnswer;
     }
 }

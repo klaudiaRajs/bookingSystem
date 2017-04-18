@@ -134,5 +134,21 @@ namespace PatientBookingSystem.Presenters.MainViews {
                 this.Close();
             }
         }
+
+        private void printCheckBox_MouseEnter(object sender, EventArgs e) {
+            printAnswer.Visible = true;
+        }
+
+        private void printCheckBox_MouseLeave(object sender, EventArgs e) {
+            printAnswer.Visible = false;
+        }
+
+        private void emailCheckBox_MouseEnter(object sender, EventArgs e) {
+            emailAnswer.Visible = true;
+        }
+
+        private void emailCheckBox_MouseLeave(object sender, EventArgs e) {
+            emailAnswer.Visible = false;
+        }
     }
 }

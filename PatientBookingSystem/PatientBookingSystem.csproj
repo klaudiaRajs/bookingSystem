@@ -130,11 +130,11 @@
     <Compile Include="Presenters\MainViews\PrintConfirmationWindow.Designer.cs">
       <DependentUpon>PrintConfirmationWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.cs">
+    <Compile Include="Presenters\MainViews\CancelAppointmentConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presenters\MainViews\cancelAppointmentConfirmation.Designer.cs">
-      <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
+    <Compile Include="Presenters\MainViews\CancelAppointmentConfirmation.Designer.cs">
+      <DependentUpon>CancelAppointmentConfirmation.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MainViews\SingleScheduleDayWindow.cs">
       <SubType>Form</SubType>
@@ -321,8 +321,8 @@
     <EmbeddedResource Include="Presenters\MainViews\PrintConfirmationWindow.resx">
       <DependentUpon>PrintConfirmationWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presenters\MainViews\cancelAppointmentConfirmation.resx">
-      <DependentUpon>cancelAppointmentConfirmation.cs</DependentUpon>
+    <EmbeddedResource Include="Presenters\MainViews\CancelAppointmentConfirmation.resx">
+      <DependentUpon>CancelAppointmentConfirmation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presenters\MainViews\PrintingPrompt.resx">
       <DependentUpon>PrintingPrompt.cs</DependentUpon>
@@ -412,6 +412,7 @@
       <DependentUpon>upcomingAppointments.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="pbsDataSet.xsc">
       <DependentUpon>pbsDataSet.xsd</DependentUpon>

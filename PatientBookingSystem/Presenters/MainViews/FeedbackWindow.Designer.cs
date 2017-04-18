@@ -50,6 +50,7 @@
             this.Name = "FeedbackWindow";
             this.Text = "FeedbackWindow";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FeedbackWindow_FormClosing);
+            this.Shown += new System.EventHandler(this.FeedbackWindow_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyHandler);
             this.ResumeLayout(false);
 
